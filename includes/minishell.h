@@ -3,6 +3,11 @@
 
 # include "libft.h"
 
-void	test(void);
+/* Variables d'environnement */
+
+/* */
+
+char		**ft_split_whitespaces(char *str);
+char		*ft_get_env(char **tab, char *env);
 
 #endif

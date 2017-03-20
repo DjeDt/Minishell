@@ -27,7 +27,12 @@ UP =	"\033[A"
 DEF	=	"\033[0;0m"
 
 # Sources
-SRC = $(SRCDIR)main.c
+SRC =\
+\
+$(SRCDIR)main.c \
+$(SRCDIR)ft_split_whitespaces.c \
+$(SRCDIR)ft_get_env.c \
+
 
 OBJ = $(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 INC = -I./$(INC_PATH) -I./$(LIB_PATH)$(INC_PATH)
@@ -40,7 +45,10 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C $(LIB_PATH)
+	@printf $(YELLOW)"\n[  BUILDING MINISHELL  ]\n"
 	@$(CC) $(FLAGS) $(OBJ) -o $@ $(LIB) $(INC)
+	@printf $(GREEN)"-> compilation done\n"
+	@printf $(GREEN)"-> Objects created\n"
 
 
 $(OBJDIR)%.o: $(SRCDIR)%.c $(CHECK)
@@ -51,21 +59,21 @@ $(OBJDIR)%.o: $(SRCDIR)%.c $(CHECK)
 
 $(CHECK):
 	@echo "create $(OBJDIR)"
-	@printf $(GREEN)"-> " $(GREEN)"$(OBJDIR) created"
+	@printf $(GREEN)"-> " $(GREEN)"$(OBJDIR) created\n"
 	@mkdir -p $(OBJDIR)
 
 %.c:
-	echo "$(COL_RED) Missing file -> $@\n"
+	@printf $(RED)"Missing file -> $@\n"
 
 clean:
 	@make -C $(LIB_PATH) clean
-#	@echo $(YELLOW)"[    CLEANING LIBFT    ]\n"$(DEF)
+	@printf $(YELLOW)"\n[  CLEANING MINISHEL  ]\n"
 	@rm -rf $(OBJDIR)
-	@echo $(RED)"-> "$(RED)"$(OBJDIR) removed."
+	@echo $(RED)"-> "$(RED)"$(OBJDIR) removed.\n"
 
 fclean: clean
 	@make -C $(LIB_PATH) fclean
 	@rm -f $(NAME)
-	@printf $(RED)"-> "$(RED)"$(NAME) removed.\n"
+	@printf $(RED)"-> $(NAME) removed.\n"
 
 re: fclean all
