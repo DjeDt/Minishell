@@ -34,4 +34,6 @@ minishell
 *.su
 
 # backup files
+./includes/*~
+./srcs/*~
 *~
