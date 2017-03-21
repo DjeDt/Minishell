@@ -1,23 +1,26 @@
 #include "minishell.h"
-/*
+
 static void print_tab(char **tab)
 {
 	int		count;
 
 	count = -1;
-	while (tab[count + 1])
-		ft_putendl(tab[++count]);
+	while (tab[++count])
+		ft_putendl(tab[count]);
 }
-*/
+
 static char	**ft_set_env(void)
 {
 	char **tab;
 
-	tab = (char**)malloc(sizeof(char*) * 3 + 1);
-	tab[0] = "PATH";
-	tab[1] = "ENV2";
-	tab[2] = "ENV3";
-	tab[3] = 0;
+	tab = (char**)malloc(sizeof(char*) * 5 + 1);
+	tab[0] = "PATH = 1";
+	tab[1] = "env = 2";
+	tab[2] = "truc = 3";
+	tab[3] = "test = 4";
+	tab[4] = "ok = 5";
+	tab[5] = "bla = 6";
+	tab[6] = 0;
 
 	return (tab);
 }
@@ -25,17 +28,25 @@ static char	**ft_set_env(void)
 int		main(int argc, char **argv)
 {
 	int		count;
-	char	**tab;
+	char	**test;
+	char	**recup;
 
 	count = 1;
-	tab = ft_set_env();
-	(void)argc;
-	while (count)
+	recup = NULL;
+	test = ft_set_env();
+	if (argc > 0)
 	{
-		ft_putstrlen("$user> ");
-		get_next_line(0, argv);
-//		print_tab(ft_split_whitespaces(*argv));
-		ft_get_env(tab, "PATH");
+		while (count)
+		{
+			ft_putstrlen("\n$user--> ");
+			get_next_line(1, argv);
+			recup = ft_split_whitespaces(*argv);
+			ft_putstrlen("recup = ");
+			print_tab(recup);
+			ft_putstrlen("get env = ");
+			ft_putstrlen(ft_get_env(test, "test"));
+		}
 	}
+	(void)test;
 	return (0);
 }

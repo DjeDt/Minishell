@@ -1,12 +1,18 @@
-#include "minishell.c"
+#include "minishell.h"
 
-char	*ft_get_env(const char **tab, char *env)
+char	*ft_get_env(char **tab, char *env)
 {
 	int count;
-	int count2;
 
-	count = 0;
-	while (!ft_strstr(tab[count], env))
-		count++;
-	return (tab[count])
+	count = -1;
+	if (!env)
+		return (NULL);
+	while (tab[++count])
+	{
+		ft_putendl("debut boucle");
+		if (ft_strcmp(tab[count], env))
+			return (ft_strchr((char*)tab[count], '='));
+		ft_putendl("fin boucle");
+	}
+	return (NULL);
 }
