@@ -2,7 +2,7 @@
 
 static int		delimiteurs(char c)
 {
-	if ((c == ' ') || (c == '\t') || (c == '\n'))
+	if ((c == ' ') || (c == '\t'))
 		return (1);
 	return (0);
 }
@@ -38,7 +38,7 @@ static int		nbr_mots(char *str)
 	return (nombremot);
 }
 
-char	**ft_split_whitespaces(char *str)
+char			**ft_split_whitespaces(char *str)
 {
 	int		i;
 	int		j;
@@ -58,8 +58,8 @@ char	**ft_split_whitespaces(char *str)
 		taille = ft_count(&str[i]);
 		tab[j] = (char*)malloc(sizeof(char) * (taille));
 		tab[j] = ft_strncpy(tab[j], str + i, taille);
-		i += taille;
 		tab[j][taille] = '\0';
+		i += taille;
 		j++;
 	}
 	tab[j] = 0;
