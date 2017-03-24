@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 12:39:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/03/24 11:08:18 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/03/24 12:37:32 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int			main(void)
 {
-	char		**tmp;
 	char		**env;
 	char		*cmd;
 	pid_t		proc;
@@ -30,12 +29,8 @@ int			main(void)
 			ft_putstrlen("$user\n--> ");
 			get_next_line(0, &cmd);
 			if (!ft_strchr(cmd, '/'))
-			{
-				tmp = ft_split_whitespaces(cmd);
-				ft_getprog(tmp, tmp[0]);
-				ft_tabfree(tmp);
-			}
-			free(cmd);
+				ft_getprog(ft_split_whitespaces(cmd));
+			ft_memdel((void*)&cmd);
 			ft_tabfree(env);
 		}
 	}
