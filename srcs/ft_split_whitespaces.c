@@ -2,7 +2,7 @@
 
 static int		delimiteurs(char c)
 {
-	if ((c == ' ') || (c == '\t'))
+	if ((c == ' ') || (c == '\t') || (c == '\n') || (c == '\0'))
 		return (1);
 	return (0);
 }
@@ -28,7 +28,7 @@ static int		nbr_mots(char *str)
 	{
 		while ((delimiteurs(str[i])))
 			i++;
-		if (str[i] != 0)
+		if (str[i] != '\0')
 		{
 			while ((!delimiteurs(str[i])) && str[i])
 				i++;
