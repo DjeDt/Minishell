@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getenv.c                                        :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/23 10:42:30 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/03/24 14:43:09 by ddinaut          ###   ########.fr       */
+/*   Created: 2017/03/24 14:37:39 by ddinaut           #+#    #+#             */
+/*   Updated: 2017/03/24 14:49:44 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern char		**environ;
+extern char **environ;
 
-char		**ft_cpyenv(void)
+void		ft_env(char **input)
 {
-	char	**ret;
-
-	if ((*environ) == NULL)
-		return (NULL);
-	ret = ft_tabcpy(environ);
-	return (ret);
-}
-
-char		*ft_getenv(char *str)
-{
-	int		count;
-
-	count = -1;
-	if (!str)
-		return (NULL);
-	while (environ[++count] != NULL)
+	if (ft_strncmp(input[1], "-i", 2) == 0)
 	{
-		if (ft_strncmp(environ[count], str, ft_strlen(str)) == 0)
-			return (ft_strchr(environ[count], '=') + 1);
+		ft_putendl("on lance les options");
 	}
-	return (NULL);
+	else if (input[1] == NULL)
+	{
+		ft_putendl("tabprint");
+		ft_tabprint(environ);
+	}
 }

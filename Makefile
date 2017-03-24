@@ -32,7 +32,10 @@ SRC =\
 $(SRCDIR)main.c \
 $(SRCDIR)ft_split_whitespaces.c \
 $(SRCDIR)fc_env.c \
+$(SRCDIR)ft_prog.c \
 $(SRCDIR)ft_getpath.c \
+$(SRCDIR)ft_check_input.c \
+$(SRCDIR)ft_env.c \
 
 OBJ = $(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 INC = -I./$(INC_PATH) -I./$(LIB_PATH)$(INC_PATH)

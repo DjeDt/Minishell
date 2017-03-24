@@ -3,19 +3,21 @@
 
 # include "libft.h"
 
-/* Variables d'environnement */
-/* */
-
 char		**ft_split_whitespaces(char *str);
 
 char		**ft_getpath(char *str);
-char		**ft_get_full_env(void);
+char		**ft_cpyenv(void);
 char		*ft_getenv(char *str);
-//char		*ft_getprog(char **av, char *prog);
+void		ft_env(char **input);
+
 char		*ft_getprog(char **av);
 
+char		*ft_check_input(char *cmd);
 
 #endif
+
+
+
 
 
 
