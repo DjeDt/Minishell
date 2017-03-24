@@ -36,6 +36,6 @@ minishell
 
 # backup files
 #*#
-includes/*~
-srcs/*~
+*/*~
+*/*~
 *~
