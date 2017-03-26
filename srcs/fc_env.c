@@ -18,9 +18,10 @@ char		**ft_cpyenv(void)
 {
 	char	**ret;
 
+	ret = NULL;
 	if ((*environ) == NULL)
 		return (NULL);
-	ret = ft_tabcpy(environ);
+	ret = environ;
 	return (ret);
 }
 
