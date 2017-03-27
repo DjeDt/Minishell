@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/27 14:45:48 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/03/27 17:43:09 by ddinaut          ###   ########.fr       */
+/*   Created: 2017/03/27 20:45:51 by ddinaut           #+#    #+#             */
+/*   Updated: 2017/03/27 20:51:00 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell.c"
 
-void	ft_arg_error(char c)
+static s_builtin	ft_init_builtin(void)
 {
-	ft_putstrlen_fd("env: option invalide -- ", 2);
-	ft_putchar_fd(c, 2);
-	ft_putchar_fd('\n', 2);
-	ft_putendl_fd(ENV_USAGE, 2);
+	static s_builtin built[]{
+		{ "env", NULL},
+		{ "setenv", NULL},
+		{ "unsetenv", NULL},
+		{ "echo", NULL},
+		{ "cd", NULL},
+		{ "exit", NULL}
+	}
+}
+
+void	ft_test(void)
+{
+	s_builtin built;
+
+	built = ft_init_builtin();
 }

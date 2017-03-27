@@ -3,14 +3,20 @@
 
 # include "libft.h"
 
-# define ENV_USAGE "usage: env [-i] [file...]\n"
+# define ENV_USAGE "usage: env [-i] [name=value]... [utility [argument...]]\n"
 
-// Pour wait :
+/* sous debian
 # include <sys/types.h>
 # include <sys/wait.h>
-// fin de wait
+*/
 
-# define FLAG_0 (0x00)
+struct	s_builtin
+{
+	const char	*ft;
+	t_builtin	*next;
+};
+
+# define FLAG_0 0
 # define FLAG_1 (1 << 0)
 # define FLAG_2 (1 << 1)
 # define FLAG_3 (1 << 2)

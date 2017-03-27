@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 12:39:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/03/27 17:18:25 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/03/27 20:52:06 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*ft_check_input(char *cmd)
 	char	**tmp;
 
 	tmp = ft_split_whitespaces(cmd);
-	if (ft_strncmp(tmp[0], "env", 3) == 0)
+	if (ft_strncmp(tmp[0], "env ", 3) == 0)
 		ft_env(tmp);
 	free(tmp);
 	tmp = NULL;
