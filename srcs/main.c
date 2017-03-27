@@ -6,11 +6,23 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 12:39:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/03/24 14:34:26 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/03/27 17:18:25 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static char	*ft_check_input(char *cmd)
+{
+	char	**tmp;
+
+	tmp = ft_split_whitespaces(cmd);
+	if (ft_strncmp(tmp[0], "env", 3) == 0)
+		ft_env(tmp);
+	free(tmp);
+	tmp = NULL;
+	return (NULL);
+}
 
 int			main(void)
 {

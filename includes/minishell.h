@@ -3,15 +3,19 @@
 
 # include "libft.h"
 
-# define flg_env "i"
-# define env_use "usage: env [-"flg_env"] [file...]\n"
+# define ENV_USAGE "usage: env [-i] [file...]\n"
 
 // Pour wait :
 # include <sys/types.h>
 # include <sys/wait.h>
 // fin de wait
 
-char		**ft_split_whitespaces(char *str);
+# define FLAG_0 (0x00)
+# define FLAG_1 (1 << 0)
+# define FLAG_2 (1 << 1)
+# define FLAG_3 (1 << 2)
+# define FLAG_4 (1 << 3)
+# define FLAG_5 (1 << 4)
 
 char		**ft_getpath(char *str);
 char		**ft_cpyenv(void);
@@ -20,6 +24,7 @@ void		ft_env(char **input);
 
 char		*ft_getprog(char **av);
 
-char		*ft_check_input(char *cmd);
+void		ft_arg_error(char c);
+
 
 #endif

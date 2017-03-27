@@ -1,36 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_prog.c                                          :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/24 13:46:18 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/03/27 09:57:02 by ddinaut          ###   ########.fr       */
+/*   Created: 2017/03/27 14:45:48 by ddinaut           #+#    #+#             */
+/*   Updated: 2017/03/27 17:14:59 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char		*ft_getprog(char **av)
+void	ft_arg_error(char c)
 {
-	int		count;
-	char	*tmp;
-	char	**path;
-
-	count = -1;
-	tmp = NULL;
-	path = ft_getpath(ft_getenv("PATH"));
-	while (path != NULL && path[++count])
-	{
-		tmp = ft_strjoin(path[count], "/");
-		execve(ft_strjoin(tmp, av[0]), av, NULL);
-		free(tmp);
-		tmp = NULL;
-	}
-	ft_putstrlen("commande introuvable: ");
-	ft_putendl(av[0]);
-	free(path);
-	free(av);
-	return (NULL);
+	ft_putstrlen("env: option invalide -- ");
+	ft_putchar(c);
+	ft_putchar('\n');
+	ft_putendl(ENV_USAGE);
+	exit (-1);
 }

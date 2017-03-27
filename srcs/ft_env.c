@@ -6,49 +6,49 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 14:37:39 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/03/24 14:49:44 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/03/27 17:21:48 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern char **environ;
+extern char	**environ;
 
-static int	one_of(char c)
+static unsigned int	arg_check(char **input)
 {
-	if (ft_strchr(flg_env, c))
-		return (c);
-	else
-		arg_error(c);
-}
+	int				count;
+	int				count2;
+	unsigned int	flags;
+	const char		*mask;
 
-static int	arg_check(char **input)
-{
-	int i;
-	int j;
-	int arg;
-
-	i = 0;
-	arg = 0;
-	if (input[1][0] == '-' && imput[1][1] != '\0')
+	count = 0;
+	flags = 0;
+	mask = "i";
+	while (input[++count])
 	{
-		while (input[++i])
+		count2 = 1;
+		while (input[count][count2] != '\0' && input[count][0] == '-')
 		{
-			while (input[i][j]
+			if (ft_strchr(mask, input[count][count2]) != NULL)
+				flags |= (1 << (ft_strchr(mask, input[count][count2]) - mask));
+			else
+				ft_arg_error(input[count][count2]);
+			count2++;
 		}
 	}
+	return (flags);
 }
 
-void		ft_env(char **input)
+void				ft_env(char **input)
 {
-	int i;
+	int flags;
 
-	i = arg_check(input);
-	if (i == 0)
-		ft_tabprint(environ);
-	else
+	flags = arg_check(input);
+	if (flags & )
 	{
-		if (ft_strncmp(input[1], "-i", 2) == 0)
-			ft_putendl("on lance les options");
+		ft_putendl("no flag");
+		ft_tabprint(environ);
 	}
+	if (flags & FLAG_1)
+		ft_putendl("option ok");
 }
