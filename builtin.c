@@ -4,32 +4,32 @@
 struct	s_builtin
 {
 	const char	*name;
-	char		*ft;
+	char		*fc;
 };
 
-static struct s_builtin	func(void)
+static struct s_builtin *func(struct s_builtin *test)
 {
-	struct s_builtin	arr[] = {
+	struct s_builtin	arr[] ={
 		{ "env", NULL },
-		{ "echo", NULL},
-		{ "test", NULL}
+		{ "echo", NULL },
+		{ "test", NULL },
+		{ "cd", NULL },
 	};
-
-	return (arr);
+	test = arr;
+	return (test);
 }
 
 int	main(void)
 {
-	struct s_builtin test;
+	int i = 0;
+	struct s_builtin *test;
 
-	test = func();
-	printf("%s", test.name);
+	test = func(test);
+//	while (test[i].name != NULL)
+//	{
+//		printf("i = %d\n", i);
+		printf("name = %s", test[i].name);
+//		i++;
+//	}
 	return (0);
 }
-
-
-
-
-
-
-
