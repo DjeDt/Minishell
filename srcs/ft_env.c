@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 14:37:39 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/03/27 18:10:29 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/03/28 16:33:04 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static unsigned int arg_check2(char **input)
 	int count;
 
 	count = 0;
+	ft_putendl("arg check 2 = option i reconnue");
 	while (input[++count])
 	{
 		while (input[count][0] == '-')
@@ -67,13 +68,5 @@ void				ft_env(char **input)
 		arg_check2(input);
 	else
 		ft_tabprint(environ);
+	exit (0);
 }
-
-
-
-
-
-
-
-
-

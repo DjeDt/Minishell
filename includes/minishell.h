@@ -10,11 +10,11 @@
 # include <sys/wait.h>
 */
 
-struct	s_builtin
+typedef struct	s_builtin
 {
 	const char	*ft;
-	t_builtin	*next;
-};
+	void		(*func)(char**);
+}test;
 
 # define FLAG_0 0
 # define FLAG_1 (1 << 0)

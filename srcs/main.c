@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 12:39:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/03/27 20:52:06 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/03/28 16:40:30 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,24 @@
 
 static char	*ft_check_input(char *cmd)
 {
+	int		count;
 	char	**tmp;
+	test	tt[6] ={
+		{"env", &ft_env},
+		{"setenv", NULL},
+		{"unsetenv", NULL},
+		{"echo", NULL},
+		{"cd", NULL},
+		{"exit", NULL}
+	};
 
+	count = -1;
 	tmp = ft_split_whitespaces(cmd);
-	if (ft_strncmp(tmp[0], "env ", 3) == 0)
-		ft_env(tmp);
+	while (++count < 6)
+	{
+		if (ft_strcmp(tt[count].ft, tmp[0]) == 0)
+			(*(tt[count].func))(tmp);
+	}
 	free(tmp);
 	tmp = NULL;
 	return (NULL);
