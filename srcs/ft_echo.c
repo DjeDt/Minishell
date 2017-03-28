@@ -12,13 +12,19 @@
 
 #include "minishell.h"
 
-void	ft_echo(char **input)
+void	ft_echo(char *input)
 {
-	int count;
+	int		count;
+	char	**tmp;
 
 	count = 0;
-	while (input[++count])
-		ft_putstrlen(input[count]);
+	tmp = ft_split_whitespaces(input);
+	while (tmp[++count])
+		ft_putstrlen(tmp[count]);
 	ft_putchar('\n');
+	count = -1;
+	while (tmp[++count])
+		ft_memdel((void*)tmp[count]);
+	ft_memdel((void**)tmp);
 	exit (0);
 }

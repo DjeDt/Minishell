@@ -5,15 +5,14 @@
 
 # define ENV_USAGE "usage: env [-i] [name=value]... [utility [argument...]]\n"
 
-/* sous debian
+// sous debian
 # include <sys/types.h>
 # include <sys/wait.h>
-*/
 
 typedef struct	s_builtin
 {
 	const char	*ft;
-	void		(*func)(char*);
+	void		(*func)(char**);
 }test;
 
 # define FLAG_0 0
@@ -32,7 +31,7 @@ char		*ft_getprog(char **av);
 void		ft_arg_error(char c);
 
 /* Builtins */
-void		ft_echo(char **input);
-void		ft_env(char **input);
+void		ft_echo(char *input);
+void		ft_env(char *input);
 
 #endif

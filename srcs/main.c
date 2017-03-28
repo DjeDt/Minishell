@@ -15,16 +15,18 @@
 static char	*ft_check_input(char *input)
 {
 	int		count;
-	test	tt[6] ={
-		{"env", &ft_env},
+	char	**tmp;
+	test	tt[6] = {
+		{"env", ft_env},
 		{"setenv", NULL},
 		{"unsetenv", NULL},
-		{"echo", &ft_echo},
+		{"echo", ft_echo},
 		{"cd", NULL},
 		{"exit", NULL}
 	};
 
 	count = -1;
+	tmp = ft_split_whitespaces(input);
 	while (++count < 6)
 	{
 		if (ft_strcmp(tt[count].ft, tmp[0]) == 0)

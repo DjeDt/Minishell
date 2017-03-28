@@ -57,16 +57,24 @@ static unsigned int arg_check2(char **input)
 	return (0);
 }
 
-void				ft_env(char **input)
+void				ft_env(char *input)
 {
-	int flags;
+	int		count;
+	int		flags;
+	char	**tmp;
 
-	flags = arg_check(input);
+	tmp = ft_split_whitespaces(input);
+	flags = arg_check(tmp);
 	if (flags == -1)
 		return ;
 	if (flags & FLAG_1)
-		arg_check2(input);
+		arg_check2(tmp);
 	else
 		ft_tabprint(environ);
+	count = -1;
+	while (tmp[++count])
+		ft_memdel((void*)tmp[count]);
+	ft_memdel((void**)tmp[count]);
+	tmp = NULL;
 	exit (0);
 }
