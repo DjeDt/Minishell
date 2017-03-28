@@ -13,7 +13,7 @@
 typedef struct	s_builtin
 {
 	const char	*ft;
-	void		(*func)(char**);
+	void		(*func)(char*);
 }test;
 
 # define FLAG_0 0
@@ -26,11 +26,13 @@ typedef struct	s_builtin
 char		**ft_getpath(char *str);
 char		**ft_cpyenv(void);
 char		*ft_getenv(char *str);
-void		ft_env(char **input);
 
 char		*ft_getprog(char **av);
 
 void		ft_arg_error(char c);
 
+/* Builtins */
+void		ft_echo(char **input);
+void		ft_env(char **input);
 
 #endif

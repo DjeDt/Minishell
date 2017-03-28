@@ -35,6 +35,7 @@ $(SRCDIR)ft_prog.c \
 $(SRCDIR)ft_getpath.c \
 $(SRCDIR)ft_env.c \
 $(SRCDIR)error.c \
+$(SRCDIR)ft_echo.c \
 
 OBJ = $(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 INC = -I./$(INC_PATH) -I./$(LIB_PATH)$(INC_PATH)
