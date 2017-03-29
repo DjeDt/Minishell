@@ -57,7 +57,7 @@ $(NAME): $(OBJ)
 $(OBJDIR)%.o: $(SRCDIR)%.c $(CHECK)
 	@mkdir -p $(OBJDIR)
 	@$(CC) $(FLAGS) -c $< -o $@ $(INC)
-	@printf "\r"
+	@printf "%s -> %s\n" $@ $<
 	@printf $(GREEN)"-> "$(GREEN) "$@.\n"$(DEF)
 
 $(CHECK):
@@ -72,7 +72,7 @@ clean:
 	@make -C $(LIB_PATH) clean
 	@printf $(YELLOW)"\n[  CLEANING MINISHEL  ]\n"
 	@rm -rf $(OBJDIR)
-	@echo $(RED)"-> "$(RED)"$(OBJDIR) removed.\n"
+	@printf "%s -> removed" $<
 
 fclean: clean
 	@make -C $(LIB_PATH) fclean

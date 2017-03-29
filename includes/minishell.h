@@ -12,7 +12,7 @@
 typedef struct	s_builtin
 {
 	const char	*ft;
-	void		(*func)(char**);
+	void		(*func)(char*);
 }test;
 
 # define FLAG_0 0

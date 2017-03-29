@@ -47,7 +47,6 @@ static unsigned int arg_check2(char **input)
 	int count;
 
 	count = 0;
-	ft_putendl("arg check 2 = option i reconnue");
 	while (input[++count])
 	{
 		while (input[count][0] == '-')

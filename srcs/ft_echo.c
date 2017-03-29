@@ -14,17 +14,6 @@
 
 void	ft_echo(char *input)
 {
-	int		count;
-	char	**tmp;
-
-	count = 0;
-	tmp = ft_split_whitespaces(input);
-	while (tmp[++count])
-		ft_putstrlen(tmp[count]);
-	ft_putchar('\n');
-	count = -1;
-	while (tmp[++count])
-		ft_memdel((void*)tmp[count]);
-	ft_memdel((void**)tmp);
+	ft_putendl(ft_strchr(input, 'o') + 2);
 	exit (0);
 }

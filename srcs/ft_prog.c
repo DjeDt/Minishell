@@ -25,12 +25,13 @@ char		*ft_getprog(char **av)
 	{
 		tmp = ft_strjoin(path[count], "/");
 		execve(ft_strjoin(tmp, av[0]), av, NULL);
-		free(tmp);
-		tmp = NULL;
+		ft_memdel((void*)tmp);
 	}
 	ft_putstrlen("commande introuvable: ");
 	ft_putendl(av[0]);
-	free(path);
-	free(av);
+	count = -1;
+	while (path[++count])
+		ft_memdel((void*)path[count]);
+	ft_memdel((void**)path);
 	return (NULL);
 }
