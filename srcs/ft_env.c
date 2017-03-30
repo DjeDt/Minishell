@@ -6,24 +6,22 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 14:37:39 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/03/28 16:33:04 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/03/30 16:38:41 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern char	**environ;
 
 static unsigned int	arg_check(char **input)
 {
 	int				count;
 	int				count2;
 	unsigned int	flags;
-	const char		*mask;
+	char			*mask;
 
 	count = 0;
 	flags = 0;
-	mask = "i";
+	mask = ft_strdup("i");
 	while (input[++count])
 	{
 		count2 = 1;
@@ -39,10 +37,11 @@ static unsigned int	arg_check(char **input)
 			count2++;
 		}
 	}
+	free(mask);
 	return (flags);
 }
 
-static unsigned int arg_check2(char **input)
+static unsigned int option_i(char **input)
 {
 	int count;
 
@@ -56,7 +55,7 @@ static unsigned int arg_check2(char **input)
 	return (0);
 }
 
-void				ft_env(char *input)
+void				ft_env(char *input, char **environ)
 {
 	int		count;
 	int		flags;
@@ -67,13 +66,13 @@ void				ft_env(char *input)
 	if (flags == -1)
 		return ;
 	if (flags & FLAG_1)
-		arg_check2(tmp);
+		option_i(tmp);
 	else
 		ft_tabprint(environ);
 	count = -1;
 	while (tmp[++count])
-		ft_memdel((void*)tmp[count]);
-	ft_memdel((void**)tmp[count]);
+		free(tmp[count]);
+	free(tmp);
 	tmp = NULL;
 	exit (0);
 }

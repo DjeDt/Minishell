@@ -34,6 +34,7 @@ $(SRCDIR)fc_env.c \
 $(SRCDIR)ft_prog.c \
 $(SRCDIR)ft_getpath.c \
 $(SRCDIR)ft_env.c \
+$(SRCDIR)ft_setenv.c \
 $(SRCDIR)error.c \
 $(SRCDIR)ft_echo.c \
 
@@ -58,7 +59,7 @@ $(OBJDIR)%.o: $(SRCDIR)%.c $(CHECK)
 	@mkdir -p $(OBJDIR)
 	@$(CC) $(FLAGS) -c $< -o $@ $(INC)
 	@printf "%s -> %s\n" $@ $<
-	@printf $(GREEN)"-> "$(GREEN) "$@.\n"$(DEF)
+	@tput up
 
 $(CHECK):
 	@echo "create $(OBJDIR)"
@@ -72,7 +73,7 @@ clean:
 	@make -C $(LIB_PATH) clean
 	@printf $(YELLOW)"\n[  CLEANING MINISHEL  ]\n"
 	@rm -rf $(OBJDIR)
-	@printf "%s -> removed" $<
+	@printf "%s -> removed\n" $<
 
 fclean: clean
 	@make -C $(LIB_PATH) fclean
