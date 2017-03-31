@@ -6,16 +6,15 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 12:39:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/03/30 17:12:38 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/03/31 14:15:30 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_check_input(char *input, char **environ)
+static char	*ft_check_input(char **input)
 {
 	int		count;
-	char	**tmp;
 	test	tt[6] ={
 		{"env", &ft_env},
 		{"setenv", NULL},
@@ -26,7 +25,6 @@ static char	*ft_check_input(char *input, char **environ)
 	};
 
 	count = -1;
-	tmp = ft_split_whitespaces(input);
 	while (++count < 6)
 	{
 		if (ft_strcmp(tt[count].ft, tmp[0]) == 0)
@@ -40,6 +38,7 @@ int			main(void)
 	char		*cmd;
 	pid_t		proc;
 	char		**env;
+	char		**input;
 
 	env = ft_cpyenv();
 	while (1)
@@ -51,10 +50,10 @@ int			main(void)
 		{
 			ft_putstrlen("user\n--> ");
 			get_next_line(0, &cmd);
-			if (ft_check_input(cmd, env) == NULL)
+			input = ft_split_whitespaces(cmd);
+			if (ft_check_input(input) == NULL)
 				ft_getprog(ft_split_whitespaces(cmd));
-			free(cmd);
-			cmd = NULL;
+			ft_memdel((void*)cmd);
 		}
 	}
 	return (0);
