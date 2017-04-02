@@ -12,18 +12,17 @@
 
 #include "minishell.h"
 
-void	ft_echo(char *input, char **environ)
+int		ft_echo(char **input, char **environ)
 {
-	char **tmp = ft_split_whitespaces(input);
 	int count;
 
-	count = -1;
-	while (tmp[++count])
+	count = 0;
+	(void)environ;
+	while (input[++count])
 	{
-		ft_putstrlen(tmp[count]);
-		write(1, "\n", 1);
+		ft_putstrlen(input[count]);
+		write(1, " ", 1);
 	}
-
-//	ft_putendl(ft_strchr(input, 'o') + 2);
-	exit (0);
+	write(1, "\n", 1);
+	return (0);
 }

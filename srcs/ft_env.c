@@ -43,36 +43,37 @@ static unsigned int	arg_check(char **input)
 
 static unsigned int option_i(char **input)
 {
-	int count;
+	int		count;
+	int		count2;
+	char	**tmp;
 
 	count = 0;
+	count2 = 0;
+	tmp = NULL;
 	while (input[++count])
 	{
 		while (input[count][0] == '-')
 			count++;
-		ft_putendl(input[count]);
+		if (!(tmp = (char**)malloc(sizeof(char*) * ft_tablen((const char**)input) - 2)))
+			return (-1);
+		tmp[count2] = ft_strdup(input[count]);
+		count2++;
 	}
+	tmp[count2] = NULL;
+	ft_get
 	return (0);
 }
 
-void				ft_env(char *input, char **environ)
+int			ft_env(char **input, char **environ)
 {
-	int		count;
 	int		flags;
-	char	**tmp;
 
-	tmp = ft_split_whitespaces(input);
-	flags = arg_check(tmp);
+	flags = arg_check(input);
 	if (flags == -1)
-		return ;
+		return (-1);
 	if (flags & FLAG_1)
-		option_i(tmp);
+		option_i(input);
 	else
 		ft_tabprint(environ);
-	count = -1;
-	while (tmp[++count])
-		free(tmp[count]);
-	free(tmp);
-	tmp = NULL;
-	exit (0);
+	return (0);
 }

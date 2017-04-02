@@ -59,7 +59,7 @@ $(OBJDIR)%.o: $(SRCDIR)%.c $(CHECK)
 	@mkdir -p $(OBJDIR)
 	@$(CC) $(FLAGS) -c $< -o $@ $(INC)
 	@printf "%s -> %s\n" $@ $<
-	@tput up
+#	@tput up
 
 $(CHECK):
 	@echo "create $(OBJDIR)"

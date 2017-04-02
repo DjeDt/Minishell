@@ -12,8 +12,9 @@
 
 #include "minishell.h"
 
-int		ft_setenv(char *str, char **environ)
+int		ft_setenv(char **str, char **environ)
 {
+	/*
 	int count;
 
 	count = 0;
@@ -26,5 +27,9 @@ int		ft_setenv(char *str, char **environ)
 	environ[count] = ft_strjoin(name, ft_strjoin("=", value));
 	free(name);
 	free(value);
-
+	*/
+	ft_putendl("ft_setenv");
+	(void)str;
+	(void)environ;
+	return (0);
 }

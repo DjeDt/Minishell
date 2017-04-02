@@ -12,12 +12,12 @@
 
 #include "minishell.h"
 
-static char	*ft_check_input(char **input)
+static int	ft_check_input(char **input, char **env)
 {
 	int		count;
 	test	tt[6] ={
 		{"env", &ft_env},
-		{"setenv", NULL},
+		{"setenv", &ft_setenv},
 		{"unsetenv", NULL},
 		{"echo", &ft_echo},
 		{"cd", NULL},
@@ -27,10 +27,13 @@ static char	*ft_check_input(char **input)
 	count = -1;
 	while (++count < 6)
 	{
-		if (ft_strcmp(tt[count].ft, tmp[0]) == 0)
-			(*(tt[count].func))(input, environ);
+		if (ft_strcmp(tt[count].ft, input[0]) == 0)
+		{
+			(*(tt[count].func))(input, env);
+			return (0);
+		}
 	}
-	return (NULL);
+	return (-1);
 }
 
 int			main(void)
@@ -51,7 +54,7 @@ int			main(void)
 			ft_putstrlen("user\n--> ");
 			get_next_line(0, &cmd);
 			input = ft_split_whitespaces(cmd);
-			if (ft_check_input(input) == NULL)
+			if (ft_check_input(input, env) != 0)
 				ft_getprog(ft_split_whitespaces(cmd));
 			ft_memdel((void*)cmd);
 		}
