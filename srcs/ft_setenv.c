@@ -12,24 +12,40 @@
 
 #include "minishell.h"
 
-int		ft_setenv(char **str, char **environ)
+static int	name_len(char	*str)
 {
-	/*
 	int count;
 
 	count = 0;
-	while (!ft_strcmp(name, environ[count]))
+	while ((str[count] != '\0') && (str[count] != '='))
 		count++;
-	if (environ[count] == NULL)
-		exit (-1);
-	free(environ[count]);
-	environ[count] = NULL;
-	environ[count] = ft_strjoin(name, ft_strjoin("=", value));
-	free(name);
-	free(value);
-	*/
-	ft_putendl("ft_setenv");
-	(void)str;
-	(void)environ;
+	return (count);
+}
+
+int		ft_setenv(char **input, char **environ)
+{
+	int		count;
+	int		count2;
+
+	count = 0;
+	count2 = 1;
+	if (input == NULL)
+		return (-1);
+	while (input[count2] != NULL)
+	{
+		while (environ[count] != NULL)
+		{
+			if (ft_strncmp(environ[count], input[count2], name_len(input[count2])) == 0)
+			{
+				ft_strreplace(environ[count], input[count2]);
+				break ;
+			}
+			count++;
+		}
+		environ = ft_tabjoin(environ, input[count2]);
+		count2++;
+	}
+	ft_putstrlen("environ = \n");
+	ft_tabprint(environ);
 	return (0);
 }

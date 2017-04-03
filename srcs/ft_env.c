@@ -47,20 +47,19 @@ static unsigned int option_i(char **input)
 	int		count2;
 	char	**tmp;
 
-	count = 0;
+	count = 2;
 	count2 = 0;
 	tmp = NULL;
-	while (input[++count])
+	while (input[count] != NULL)
 	{
-		while (input[count][0] == '-')
-			count++;
-		if (!(tmp = (char**)malloc(sizeof(char*) * ft_tablen((const char**)input) - 2)))
+		if (!(tmp = (char**)malloc(sizeof(char*) * ft_tablen(input) - 2)))
 			return (-1);
 		tmp[count2] = ft_strdup(input[count]);
+//		ft_putendl(tmp[count2]);
+		count++;
 		count2++;
 	}
-	tmp[count2] = NULL;
-	ft_get
+	ft_tabprint(tmp);
 	return (0);
 }
 

@@ -22,6 +22,7 @@ BLUE   = "\033[1;34m"
 PURPLE = "\033[1;35m"
 WHITE  = "\033[1;37m"
 
+COLOR_RESET="\033[0"
 CLEAR = "\033[2K"
 UP =	"\033[A"
 DEF	=	"\033[0;0m"
