@@ -36,6 +36,7 @@ $(SRCDIR)ft_prog.c \
 $(SRCDIR)ft_getpath.c \
 $(SRCDIR)ft_env.c \
 $(SRCDIR)ft_setenv.c \
+$(SRCDIR)ft_unsetenv.c \
 $(SRCDIR)error.c \
 $(SRCDIR)ft_echo.c \
 
