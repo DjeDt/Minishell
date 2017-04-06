@@ -63,7 +63,7 @@ static unsigned int option_i(char **input)
 	return (0);
 }
 
-int			ft_env(char **input, char **environ)
+int			ft_env(char **input, char ***environ)
 {
 	int		flags;
 
@@ -73,6 +73,6 @@ int			ft_env(char **input, char **environ)
 	if (flags & FLAG_1)
 		option_i(input);
 	else
-		ft_tabprint(environ);
+		ft_tabprint(*environ);
 	return (0);
 }

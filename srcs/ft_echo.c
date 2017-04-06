@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int		ft_echo(char **input, char **environ)
+int		ft_echo(char **input, char ***environ)
 {
 	int count;
 

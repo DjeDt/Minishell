@@ -1,15 +1,15 @@
 
-# Output file
-NAME = minishell
+# Output
+NAME =	minishell
 
-# Details
-CC = gcc
-FLAGS = -Wall -Wextra -Werror
+# Compilation
+CC =	gcc
+FLAGS =	-Wall -Wextra -Werror
+ADDFLAGS =
 
-# Path #
+# Directories
 INC_PATH = includes/
 LIB_PATH = libft/
-
 SRCDIR = srcs/
 OBJDIR = objects/
 
@@ -21,11 +21,6 @@ YELLOW = "\033[1;33m"
 BLUE   = "\033[1;34m"
 PURPLE = "\033[1;35m"
 WHITE  = "\033[1;37m"
-
-COLOR_RESET="\033[0"
-CLEAR = "\033[2K"
-UP =	"\033[A"
-DEF	=	"\033[0;0m"
 
 # Sources
 SRC =\
@@ -52,7 +47,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@make -C $(LIB_PATH)
 	@printf $(YELLOW)"\n[  BUILDING MINISHELL  ]\n"
-	@$(CC) $(FLAGS) $(OBJ) -o $@ $(LIB) $(INC)
+	@$(CC) $(FLAGS) $(ADDFLAGS) $(OBJ) -o $@ $(LIB) $(INC)
 	@printf $(GREEN)"-> compilation done\n"
 	@printf $(GREEN)"-> Objects created\n"
 

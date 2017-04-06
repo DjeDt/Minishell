@@ -5,6 +5,10 @@
 
 /* Env error */
 # define ENV_USAGE "usage: env [-i] [name=value]... [utility [argument...]]\n"
+/* Setenv error*/
+# define SETENV_USAGE "usage: setenv [name=value]\n"
+/* Unsetenv error */
+# define UNSETENV_USAGE "usage: unsetenv [name]\n"
 
 /* Sous debian */
 # include <sys/types.h>
@@ -17,10 +21,11 @@
 # define FLAG_4 (1 << 3)
 # define FLAG_5 (1 << 4)
 
+/* Pointeurs sur fonctions */
 typedef struct	s_builtin
 {
 	const char	*ft;
-	int			(*func)(char **, char **);
+	int			(*func)(char **, char ***);
 }test;
 
 /* Gestion d'environnement */
@@ -33,9 +38,9 @@ char		*ft_getprog(char **av);
 void		ft_arg_error(char c);
 
 /* Builtins */
-int			ft_echo(char **input, char **environ);
-int			ft_env(char **input, char **environ);
-int			ft_setenv(char **input, char **environ);
-int			ft_unsetenv(char **input, char **environ);
+int			ft_echo(char **input, char ***environ);
+int			ft_env(char **input, char ***environ);
+int			ft_setenv(char **input, char ***environ);
+int			ft_unsetenv(char **input, char ***environ);
 
 #endif
