@@ -6,9 +6,9 @@
 /* Env error */
 # define ENV_USAGE "usage: env [-i] [name=value]... [utility [argument...]]\n"
 /* Setenv error*/
-# define SETENV_USAGE "usage: setenv [name=value]\n"
+# define SETENV_USAGE "usage: setenv [NAME=value]\n"
 /* Unsetenv error */
-# define UNSETENV_USAGE "usage: unsetenv [name]\n"
+# define UNSETENV_USAGE "usage: unsetenv [NAME]\n"
 
 /* Sous debian */
 # include <sys/types.h>

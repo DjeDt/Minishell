@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 12:39:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/03/31 14:15:30 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/07 16:06:11 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,18 @@ static int	ft_check_input(char **input, char ***env)
 int			main(void)
 {
 	char		*cmd;
-	pid_t		proc;
 	char		**env;
 	char		**input;
 
 	env = ft_cpyenv();
 	while (1)
 	{
-		proc = fork();
-		if (proc > 0)
-			wait(0);
-		if (proc == 0)
-		{
-			ft_putstrlen("user\n--> ");
-			get_next_line(0, &cmd);
-			input = ft_split_whitespaces(cmd);
-			if (ft_check_input(input, &env) != 0)
-				ft_getprog(ft_split_whitespaces(cmd));
-			ft_memdel((void*)cmd);
-		}
+		ft_putstrlen("user\n--> ");
+		get_next_line(0, &cmd);
+		input = ft_split_whitespaces(cmd);
+		if (ft_check_input(input, &env) != 0)
+			ft_getprog(ft_split_whitespaces(cmd));
+		ft_memdel((void*)&cmd);
 	}
 	return (0);
 }

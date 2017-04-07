@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 13:46:18 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/03/30 14:38:27 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/07 12:42:41 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char		*ft_getprog(char **av)
 	ft_putstrlen("commande introuvable: ");
 	ft_putendl(av[0]);
 	count = -1;
-	while (path[++count])
+	while (path[++count] != NULL)
 		free(path[count]);
 	free(path);
 	return (NULL);

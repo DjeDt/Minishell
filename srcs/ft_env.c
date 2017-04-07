@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 14:37:39 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/03/30 16:38:41 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/07 14:12:39 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static unsigned int option_i(char **input)
 		if (!(tmp = (char**)malloc(sizeof(char*) * ft_tablen(input) - 2)))
 			return (-1);
 		tmp[count2] = ft_strdup(input[count]);
-//		ft_putendl(tmp[count2]);
 		count++;
 		count2++;
 	}
@@ -66,13 +65,19 @@ static unsigned int option_i(char **input)
 int			ft_env(char **input, char ***environ)
 {
 	int		flags;
+	char	**tmp;
 
 	flags = arg_check(input);
+	tmp = (*environ);
 	if (flags == -1)
 		return (-1);
 	if (flags & FLAG_1)
 		option_i(input);
 	else
-		ft_tabprint(*environ);
+		ft_tabprint(tmp);
 	return (0);
 }
+
+
+
+

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_unsetenv.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/07 12:09:42 by ddinaut           #+#    #+#             */
+/*   Updated: 2017/04/07 14:47:48 by ddinaut          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static	void	new_tab(int ptr, char ***environ)
@@ -11,6 +23,7 @@ static	void	new_tab(int ptr, char ***environ)
 		tmp[ptr] = ft_strdup(tmp[ptr + 1]);
 		ptr++;
 	}
+	ft_tabprint(tmp);
 }
 
 int		ft_unsetenv(char **input, char ***environ)
