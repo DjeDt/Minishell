@@ -16,12 +16,16 @@ extern char		**environ;
 
 char		**ft_cpyenv(void)
 {
+	size_t	count;
 	char	**ret;
 
-	ret = NULL;
-	if ((*environ) == NULL)
+	count = -1;
+	if (environ == NULL)
 		return (NULL);
-	ret = environ;
+	if (!(ret = (char**)malloc(sizeof(char*) * ft_arraylen(environ))))
+		return (NULL);
+	while (environ[++count])
+		ret[count] = ft_strdup(environ[count]);
 	return (ret);
 }
 

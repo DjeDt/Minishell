@@ -12,27 +12,35 @@
 
 #include "minishell.h"
 
-char		*ft_getprog(char **av)
+int		ft_spawn(char **av)
 {
 	int		count;
 	char	*tmp;
 	char	**path;
 
 	count = -1;
-	tmp = NULL;
 	path = ft_getpath(ft_getenv("PATH"));
-	while (path != NULL && path[++count])
+	while ((path != NULL) && (path[++count]))
 	{
 		tmp = ft_strjoin(path[count], "/");
 		execve(ft_strjoin(tmp, av[0]), av, NULL);
-		free(tmp);
-		tmp = NULL;
+		ft_memdel((void*)&tmp);
 	}
-	ft_putstrlen("commande introuvable: ");
-	ft_putendl(av[0]);
-	count = -1;
-	while (path[++count] != NULL)
-		free(path[count]);
-	free(path);
-	return (NULL);
+	ft_arrayfree(&path);
+	return (0);
+}
+
+void	ft_getprog(char **av)
+{
+	pid_t child;
+
+	child = fork();
+	if (child != 0)
+		wait(&child);
+	else
+	{
+		ft_spawn(av);
+		ft_putstrlen("commande introuvable: ");
+		ft_putendl(av[0]);
+	}
 }

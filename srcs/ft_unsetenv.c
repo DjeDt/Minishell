@@ -23,7 +23,7 @@ static	void	new_tab(int ptr, char ***environ)
 		tmp[ptr] = ft_strdup(tmp[ptr + 1]);
 		ptr++;
 	}
-	ft_tabprint(tmp);
+	ft_arrayprint(tmp);
 }
 
 int		ft_unsetenv(char **input, char ***environ)

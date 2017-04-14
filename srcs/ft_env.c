@@ -37,11 +37,11 @@ static unsigned int	arg_check(char **input)
 			count2++;
 		}
 	}
-	free(mask);
+	ft_memdel((void*)&mask);
 	return (flags);
 }
 
-static unsigned int option_i(char **input)
+static	int option_i(char **input)
 {
 	int		count;
 	int		count2;
@@ -52,13 +52,14 @@ static unsigned int option_i(char **input)
 	tmp = NULL;
 	while (input[count] != NULL)
 	{
-		if (!(tmp = (char**)malloc(sizeof(char*) * ft_tablen(input) - 2)))
+		if (!(tmp = (char**)malloc(sizeof(char*) * ft_arraylen(input) - 2)))
 			return (-1);
 		tmp[count2] = ft_strdup(input[count]);
 		count++;
 		count2++;
 	}
-	ft_tabprint(tmp);
+	ft_arrayprint(tmp);
+	ft_arrayfree(&tmp);
 	return (0);
 }
 
@@ -74,10 +75,6 @@ int			ft_env(char **input, char ***environ)
 	if (flags & FLAG_1)
 		option_i(input);
 	else
-		ft_tabprint(tmp);
+		ft_arrayprint(tmp);
 	return (0);
 }
-
-
-
-

@@ -32,7 +32,7 @@ typedef struct	s_builtin
 char		**ft_getpath(char *str);
 char		**ft_cpyenv(void);
 char		*ft_getenv(char *str);
-char		*ft_getprog(char **av);
+void		ft_getprog(char **av);
 
 /* Gestion d'erreurs */
 void		ft_arg_error(char c);

@@ -29,6 +29,23 @@ static int	check_input(char **input)
 	return (0);
 }
 
+static char	**ft_change_env(char ***env, char **input)
+{
+	int		count;
+	char	**ret;
+	char	**tmp;
+
+	tmp = (*env);
+	count = -1;
+	if (!(ret = (char**)malloc(sizeof(char*) * ft_arraylen(tmp) + 1)))
+		return (NULL);	// changer le retour et penser au free si malloc erreur
+	while (tmp[++count] != NULL)
+		ret[count] = ft_strdup(tmp[count]);
+	ret[++count] = ft_strdup(input[1]);
+	ft_arrayfree(&tmp);
+	return (ret);
+}
+
 int		ft_setenv(char **input, char ***environ)
 {
 	int		count;
@@ -42,10 +59,12 @@ int		ft_setenv(char **input, char ***environ)
 	{
 		if (ft_strncmp(tmp[count], input[1], ft_strnlen(input[1], '=')) == 0)
 		{
+			free(tmp[count]);
 			tmp[count] = ft_strdup(input[1]);
 			return (0);
 		}
 		count++;
 	}
+	tmp = ft_change_env(&tmp, input);
 	return (0);
 }
