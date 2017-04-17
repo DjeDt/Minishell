@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getpath.c                                       :+:      :+:    :+:   */
+/*   split_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -61,7 +61,7 @@ static char	*cpy(int j, int i, char *dst, char *src)
 	return (dst);
 }
 
-char		**ft_getpath(char *str)
+char		**split_path(char *str)
 {
 	int		i;
 	int		j;

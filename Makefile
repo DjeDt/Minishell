@@ -44,7 +44,7 @@ SRC = $(addprefix $(SRC_PATH)/,$(SRCS))
 SRCS =	main.c \
 		env_utils.c \
 		ft_prog.c \
-		ft_getpath.c \
+		split_path.c \
 		ft_env.c \
 		ft_echo.c \
 		ft_setenv.c \
