@@ -26,13 +26,25 @@ typedef struct	s_builtin
 {
 	const char	*ft;
 	int			(*func)(char **, char ***);
-}test;
+}s_builtin;
+
+typedef struct	s_env
+{
+	char	*name;
+	int		len;
+	struct s_env	*next;
+}t_env;
+
+/* Gestion de listes */
+void		ft_free_lst_env(t_env **list);
+void		ft_add_lst_env(char *data, int len, t_env **list);
+t_env		*ft_create_lst_env(char *data, int len);
+
 
 /* Gestion d'environnement */
-char		**ft_getpath(char *str);
-char		**ft_cpyenv(void);
-char		*ft_getenv(char *str);
-void		ft_getprog(char **av);
+void		ft_env_to_lst(t_env **list);
+char		*get_env_var(char *tf, t_env **list);
+int			ft_getprog(char **av);
 
 /* Gestion d'erreurs */
 void		ft_arg_error(char c);

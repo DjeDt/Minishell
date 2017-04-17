@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getenv.c                                        :+:      :+:    :+:   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,32 +14,21 @@
 
 extern char		**environ;
 
-char		**ft_cpyenv(void)
+void	ft_env_to_lst(t_env **list)
 {
-	size_t	count;
-	char	**ret;
+	int count;
 
 	count = -1;
-	if (environ == NULL)
-		return (NULL);
-	if (!(ret = (char**)malloc(sizeof(char*) * ft_arraylen(environ))))
-		return (NULL);
-	while (environ[++count])
-		ret[count] = ft_strdup(environ[count]);
-	return (ret);
+	while (environ[++count] != NULL)
+		ft_add_lst_env(environ[count], ft_strlen(environ[count]), list);
 }
 
-char		*ft_getenv(char *str)
+char	*ft_get_env_var(char *tf, t_env **list)
 {
-	int		count;
+	t_env *tmp;
 
-	count = -1;
-	if (!str)
-		return (NULL);
-	while (environ[++count] != NULL)
-	{
-		if (ft_strncmp(environ[count], str, ft_strlen(str)) == 0)
-			return (ft_strchr(environ[count], '=') + 1);
-	}
-	return (NULL);
+	tmp = (*list);
+	while ((tmp->next != NULL) && (ft_strncmp(tf, tmp->name, ft_strlen(tf)) != 0))
+		tmp = tmp->next;
+	return (tmp->name);
 }

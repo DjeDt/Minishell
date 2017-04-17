@@ -49,11 +49,10 @@ static	int option_i(char **input)
 
 	count = 2;
 	count2 = 0;
-	tmp = NULL;
+	if (!(tmp = (char**)malloc(sizeof(char*) * ft_arraylen(input) - 2)))
+		return (-1);
 	while (input[count] != NULL)
 	{
-		if (!(tmp = (char**)malloc(sizeof(char*) * ft_arraylen(input) - 2)))
-			return (-1);
 		tmp[count2] = ft_strdup(input[count]);
 		count++;
 		count2++;

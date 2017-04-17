@@ -4,7 +4,7 @@ NAME =	minishell
 
 # Compilation #
 CC			= gcc
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		= -Wall -Wextra -Werror
 ADDFLAGS	=
 
 # Directories #
@@ -31,14 +31,15 @@ SRC = $(addprefix $(SRC_PATH)/,$(SRCS))
 
 # Sources #
 SRCS =	main.c \
-		fc_env.c \
+		env_utils.c \
 		ft_prog.c \
 		ft_getpath.c \
 		ft_env.c \
+		ft_echo.c \
 		ft_setenv.c \
 		ft_unsetenv.c \
-		error.c \
-		ft_echo.c
+		ft_lst_f.c \
+		error.c
 
 # Rules #
 .PHONY: all norme clean fclean re
