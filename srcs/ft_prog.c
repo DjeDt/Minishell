@@ -11,28 +11,27 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-static void		ft_spawn(char **av)
+
+static void		ft_spawn(char **av, char **env)
 {
 	int		count;
 	char	*tmp;
-	char	**env_path;
+	char	**diff_p;
 
 	count = -1;
-	env_path = ft_getpath(ft_getenv("PATH"));
-	while ((env_path != NULL) && (env_path[++count]))
+	diff_p = split_path(get_var_name("PATH", &env));
+	while ((diff_p != NULL) && (diff_p[++count]))
 	{
-		tmp = ft_strjoin(env_path[count], "/");
-		execve(ft_strjoin(tmp, av[0]), av, NULL);
+		tmp = ft_strjoin(diff_p[count], "/");
+		tmp = ft_strjoin_fl(tmp, av[0]);
+		execve(tmp, av, NULL);
 		ft_memdel((void*)&tmp);
 	}
-	ft_arrayfree(&env_path);
+	ft_array_free(&diff_p);
 }
-*/
-int		ft_launch_prog(char **av)
+
+int		ft_launch_prog(char **av, char **env)
 {
-	(void)av;
-	/*
 	pid_t child;
 
 	child = fork();
@@ -40,15 +39,9 @@ int		ft_launch_prog(char **av)
 		wait(&child);
 	else
 	{
-		ft_spawn(av);
-		ft_putstrlen("commande introuvable: ");
-		ft_putendl(av[0]);
+		ft_spawn(av, env);
+		ft_putstrlen_fd("commande introuvable: ", 2);
+		ft_putendl_fd(av[0], 2);
 	}
-	*/
 	return(0);
 }
-
-
-
-
-

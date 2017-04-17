@@ -21,6 +21,7 @@
 # define FLAG_4 (1 << 3)
 # define FLAG_5 (1 << 4)
 
+/* Structure */
 typedef struct	s_env
 {
 	char	*name;
@@ -32,31 +33,24 @@ typedef struct	s_env
 typedef struct	s_builtin
 {
 	const char	*ft;
-	int			(*func)(char **, t_env **);
+	int			(*func)(char **, char **);
 }s_builtin;
 
-/* Gestion de listes */
-void		list_print(t_env **list);
-int			list_len(t_env **list);
-char		**list_to_array(t_env **list);
-t_env		*array_to_list(char **array);
-
 /* Gestion d'environnement */
-void		ft_free_lst_env(t_env **list);
-void		ft_add_lst_env(char *data, int len, t_env **list);
-t_env		*ft_create_lst_env(char *data, int len);
-
-void		ft_env_to_lst(t_env **list);
-char		*get_env_var(char *tf, t_env **list);
-int			ft_launch_prog(char **av);
+char		**get_environ(void);
+char		**split_path(char *str);
+char		*get_var_name(const char *tf, char ***ar_env);
 
 /* Gestion d'erreurs */
 void		ft_arg_error(char c);
 
 /* Builtins */
-int			ft_echo(char **input, t_env **list);
-int			ft_env(char **input, t_env **list);
-int			ft_setenv(char **input, t_env **list);
-int			ft_unsetenv(char **input, t_env **list);
+int			ft_echo(char **input, char **ar_env);
+int			ft_env(char **input, char **ar_env);
+int			ft_setenv(char **input, char **ar_env);
+int			ft_unsetenv(char **input, char **ar_env);
+
+/* Others */
+int			ft_launch_prog(char **av, char **env);
 
 #endif

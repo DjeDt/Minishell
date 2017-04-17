@@ -14,24 +14,30 @@
 
 extern char		**environ;
 
-void	ft_env_to_lst(t_env **list)
+char	**get_environ(void)
 {
 	int		count;
+	char	**tmp;
 
 	count = -1;
+	if (!(tmp = (char**)malloc(sizeof(char*) * ft_array_len(environ) + 1)))
+		return (NULL);
 	while (environ[++count] != NULL)
-		ft_add_lst_env(environ[count], ft_strlen(environ[count]), list);
+		tmp[count] = ft_strdup(environ[count]);
+	tmp[++count] = NULL;
+	return (tmp);
 }
 
-char	*get_var_name(const char *tf, t_env **list)
+char	*get_var_name(const char *tf, char ***ar_env)
 {
-	t_env	*tmp;
+	int		count;
+	char	**tmp;
 
-	tmp = (*list);
-	if (tf == NULL)
-		return (NULL);
-	while ((tmp->next != NULL) && (ft_strncmp(tf, tmp->name, ft_strlen(tf)) != 0))
-		tmp = tmp->next;
-	free(tmp);
-	return (tmp->name);
+	tmp = (*ar_env);
+	while (tmp[++count] != NULL)
+	{
+		if (ft_strncmp(tf, tmp[count], ft_strlen(tf)) == 0)
+			return (ft_strchr(tmp[count], '=') + 1);
+	}
+	return (NULL);
 }

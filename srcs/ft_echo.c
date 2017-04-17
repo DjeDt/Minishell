@@ -12,12 +12,12 @@
 
 #include "minishell.h"
 
-int		ft_echo(char **input, t_env **list)
+int		ft_echo(char **input, char **ar_env)
 {
 	int		count;
 
 	count = 0;
-	(void)list;
+	(void)ar_env;
 	while (input[++count] != NULL)
 	{
 		ft_putstrlen(input[count]);

@@ -41,25 +41,24 @@ static unsigned int	arg_check(char **input)
 	return (flags);
 }
 
-static	int env_option_i(char **input)
+static	int env_option_i(char **input, char ***ar_env)
 {
 	(void)input;
+	(void)ar_env;
 	ft_putendl("option i");
 	return (0);
 }
 
-int		ft_env(char **input, t_env **list)
+int		ft_env(char **input, char **ar_env)
 {
 	int		flags;
-	t_env	*tmp;
 
 	flags = arg_check(input);
-	tmp = (*list);
 	if (flags == -1)
 		return (-1);
 	if (flags & FLAG_1)
-		env_option_i(input);
+		env_option_i(input, &ar_env);
 	else
-		list_print(&tmp);
+		ft_array_print(ar_env);
 	return (0);
 }

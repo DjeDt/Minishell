@@ -26,10 +26,10 @@ static	void	new_tab(int ptr, char ***environ)
 	ft_arrayprint(tmp);
 }
 */
-int		ft_unsetenv(char **input, t_env **list)
+int		ft_unsetenv(char **input, char **ar_env)
 {
 	(void)input;
-	(void)list;
+	(void)ar_env;
 	/*
 	int count;
 	int	len;
@@ -49,4 +49,3 @@ int		ft_unsetenv(char **input, t_env **list)
 	*/
 	return (0);
 }
-

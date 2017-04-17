@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static void	ft_check_input(char **input, t_env **struct_env)
+static int	check_builtins(char **input, char **ar_env)
 {
 	int		count;
 	s_builtin	builtin[6] ={
@@ -26,35 +26,35 @@ static void	ft_check_input(char **input, t_env **struct_env)
 
 	count = -1;
 	if (input[0] == NULL)
-		return ;
+		return (-1);
 	while (++count < 6)
 	{
 		if (ft_strcmp(builtin[count].ft, input[0]) == 0)
 		{
-			(*(builtin[count].func))(input, struct_env);
-			return ;
+			(*(builtin[count].func))(input, ar_env);
+			return (1);
 		}
 	}
-	ft_launch_prog(input);
+	return (0);
 }
 
 int		main(void)
 {
 	char		*cmd;
 	char		**input;
-	t_env		*struct_env;
+	char		**env;
 
-	struct_env = NULL;
-	ft_env_to_lst(&struct_env);
+	env = get_environ();
 	while (1)
 	{
 		ft_putstrlen("$> ");
 		get_next_line(0, &cmd);
 		input = ft_split_whitespaces(cmd);
-		ft_check_input(input, &struct_env);
+		if (check_builtins(input, env) != 1)
+			ft_launch_prog(input, env);
 		ft_memdel((void*)&cmd);
 	}
-	ft_arrayfree(&input);
-	ft_free_lst_env(&struct_env);
+	ft_array_free(&input);
+	ft_array_free(&env);
 	return (0);
 }

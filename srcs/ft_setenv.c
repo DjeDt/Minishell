@@ -29,24 +29,40 @@ static int	check_input(char **input)
 	return (0);
 }
 
-int		ft_setenv(char **input, t_env **list)
+static char	**array_add_one(char *new, char ***ar_env)
 {
-	t_env	*tmp;
+	int		count;
+	char	**tmp;
+	char	**ret;
 
+	count = -1;
+	tmp = (*ar_env);
+	if (!(ret = (char**)malloc(sizeof(char*) * ft_array_len(tmp) + 1)))
+		return (NULL);
+	while (tmp[++count] != NULL)
+		ret[count] = ft_strdup(tmp[count]);
+	ret[++count] = ft_strdup(new);
+	ret[++count] = NULL;
+	return (ret);
+}
+
+int		ft_setenv(char **input, char **ar_env)
+{
+	int		count;
+
+	count = -1;
 	if (input[1] == NULL)
 		return (-1);
 	check_input(input);
-	tmp = (*list);
-	while (tmp->next != NULL)
+	while (ar_env[++count] != NULL)
 	{
-		if (ft_strncmp(input[1], tmp->name, ft_strnlen(input[1], '=')) == 0)
+		if (ft_strncmp(input[1], ar_env[count], ft_strnlen(input[1], '=')) == 0)
 		{
-			ft_memdel((void*)&tmp->name);
-			tmp->name = ft_strdup(input[1]);
+			ft_memdel((void*)&ar_env[count]);
+			ar_env[count] = ft_strdup(input[1]);
 			return (0);
 		}
-		tmp = tmp->next;
 	}
-	ft_add_lst_env(input[1], ft_strlen(input[1]), &tmp);
+	ar_env = array_add_one(input[1], &ar_env);
 	return (0);
 }
