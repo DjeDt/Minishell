@@ -38,53 +38,6 @@ static void	ft_check_input(char **input, char **env)
 	ft_getprog(input);
 }
 
-/*
-static void print_list(t_env **list)
-{
-	t_env *tmp;
-	int i;
-
-	tmp = (*list);
-	i = 0;
-	while (tmp->next != NULL)
-	{
-		ft_putendl(tmp->name);
-		tmp = tmp->next;
-		i++;
-	}
-	ft_putnbr(i);
-}
-*/
-
-static int list_len(t_env **list)
-{
-	int i;
-	t_env *tmp;
-
-	i = -1;
-	tmp = (*list);
-	while (tmp->next != NULL && ++i)
-		tmp = tmp->next;
-	return (i);
-}
-static char **list_to_array(t_env **list)
-{
-	int count;
-	char **ret;
-	t_env *tmp;
-
-	count = -1;
-	ret = (char**)malloc(sizeof(char*) * list_len(list));
-	tmp = (*list);
-	while (tmp->next != NULL)
-	{
-		ret[++count] = ft_strdup(tmp->name);
-		tmp = tmp->next;
-	}
-	ret[++count] = NULL;
-	return (ret);
-}
-
 int		main(void)
 {
 	char		*cmd;

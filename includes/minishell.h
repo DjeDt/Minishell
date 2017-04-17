@@ -36,12 +36,16 @@ typedef struct	s_env
 }t_env;
 
 /* Gestion de listes */
+void		list_print(t_env **list);
+int			list_len(t_env **list);
+char		**list_to_array(t_env **list);
+t_env		*array_to_list(char **array);
+
+/* Gestion d'environnement */
 void		ft_free_lst_env(t_env **list);
 void		ft_add_lst_env(char *data, int len, t_env **list);
 t_env		*ft_create_lst_env(char *data, int len);
 
-
-/* Gestion d'environnement */
 void		ft_env_to_lst(t_env **list);
 char		*get_env_var(char *tf, t_env **list);
 int			ft_getprog(char **av);
