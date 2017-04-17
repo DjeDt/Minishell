@@ -1,3 +1,14 @@
+#******************************************************************************#
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/04/17 14:14:43 by ddinaut           #+#    #+#              #
+#    Updated: 2017/04/17 18:09:04 by ddinaut          ###   ########.fr        #
+#                                                                              #
+#******************************************************************************#
 
 # Output #
 NAME =	minishell
@@ -54,7 +65,7 @@ $(NAME): $(OBJ)
 $(OBJ): $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
 	@mkdir -p $(dir $@)
 	@$(CC) -o $@ $(FLAGS) $(ADD_FLAGS) $(INCLUDES) -c $<
-	@printf "$(GREEN)%s -> %s\n" $@ $<
+	@printf "$(GREEN)%s -> %s                                \r" $@ $<
 
 clean:
 	@/bin/rm -rf $(OBJ_PATH)

@@ -6,12 +6,12 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 13:46:18 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/07 12:42:41 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/17 18:05:21 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+/*
 static void		ft_spawn(char **av)
 {
 	int		count;
@@ -28,9 +28,11 @@ static void		ft_spawn(char **av)
 	}
 	ft_arrayfree(&env_path);
 }
-
-int		ft_getprog(char **av)
+*/
+int		ft_launch_prog(char **av)
 {
+	(void)av;
+	/*
 	pid_t child;
 
 	child = fork();
@@ -42,5 +44,11 @@ int		ft_getprog(char **av)
 		ft_putstrlen("commande introuvable: ");
 		ft_putendl(av[0]);
 	}
+	*/
 	return(0);
 }
+
+
+
+
+

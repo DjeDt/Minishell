@@ -21,19 +21,19 @@
 # define FLAG_4 (1 << 3)
 # define FLAG_5 (1 << 4)
 
-/* Pointeurs sur fonctions */
-typedef struct	s_builtin
-{
-	const char	*ft;
-	int			(*func)(char **, char ***);
-}s_builtin;
-
 typedef struct	s_env
 {
 	char	*name;
 	int		len;
 	struct s_env	*next;
 }t_env;
+
+/* Pointeurs sur fonctions */
+typedef struct	s_builtin
+{
+	const char	*ft;
+	int			(*func)(char **, t_env **);
+}s_builtin;
 
 /* Gestion de listes */
 void		list_print(t_env **list);
@@ -48,15 +48,15 @@ t_env		*ft_create_lst_env(char *data, int len);
 
 void		ft_env_to_lst(t_env **list);
 char		*get_env_var(char *tf, t_env **list);
-int			ft_getprog(char **av);
+int			ft_launch_prog(char **av);
 
 /* Gestion d'erreurs */
 void		ft_arg_error(char c);
 
 /* Builtins */
-int			ft_echo(char **input, char ***environ);
-int			ft_env(char **input, char ***environ);
-int			ft_setenv(char **input, char ***environ);
-int			ft_unsetenv(char **input, char ***environ);
+int			ft_echo(char **input, t_env **list);
+int			ft_env(char **input, t_env **list);
+int			ft_setenv(char **input, t_env **list);
+int			ft_unsetenv(char **input, t_env **list);
 
 #endif

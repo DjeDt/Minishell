@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 13:21:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/07 17:11:47 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/17 19:38:26 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,42 +29,24 @@ static int	check_input(char **input)
 	return (0);
 }
 
-static char	**ft_change_env(char ***env, char **input)
+int		ft_setenv(char **input, t_env **list)
 {
-	int		count;
-	char	**ret;
-	char	**tmp;
+	t_env	*tmp;
 
-	tmp = (*env);
-	count = -1;
-	if (!(ret = (char**)malloc(sizeof(char*) * ft_arraylen(tmp) + 1)))
-		return (NULL);	// changer le retour et penser au free si malloc erreur
-	while (tmp[++count] != NULL)
-		ret[count] = ft_strdup(tmp[count]);
-	ret[++count] = ft_strdup(input[1]);
-	ft_arrayfree(&tmp);
-	return (ret);
-}
-
-int		ft_setenv(char **input, char ***environ)
-{
-	int		count;
-	char	**tmp;
-
-	count = 0;
-	tmp = (*environ);
-	if (input == NULL || check_input(input) != 0)
+	if (input[1] == NULL)
 		return (-1);
-	while (tmp[count] != NULL)
+	check_input(input);
+	tmp = (*list);
+	while (tmp->next != NULL)
 	{
-		if (ft_strncmp(tmp[count], input[1], ft_strnlen(input[1], '=')) == 0)
+		if (ft_strncmp(input[1], tmp->name, ft_strnlen(input[1], '=')) == 0)
 		{
-			free(tmp[count]);
-			tmp[count] = ft_strdup(input[1]);
+			ft_memdel((void*)&tmp->name);
+			tmp->name = ft_strdup(input[1]);
 			return (0);
 		}
-		count++;
+		tmp = tmp->next;
 	}
-	tmp = ft_change_env(&tmp, input);
+	ft_add_lst_env(input[1], ft_strlen(input[1]), &tmp);
 	return (0);
 }

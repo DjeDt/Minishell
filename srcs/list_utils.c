@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/17 14:24:20 by ddinaut           #+#    #+#             */
+/*   Updated: 2017/04/17 18:37:47 by ddinaut          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	list_print(t_env **list)
@@ -10,7 +22,6 @@ void	list_print(t_env **list)
 		ft_putendl(tmp->name);
 		tmp = tmp->next;
 	}
-	free(tmp);
 }
 
 int		list_len(t_env **list)
@@ -42,7 +53,6 @@ char	**list_to_array(t_env **list)
 		tmp = tmp->next;
 	}
 	ret[++count] = NULL;
-	free(tmp);
 	return (ret);
 }
 
@@ -53,10 +63,7 @@ t_env	*array_to_list(char **ar)
 
 	count = -1;
 	list = NULL;
-	if (ar != NULL)
-	{
-		while (ar[++count] != NULL)
-			ft_add_lst_env(ar[count], ft_strlen(ar[count]), &list);
-	}
+	while (ar[++count] != NULL)
+		ft_add_lst_env(ar[count], ft_strlen(ar[count]), &list);
 	return (list);
 }

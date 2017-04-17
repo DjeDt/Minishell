@@ -6,12 +6,12 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 12:09:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/07 14:47:48 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/17 18:08:13 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+/*
 static	void	new_tab(int ptr, char ***environ)
 {
 	char	**tmp;
@@ -25,9 +25,12 @@ static	void	new_tab(int ptr, char ***environ)
 	}
 	ft_arrayprint(tmp);
 }
-
-int		ft_unsetenv(char **input, char ***environ)
+*/
+int		ft_unsetenv(char **input, t_env **list)
 {
+	(void)input;
+	(void)list;
+	/*
 	int count;
 	int	len;
 
@@ -43,5 +46,7 @@ int		ft_unsetenv(char **input, char ***environ)
 		if (ft_strncmp(*environ[count], input[1], len) == 0)
 			new_tab(count, environ);
 	}
+	*/
 	return (0);
 }
+
