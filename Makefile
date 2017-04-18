@@ -6,7 +6,7 @@
 #    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/17 14:14:43 by ddinaut           #+#    #+#              #
-#    Updated: 2017/04/17 18:09:04 by ddinaut          ###   ########.fr        #
+#    Updated: 2017/04/18 15:41:25 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -56,14 +56,19 @@ SRCS =	main.c \
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): swag $(OBJ)
 	@make -C $(LIB_PATH)/
 	@$(CC) -o $@ $(FLAGS) $(ADDFLAGS) $(OBJ) $(LIBS)
 
 $(OBJ): $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
 	@mkdir -p $(dir $@)
 	@$(CC) -o $@ $(FLAGS) $(ADD_FLAGS) $(INCLUDES) -c $<
-	@printf "$(GREEN)%s -> %s                                \r" $@ $<
+	@printf "             $(GREEN)%s -> %s                                \r" $@ $<
+
+swag:
+	@printf "********************************************************\n"
+	@printf "*                    Minishell                         *\n"
+	@printf "********************************************************\n"
 
 clean:
 	@/bin/rm -rf $(OBJ_PATH)
