@@ -19,12 +19,13 @@ static void		ft_spawn(char **av, char **env)
 	char	**diff_p;
 
 	count = -1;
+	ft_putstrlen("");
 	diff_p = split_path(get_var_name("PATH", &env));
-	while ((diff_p != NULL) && (diff_p[++count]))
+	while (diff_p[++count] != NULL)
 	{
 		tmp = ft_strjoin(diff_p[count], "/");
 		tmp = ft_strjoin_fl(tmp, av[0]);
-		execve(tmp, av, NULL);
+		execve(tmp, av, env);
 		ft_memdel((void*)&tmp);
 	}
 	ft_array_free(&diff_p);

@@ -14,7 +14,7 @@
 
 static int	check_builtins(char **input, char **ar_env)
 {
-	int		count;
+	int			count;
 	s_builtin	builtin[6] ={
 		{"env", &ft_env},
 		{"setenv", &ft_setenv},
@@ -48,10 +48,9 @@ int		main(void)
 	while (1)
 	{
 		ft_putstrlen("$> ");
-		get_next_line(0, &cmd);
+ 		get_next_line(0, &cmd);
 		input = ft_split_whitespaces(cmd);
-		if (check_builtins(input, env) != 1)
-			ft_launch_prog(input, env);
+		check_builtins(input, env) != 1 ? ft_launch_prog(input, env) : 0;
 		ft_memdel((void*)&cmd);
 	}
 	ft_array_free(&input);
