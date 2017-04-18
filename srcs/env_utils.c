@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 10:42:30 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/18 15:12:41 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/18 16:22:18 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@ char			**get_environ(void)
 	int		count;
 	char	**tmp;
 
-	count = -1;
+	count = 0;
 	if (!(tmp = (char**)malloc(sizeof(char*) * ft_array_len(environ) + 1)))
 		return (NULL);
-	while (environ[++count] != NULL)
+	while (environ[count] != NULL)
+	{
 		tmp[count] = ft_strdup(environ[count]);
-	tmp[++count] = NULL;
+		count++;
+	}
+	tmp[count] = NULL;
 	return (tmp);
 }
 

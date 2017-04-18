@@ -33,7 +33,7 @@ typedef struct	s_env
 typedef struct	s_builtin
 {
 	const char	*ft;
-	int			(*func)(char **, char **);
+	int			(*func)(char **, char ***);
 }s_builtin;
 
 /* Gestion d'environnement */
@@ -45,10 +45,10 @@ char		*get_var_name(const char *tf, char ***ar_env);
 void		ft_arg_error(char c);
 
 /* Builtins */
-int			ft_echo(char **input, char **ar_env);
-int			ft_env(char **input, char **ar_env);
-int			ft_setenv(char **input, char **ar_env);
-int			ft_unsetenv(char **input, char **ar_env);
+int			ft_echo(char **input, char ***ar_env);
+int			ft_env(char **input, char ***ar_env);
+int			ft_setenv(char **input, char ***ar_env);
+int			ft_unsetenv(char **input, char ***ar_env);
 
 /* Others */
 int			ft_launch_prog(char **av, char **env);

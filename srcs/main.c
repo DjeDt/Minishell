@@ -6,13 +6,13 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 12:39:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/18 15:19:04 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/18 20:31:59 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	check_builtins(char **input, char **ar_env)
+static int	check_builtins(char **input, char ***ar_env)
 {
 	int			count;
 	s_builtin	builtin[6] = {
@@ -50,7 +50,7 @@ int			main(void)
 		ft_putstrlen("$> ");
 		get_next_line(0, &cmd);
 		input = ft_split_whitespaces(cmd);
-		check_builtins(input, env) != 1 ? ft_launch_prog(input, env) : 0;
+		check_builtins(input, &env) != 1 ? ft_launch_prog(input, env) : 0;
 		ft_memdel((void*)&cmd);
 	}
 	ft_array_free(&input);

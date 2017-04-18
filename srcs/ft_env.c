@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 14:37:39 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/18 15:14:38 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/18 20:21:01 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	env_option_i(char **input, char ***ar_env)
 	return (0);
 }
 
-int			ft_env(char **input, char **ar_env)
+int			ft_env(char **input, char ***ar_env)
 {
 	int		flags;
 
@@ -57,8 +57,8 @@ int			ft_env(char **input, char **ar_env)
 	if (flags == -1)
 		return (-1);
 	if (flags & FLAG_1)
-		env_option_i(input, &ar_env);
+		env_option_i(input, ar_env);
 	else
-		ft_array_print(ar_env);
+		ft_array_print(*ar_env);
 	return (0);
 }
