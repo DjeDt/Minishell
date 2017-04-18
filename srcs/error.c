@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 14:45:48 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/17 14:35:49 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/18 15:19:54 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ void	ft_arg_error(char c)
 void	ft_malloc_error(void)
 {
 	ft_putendl_fd("Error malloc, abort prog", 2);
-	exit (-1);
+	exit(-1);
 }

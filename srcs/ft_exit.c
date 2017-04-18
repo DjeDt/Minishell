@@ -6,13 +6,13 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 14:23:29 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/17 14:23:31 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/18 15:20:18 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.c"
+#include "minishell.h"
 
 void	ft_exit(void)
 {
-
+	return ;
 }

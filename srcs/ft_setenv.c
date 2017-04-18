@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 13:21:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/17 19:38:26 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/18 15:15:43 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char	**array_add_one(char *new, char ***ar_env)
 	return (ret);
 }
 
-int		ft_setenv(char **input, char **ar_env)
+int			ft_setenv(char **input, char **ar_env)
 {
 	int		count;
 

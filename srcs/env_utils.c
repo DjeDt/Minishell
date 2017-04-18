@@ -6,15 +6,15 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 10:42:30 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/17 18:24:13 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/18 15:12:41 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern char		**environ;
+extern	char	**environ;
 
-char	**get_environ(void)
+char			**get_environ(void)
 {
 	int		count;
 	char	**tmp;
@@ -28,11 +28,12 @@ char	**get_environ(void)
 	return (tmp);
 }
 
-char	*get_var_name(const char *tf, char ***ar_env)
+char			*get_var_name(const char *tf, char ***ar_env)
 {
 	int		count;
 	char	**tmp;
 
+	count = 0;
 	tmp = (*ar_env);
 	while (tmp[++count] != NULL)
 	{

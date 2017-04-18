@@ -6,13 +6,13 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 14:37:39 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/17 19:26:12 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/18 15:14:38 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static unsigned int	arg_check(char **input)
+static int	arg_check(char **input)
 {
 	int				count;
 	int				count2;
@@ -41,7 +41,7 @@ static unsigned int	arg_check(char **input)
 	return (flags);
 }
 
-static	int env_option_i(char **input, char ***ar_env)
+static int	env_option_i(char **input, char ***ar_env)
 {
 	(void)input;
 	(void)ar_env;
@@ -49,7 +49,7 @@ static	int env_option_i(char **input, char ***ar_env)
 	return (0);
 }
 
-int		ft_env(char **input, char **ar_env)
+int			ft_env(char **input, char **ar_env)
 {
 	int		flags;
 
