@@ -16,32 +16,53 @@ extern	char	**environ;
 
 char			**get_environ(void)
 {
-	int		count;
-	char	**tmp;
-
-	count = 0;
-	if (!(tmp = (char**)malloc(sizeof(char*) * ft_array_len(environ) + 1)))
-		return (NULL);
-	while (environ[count] != NULL)
-	{
-		tmp[count] = ft_strdup(environ[count]);
-		count++;
-	}
-	tmp[count] = NULL;
-	return (tmp);
+	return (ft_array_cpy(environ));
 }
 
-char			*get_var_name(const char *tf, char ***ar_env)
+char			*get_var_name(char *str)
 {
+	char	*ret;
+	char	*pos;
 	int		count;
-	char	**tmp;
+
+	ret = NULL;
+	if ((pos = ft_strchr(str, '=')))
+	{
+		count = 0;
+		if (!(ret = (char*)malloc(pos - str + 1)))
+			return (NULL);
+		while (str[count] != '=')
+		{
+			ret[count] = str[count];
+			count++;
+		}
+		ret[count] = '\0';
+	}
+	return (ret);
+}
+
+char			*get_var_value(char **ar_env, const char *tf)
+{
+	size_t	count;
+	char	*tmp;
+	char	tc;
 
 	count = 0;
-	tmp = (*ar_env);
-	while (tmp[++count] != NULL)
+	while (ar_env[count])
 	{
-		if (ft_strncmp(tf, tmp[count], ft_strlen(tf)) == 0)
-			return (ft_strchr(tmp[count], '=') + 1);
+		if ((tmp = ft_strchr(ar_env[count], '=')))
+		{
+			tc = *tmp;
+			*tmp = 0;
+			if (!ft_strcmp(tf, ar_env[count]))
+			{
+				*tmp = tc;
+				return (tmp + 1);
+			}
+			*tmp = tc;
+			++count;
+		}
 	}
+	ft_memdel((void*)&tmp);
 	return (NULL);
 }

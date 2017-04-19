@@ -19,7 +19,7 @@ static void		ft_spawn(char **av, char **env)
 	char	**diff_p;
 
 	count = -1;
-	diff_p = split_path(get_var_name("PATH", &env));
+	diff_p = split_path(get_var_value(env, "PATH"));
 	while (diff_p[++count] != NULL)
 	{
 		tmp = ft_strjoin(diff_p[count], "/");
