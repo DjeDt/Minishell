@@ -25,3 +25,10 @@ void	ft_malloc_error(void)
 	ft_putendl_fd("Error malloc, abort prog", 2);
 	exit(-1);
 }
+
+int		ft_exit(char **input, char ***environ)
+{
+	ft_array_free(&input);
+	ft_array_free((environ));
+	exit(-1);
+}

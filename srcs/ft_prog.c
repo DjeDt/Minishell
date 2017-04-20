@@ -42,6 +42,7 @@ int				ft_launch_prog(char **av, char **env)
 		ft_spawn(av, env);
 		ft_putstrlen_fd("Commande introuvable: ", 2);
 		ft_putendl_fd(av[0], 2);
+		ft_exit(av, &env);
 	}
 	return (0);
 }

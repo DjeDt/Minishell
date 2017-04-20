@@ -50,6 +50,7 @@ int			ft_echo(char **input, char ***ar_env);
 int			ft_env(char **input, char ***ar_env);
 int			ft_setenv(char **input, char ***ar_env);
 int			ft_unsetenv(char **input, char ***ar_env);
+int			ft_exit(char **input, char ***ar_env);
 
 /* Others */
 int			ft_launch_prog(char **av, char **env);

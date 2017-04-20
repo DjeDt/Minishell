@@ -21,7 +21,7 @@ static int	check_builtins(char **input, char ***ar_env)
 		{"unsetenv", &ft_unsetenv},
 		{"echo", &ft_echo},
 		{"cd", NULL},
-		{"exit", NULL}
+		{"exit", &ft_exit}
 	};
 
 	count = -1;
