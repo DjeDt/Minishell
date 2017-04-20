@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/27 14:45:48 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/20 16:27:05 by ddinaut          ###   ########.fr       */
+/*   Created: 2017/04/20 16:46:48 by ddinaut           #+#    #+#             */
+/*   Updated: 2017/04/20 17:48:30 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_arg_error(char c)
+int		ft_cd(char **input, char ***environ)
 {
-	ft_putstrlen_fd("env: option invalide -- ", 2);
-	ft_putchar_fd(c, 2);
-	ft_putchar_fd('\n', 2);
-	ft_putendl_fd(ENV_USAGE, 2);
-}
+	int			fd;
+	struct stat	s_stat;
 
-void	ft_malloc_error(void)
-{
-	ft_putendl_fd("Error malloc, abort prog", 2);
-	exit(-1);
+	(void)environ;
+	fd = open(input[1], O_RDONLY);
+	chdir(input[1]);
+	fstat(fd, &s_stat);
+	return (0);
 }

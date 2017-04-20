@@ -6,7 +6,7 @@
 #    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/17 14:14:43 by ddinaut           #+#    #+#              #
-#    Updated: 2017/04/18 17:00:01 by ddinaut          ###   ########.fr        #
+#    Updated: 2017/04/20 17:57:47 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -49,6 +49,8 @@ SRCS =	main.c \
 		ft_echo.c \
 		ft_setenv.c \
 		ft_unsetenv.c \
+		ft_exit.c \
+		ft_cd.c \
 		error.c
 
 # Rules #

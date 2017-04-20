@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 12:39:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/18 20:31:59 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/20 16:48:04 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	check_builtins(char **input, char ***ar_env)
 		{"setenv", &ft_setenv},
 		{"unsetenv", &ft_unsetenv},
 		{"echo", &ft_echo},
-		{"cd", NULL},
+		{"cd", &ft_cd},
 		{"exit", &ft_exit}
 	};
 
@@ -44,6 +44,8 @@ int			main(void)
 	char		**input;
 	char		**env;
 
+	cmd = NULL;
+	input = NULL;
 	env = get_environ();
 	while (1)
 	{

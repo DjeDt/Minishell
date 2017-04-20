@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 13:46:18 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/18 15:15:17 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/20 18:17:56 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,21 @@ static void		ft_spawn(char **av, char **env)
 	char	*tmp;
 	char	**diff_p;
 
-	count = -1;
-	diff_p = split_path(get_var_value(env, "PATH"));
-	while (diff_p[++count] != NULL)
+	if (ft_strchr(av[1], '/') == NULL)
 	{
-		tmp = ft_strjoin(diff_p[count], "/");
-		tmp = ft_strjoin_fl(tmp, av[0]);
-		execve(tmp, av, env);
-		ft_memdel((void*)&tmp);
+		count = -1;
+		diff_p = split_path(get_var_value(env, "PATH"));
+		while (diff_p[++count] != NULL)
+		{
+			tmp = ft_strjoin(diff_p[count], "/");
+			tmp = ft_strjoin_fl(tmp, av[0]);
+			execve(tmp, av, env);
+			ft_memdel((void*)&tmp);
+		}
+		ft_array_free(&diff_p);
 	}
-	ft_array_free(&diff_p);
+	else
+		execve(av[1], av, env);
 }
 
 int				ft_launch_prog(char **av, char **env)
