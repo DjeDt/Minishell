@@ -12,16 +12,18 @@
 
 #include "minishell.h"
 
-static int	check_input(char **input)
+static int	check_input(const char **input)
 {
 	int	n;
 	int count;
 
 	n = 0;
 	count = -1;
+	if (input == NULL)
+		return (-1);
 	while (input[1][++count] != '\0')
 		input[1][count] == '=' ? n++ : 0;
-	if (n != 1 || input[2] != NULL)
+	if (n != 1)
 	{
 		ft_putstrlen_fd(SETENV_USAGE, 2);
 		return (-1);
@@ -29,48 +31,43 @@ static int	check_input(char **input)
 	return (0);
 }
 
-static void	array_add_one(char **input, char ***ar_env)
+static void	array_add_one(const char **input)
 {
 	int		count;
 	char	**new;
 
 	count = 0;
-	if (!(new = (char**)malloc(sizeof(char*) * ft_array_len(*ar_env) + 2)))
-	{
+	if (!(new = (char**)malloc(sizeof(char*) * ft_array_len(g_env) + 2)))
 		ft_malloc_error();
-		ft_exit(input, ar_env);
-	}
-	while ((*ar_env)[count])
+	while (g_env[count] != NULL)
 	{
-		new[count] = ft_strdup((*ar_env)[count]);
+		new[count] = ft_strdup(g_env[count]);
 		count++;
 	}
 	new[count++] = ft_strdup(input[1]);
 	new[count] = NULL;
-	ft_array_free(ar_env);
-	(*ar_env) = new;
+	ft_array_free(&g_env);
+	g_env = new;
 }
 
-int			ft_setenv(char **input, char ***ar_env)
+int			ft_setenv(const char **input)
 {
 	int		count;
 	int		len;
-	char	**tmp;
 
-	if ((input[1] == NULL) || (check_input(input) != 0))
+	if ((input == NULL) || (check_input(input) != 0))
 		return (-1);
 	count = -1;
 	len = ft_strnlen(input[1], '=');
-	tmp = (*ar_env);
-	while (tmp[++count])
+	while (g_env[++count] != NULL)
 	{
-		if (ft_strncmp(input[1], tmp[count], len) == 0)
+		if (ft_strncmp(input[1], g_env[count], len) == 0)
 		{
-			ft_memdel((void*)&tmp[count]);
-			tmp[count] = ft_strdup(input[1]);
+			ft_memdel((void*)&g_env[count]);
+			g_env[count] = ft_strdup(input[1]);
 			return (0);
 		}
 	}
-	array_add_one(input, ar_env);
+	array_add_one(input);
 	return (0);
 }

@@ -12,10 +12,9 @@
 
 #include "minishell.h"
 
-int		ft_exit(char **input, char ***ar_env)
+int		ft_exit(const char **input)
 {
-	ft_array_free(&input);
-	ft_array_free(ar_env);
+	ft_array_free((char ***)&input);
 	exit(0);
 	return (0);
 }

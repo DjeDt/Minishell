@@ -12,17 +12,18 @@
 
 #include "minishell.h"
 
-int		ft_echo(char **input, char ***ar_env)
+int		ft_echo(const char **input)
 {
-	int		count;
+	int count;
 
 	count = 0;
-	(void)ar_env;
-	while (input[++count] != NULL)
+	if (input == NULL)
+		return (-1);
+	while (input[count] != NULL)
 	{
 		ft_putstrlen(input[count]);
 		write(1, " ", 1);
+		count++;
 	}
-	write(1, "\n", 1);
 	return (0);
 }

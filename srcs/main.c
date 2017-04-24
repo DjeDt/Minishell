@@ -12,9 +12,10 @@
 
 #include "minishell.h"
 
-static int	check_builtins(char **input, char ***ar_env)
+static int	check_builtins(const char *input)
 {
 	int			count;
+	char		**tmp;
 	s_builtin	builtin[6] = {
 		{"env", &ft_env},
 		{"setenv", &ft_setenv},
@@ -23,39 +24,42 @@ static int	check_builtins(char **input, char ***ar_env)
 		{"cd", &ft_cd},
 		{"exit", &ft_exit}
 	};
-
 	count = -1;
-	if (input[0] == NULL)
+	tmp = ft_split_whitespaces((char*)input);
+	if (tmp == NULL)
 		return (-1);
 	while (++count < 6)
 	{
-		if (ft_strcmp(builtin[count].ft, input[0]) == 0)
-		{
-			(*(builtin[count].func))(input, ar_env);
-			return (1);
-		}
+		if (ft_strcmp(builtin[count].ft, tmp[0]) == 0)
+			(*(builtin[count].func))((const char **)tmp);
 	}
+	ft_launch_prog(tmp);
+	ft_array_free(&tmp);
 	return (0);
+}
+
+static void	core(void)
+{
+	int		count;
+	char	*line;
+	char	**cmd;
+
+	while (1)
+	{
+		count = 0;
+		ft_putstrlen("$> ");
+		get_next_line(0, &line);
+		cmd = ft_strsplit(line, ';');
+		while (cmd[count] != NULL)
+			check_builtins(cmd[count++]);
+		ft_memdel((void*)&line);
+		ft_array_free(&cmd);
+	}
 }
 
 int			main(void)
 {
-	char		*cmd;
-	char		**input;
-	char		**env;
-
-	cmd = NULL;
-	input = NULL;
-	env = get_environ();
-	while (1)
-	{
-		ft_putstrlen("$> ");
-		get_next_line(0, &cmd);
-		input = ft_split_whitespaces(cmd);
-		check_builtins(input, &env) != 1 ? ft_launch_prog(input, env) : 0;
-		ft_memdel((void*)&cmd);
-	}
-	ft_array_free(&input);
-	ft_array_free(&env);
+	g_env = get_environ();
+	core();
 	return (0);
 }

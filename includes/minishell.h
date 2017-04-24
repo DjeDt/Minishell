@@ -5,12 +5,9 @@
 # include <sys/stat.h>
 # include <unistd.h>
 
-
 /* Sous debian */
 # include <sys/types.h>
 # include <sys/wait.h>
-
-
 
 /* Env error */
 # define ENV_USAGE "usage: env [-i] [name=value]... [utility [argument...]]\n"
@@ -26,11 +23,14 @@
 # define FLAG_4 (1 << 3)
 # define FLAG_5 (1 << 4)
 
+/* Globale env */
+char **g_env;
+
 /* Pointeurs sur fonctions */
 typedef struct	s_builtin
 {
 	const char	*ft;
-	int			(*func)(char **, char ***);
+	int			(*func)(const char **);
 }s_builtin;
 
 /* Gestion d'environnement */
@@ -44,14 +44,14 @@ void		ft_arg_error(char c);
 void		ft_malloc_error(void);
 
 /* Builtins */
-int			ft_echo(char **input, char ***ar_env);
-int			ft_env(char **input, char ***ar_env);
-int			ft_setenv(char **input, char ***ar_env);
-int			ft_unsetenv(char **input, char ***ar_env);
-int			ft_exit(char **input, char ***ar_env);
-int			ft_cd(char **input, char ***environ);
+int			ft_echo(const char **input);
+int			ft_env(const char **input);
+int			ft_setenv(const char **input);
+int			ft_unsetenv(const char **input);
+int			ft_exit(const char **input);
+int			ft_cd(const char **input);
 
 /* Others */
-int			ft_launch_prog(char **av, char **env);
+int			ft_launch_prog(char **av);
 
 #endif

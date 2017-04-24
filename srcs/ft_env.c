@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+/*
 static int	arg_check(char **input)
 {
 	int				count;
@@ -41,24 +41,24 @@ static int	arg_check(char **input)
 	return (flags);
 }
 
-static int	env_option_i(char **input, char ***ar_env)
+static int	env_option_i(const char *input)
 {
 	(void)input;
-	(void)ar_env;
 	ft_putendl("option i");
 	return (0);
 }
-
-int			ft_env(char **input, char ***ar_env)
+*/
+int			ft_env(const char *input)
 {
-	int		flags;
+	(void)input;
+//	int		flags;
 
-	flags = arg_check(input);
-	if (flags == -1)
-		return (-1);
-	if (flags & FLAG_1)
-		env_option_i(input, ar_env);
-	else
-		ft_array_print(*ar_env);
+//	flags = arg_check();
+//	if (flags == -1)
+//		return (-1);
+//	else if (flags & FLAG_1)
+//		env_option_i(input);
+//	else
+		ft_array_print(g_env);
 	return (0);
 }

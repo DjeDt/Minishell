@@ -12,42 +12,35 @@
 
 #include "minishell.h"
 
-static void		ft_spawn(char **av, char **env)
+static void		ft_spawn(char **av, char **diff_p)
 {
+	pid_t	child;
 	int		count;
 	char	*tmp;
-	char	**diff_p;
-
-	if (ft_strchr(av[1], '/') == NULL)
-	{
-		count = -1;
-		diff_p = split_path(get_var_value(env, "PATH"));
-		while (diff_p[++count] != NULL)
-		{
-			tmp = ft_strjoin(diff_p[count], "/");
-			tmp = ft_strjoin_fl(tmp, av[0]);
-			execve(tmp, av, env);
-			ft_memdel((void*)&tmp);
-		}
-		ft_array_free(&diff_p);
-	}
-	else
-		execve(av[1], av, env);
-}
-
-int				ft_launch_prog(char **av, char **env)
-{
-	pid_t child;
 
 	child = fork();
 	if (child != 0)
 		wait(&child);
 	else
 	{
-		ft_spawn(av, env);
-		ft_putstrlen_fd("Commande introuvable: ", 2);
-		ft_putendl_fd(av[0], 2);
-		ft_exit(av, &env);
+		count = -1;
+		while (diff_p[++count] != NULL)
+		{
+			tmp = ft_strjoin(diff_p[count], "/");
+			tmp = ft_strjoin_fl(tmp, av[0]);
+			if (access(tmp, F_OK) == 0)
+				execve(tmp, av, g_env);
+			ft_memdel((void*)&tmp);
+		}
 	}
+}
+
+int				ft_launch_prog(char **av)
+{
+	char	**diff_p;
+
+	diff_p = split_path(get_var_value(g_env, "PATH"));
+	ft_spawn(av, diff_p);
+	ft_array_free(&diff_p);
 	return (0);
 }
