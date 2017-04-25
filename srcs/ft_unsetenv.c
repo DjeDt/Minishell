@@ -57,7 +57,7 @@ int				ft_unsetenv(const char **input)
 
 	count = -1;
 	check_input(input);
-	len = ft_strnlen(input[1], '=');
+	len = ft_strlen(input[1]);
 	if (input == NULL || input[2] != NULL)
 	{
 		ft_putendl_fd(UNSETENV_USAGE, 2);

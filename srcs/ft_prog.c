@@ -26,9 +26,10 @@ static void		ft_spawn(char **av, char **diff_p)
 		count = -1;
 		while (diff_p[++count] != NULL)
 		{
-			tmp = ft_strjoin(diff_p[count], "/");
-			tmp = ft_strjoin_fl(tmp, av[0]);
-			if (access(tmp, F_OK) == 0)
+			tmp = ft_strjoin_fl(ft_strjoin(diff_p[count], "/"), av[0]);
+			if (access(av[0], F_OK) == 0)
+				execve(av[0], av, g_env);
+			else if (access(tmp, F_OK) == 0)
 				execve(tmp, av, g_env);
 			ft_memdel((void*)&tmp);
 		}

@@ -21,7 +21,7 @@ static int	check_input(const char **input)
 	count = -1;
 	if (input == NULL)
 		return (-1);
-	while (input[1][++count] != '\0')
+	while (input[1] && input[1][++count] != '\0')
 		input[1][count] == '=' ? n++ : 0;
 	if (n != 1)
 	{
@@ -47,7 +47,8 @@ static void	array_add_one(const char **input)
 	new[count++] = ft_strdup(input[1]);
 	new[count] = NULL;
 	ft_array_free(&g_env);
-	g_env = new;
+	g_env = ft_array_cpy(new);
+	ft_array_free(&new);
 }
 
 int			ft_setenv(const char **input)

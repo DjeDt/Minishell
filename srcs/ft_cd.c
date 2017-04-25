@@ -12,14 +12,21 @@
 
 #include "minishell.h"
 
-int		ft_cd(char **input, char ***environ)
+int		ft_cd(const char **input)
 {
-	int			fd;
-	struct stat	s_stat;
+	int	ret;
 
-	(void)environ;
-	fd = open(input[1], O_RDONLY);
-	chdir(input[1]);
-	fstat(fd, &s_stat);
+	if (input[1] == NULL)
+		return (-1);
+	if (ft_strncmp(input[1], "~", 1) == 0)
+		ret = chdir(get_var_value(g_env, "HOME"));
+	else
+		ret = chdir(input[1]);
+	if (ret == -1)
+	{
+		ft_putstrlen(input[1]);
+		ft_putendl(" not found");
+		return (-1);
+	}
 	return (0);
 }
