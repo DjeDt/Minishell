@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 14:37:39 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/18 20:21:01 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/25 17:07:34 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	env_option_i(const char *input)
 	return (0);
 }
 */
-int			ft_env(const char *input)
+int			ft_env(const char **input)
 {
 	(void)input;
 //	int		flags;
@@ -59,6 +59,6 @@ int			ft_env(const char *input)
 //	else if (flags & FLAG_1)
 //		env_option_i(input);
 //	else
-		ft_array_print(g_env);
+	ft_array_print((const char **)g_env);
 	return (0);
 }

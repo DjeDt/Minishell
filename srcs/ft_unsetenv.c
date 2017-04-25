@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 12:09:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/18 21:21:41 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/25 17:09:51 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ static	int		check_input(const char **input)
 
 	n = 0;
 	count = -1;
-	while (input[1][++count] != '\0')
-		input[1][count] == '=' ? n++ : 0;
+	if (ft_array_len(input) != 2)
+	{
+		ft_putendl(UNSETENV_USAGE);
+		return (-1);
+	}
 	return (0);
 }
 
@@ -33,7 +36,7 @@ static	void	array_remove_one(char *rm)
 
 	count = 0;
 	count2 = 0;
-	if (!(new = (char**)malloc(sizeof(char*) * ft_array_len(g_env))))
+	if (!(new = (char**)malloc(sizeof(char*) * ft_array_len((const char **)g_env))))
 		ft_putendl("Malloc error");
 	while (g_env[count])
 	{
@@ -56,13 +59,9 @@ int				ft_unsetenv(const char **input)
 	int		len;
 
 	count = -1;
-	check_input(input);
-	len = ft_strlen(input[1]);
-	if (input == NULL || input[2] != NULL)
-	{
-		ft_putendl_fd(UNSETENV_USAGE, 2);
+	if (check_input(input) != 0)
 		return (-1);
-	}
+	len = ft_strlen(input[1]);
 	while (g_env[++count] != NULL)
 	{
 		if (ft_strncmp(g_env[count], input[1], len) == 0)

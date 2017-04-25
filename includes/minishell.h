@@ -10,11 +10,13 @@
 # include <sys/wait.h>
 
 /* Env error */
-# define ENV_USAGE "usage: env [-i] [name=value]... [utility [argument...]]\n"
+# define ENV_USAGE "usage: env [-i] [name=value]... [utility [argument...]]"
 /* Setenv error*/
-# define SETENV_USAGE "usage: setenv [NAME=value]\n"
+# define SETENV_USAGE "usage: setenv [NAME=value]"
 /* Unsetenv error */
-# define UNSETENV_USAGE "usage: unsetenv [NAME]\n"
+# define UNSETENV_USAGE "usage: unsetenv [NAME]"
+/* Cd error */
+# define CD_USAGE "usage: cd [path]"
 
 # define FLAG_0 (0)
 # define FLAG_1 (1 << 0)

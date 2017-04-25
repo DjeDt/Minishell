@@ -6,19 +6,35 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 13:46:18 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/20 18:17:56 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/25 17:35:58 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void		ft_spawn(char **av, char **diff_p)
+static int		spawn_bin(char **av)
+{
+	int		ret;
+	pid_t	child;
+
+	ret = 0;
+	child = fork();
+	if (child != 0)
+		wait(&child);
+	else
+		ret = execve(av[0], av, g_env);
+	return (ret);
+}
+
+static int		spawn_path(char **av, char **diff_p)
 {
 	pid_t	child;
+	int		ret;
 	int		count;
 	char	*tmp;
 
 	child = fork();
+	ret = 0;
 	if (child != 0)
 		wait(&child);
 	else
@@ -27,21 +43,30 @@ static void		ft_spawn(char **av, char **diff_p)
 		while (diff_p[++count] != NULL)
 		{
 			tmp = ft_strjoin_fl(ft_strjoin(diff_p[count], "/"), av[0]);
-			if (access(av[0], F_OK) == 0)
-				execve(av[0], av, g_env);
-			else if (access(tmp, F_OK) == 0)
-				execve(tmp, av, g_env);
+			ret = execve(tmp, av, g_env);
 			ft_memdel((void*)&tmp);
 		}
 	}
+	return (ret);
 }
 
 int				ft_launch_prog(char **av)
 {
+	int		ret;
 	char	**diff_p;
 
-	diff_p = split_path(get_var_value(g_env, "PATH"));
-	ft_spawn(av, diff_p);
-	ft_array_free(&diff_p);
+	if (ft_strchr(av[0], '/') != NULL)
+		ret = spawn_bin(av);
+	else
+	{
+		diff_p = ft_strsplit(get_var_value(g_env, "PATH"), ':');
+		ret = spawn_path(av, diff_p);
+		ft_array_free(&diff_p);
+	}
+	if (ret != 0)
+	{
+		ft_putstrlen_fd(av[0], 2);
+		ft_putendl_fd(": not found", 2);
+	}
 	return (0);
 }

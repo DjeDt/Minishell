@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 16:12:56 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/20 16:30:49 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/25 17:02:14 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int		ft_exit(const char **input)
 {
 	ft_array_free((char ***)&input);
+	ft_array_free(&g_env);
 	exit(0);
 	return (0);
 }

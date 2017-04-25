@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 10:42:30 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/18 16:22:18 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/25 17:23:54 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ char			*get_var_value(char **ar_env, const char *tf)
 	char	tc;
 
 	count = 0;
-	while (ar_env[count])
+	tmp = NULL;
+	while (ar_env[count] != NULL)
 	{
 		if ((tmp = ft_strchr(ar_env[count], '=')))
 		{
@@ -59,10 +60,10 @@ char			*get_var_value(char **ar_env, const char *tf)
 				*tmp = tc;
 				return (tmp + 1);
 			}
-			*tmp = tc;
-			++count;
+			(*tmp) = tc;
+			count++;
 		}
 	}
-	ft_memdel((void*)&tmp);
+/*	ft_memdel((void*)&tmp);  -- segfault si actif -- */
 	return (NULL);
 }

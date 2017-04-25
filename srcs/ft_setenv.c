@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 13:21:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/20 15:20:39 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/25 17:09:31 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,16 @@ static int	check_input(const char **input)
 
 	n = 0;
 	count = -1;
-	if (input == NULL)
+	if (ft_array_len(input) != 2)
+	{
+		ft_putendl_fd(SETENV_USAGE, 2);
 		return (-1);
+	}
 	while (input[1] && input[1][++count] != '\0')
 		input[1][count] == '=' ? n++ : 0;
 	if (n != 1)
 	{
-		ft_putstrlen_fd(SETENV_USAGE, 2);
+		ft_putendl_fd(SETENV_USAGE, 2);
 		return (-1);
 	}
 	return (0);
@@ -37,7 +40,7 @@ static void	array_add_one(const char **input)
 	char	**new;
 
 	count = 0;
-	if (!(new = (char**)malloc(sizeof(char*) * ft_array_len(g_env) + 2)))
+	if (!(new = (char**)malloc(sizeof(char*) * ft_array_len((const char **)g_env) + 2)))
 		ft_malloc_error();
 	while (g_env[count] != NULL)
 	{

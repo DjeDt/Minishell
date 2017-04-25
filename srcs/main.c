@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 12:39:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/20 16:48:04 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/25 17:02:55 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ static int	check_builtins(const char *input)
 	while (++count < 6)
 	{
 		if (ft_strcmp(builtin[count].ft, tmp[0]) == 0)
+		{
 			(*(builtin[count].func))((const char **)tmp);
+			return (0);
+		}
 	}
 	ft_launch_prog(tmp);
 	ft_array_free(&tmp);
@@ -61,5 +64,6 @@ int			main(void)
 {
 	g_env = get_environ();
 	core();
+	ft_array_free(&g_env);
 	return (0);
 }
