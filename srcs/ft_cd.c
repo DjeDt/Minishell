@@ -19,7 +19,7 @@ static int	check_input(const char **input)
 		ft_putendl_fd(CD_USAGE, 2);
 		return (-1);
 	}
-	if (ft_strcmp(input[1], "~") == 0 || ft_strcmp(input[1], "-") == 0)
+	if ((ft_strncmp(input[1], "~", 1) == 0) || (ft_strncmp(input[1], "-", 1) == 0))
 		return (0);
 	if (access(input[1], F_OK) == -1)
 	{

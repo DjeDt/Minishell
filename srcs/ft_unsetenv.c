@@ -14,11 +14,6 @@
 
 static	int		check_input(const char **input)
 {
-	int n;
-	int count;
-
-	n = 0;
-	count = -1;
 	if (ft_array_len(input) != 2)
 	{
 		ft_putendl(UNSETENV_USAGE);
