@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 12:39:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/25 17:02:55 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/27 20:04:44 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ static int	check_builtins(const char *input)
 		{"cd", &ft_cd},
 		{"exit", &ft_exit}
 	};
+
 	count = -1;
 	tmp = ft_split_whitespaces((char*)input);
 	if (tmp == NULL)
 		return (-1);
-	while (++count < 6)
+	while ((tmp[0]) && (++count < 6))
 	{
 		if (ft_strcmp(builtin[count].ft, tmp[0]) == 0)
 		{

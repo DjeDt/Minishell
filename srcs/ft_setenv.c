@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 13:21:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/25 17:09:31 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/04/27 18:41:31 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	array_add_one(const char **input)
 
 	count = 0;
 	if (!(new = (char**)malloc(sizeof(char*) * ft_array_len((const char **)g_env) + 2)))
-		ft_malloc_error();
+		ft_putendl_fd("error: not enought memory to malloc", 2);
 	while (g_env[count] != NULL)
 	{
 		new[count] = ft_strdup(g_env[count]);
@@ -50,8 +50,7 @@ static void	array_add_one(const char **input)
 	new[count++] = ft_strdup(input[1]);
 	new[count] = NULL;
 	ft_array_free(&g_env);
-	g_env = ft_array_cpy(new);
-	ft_array_free(&new);
+	g_env = new;
 }
 
 int			ft_setenv(const char **input)

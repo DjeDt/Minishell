@@ -26,7 +26,7 @@
 # define FLAG_5 (1 << 4)
 
 /* Globale env */
-char **g_env;
+char			**g_env;
 
 /* Pointeurs sur fonctions */
 typedef struct	s_builtin
