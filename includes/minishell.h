@@ -39,7 +39,7 @@ typedef struct	s_builtin
 char		**get_environ(void);
 char		**split_path(char *str);
 char		*get_var_name(char *str);
-char		*get_var_value(char **ar_env, const char *tf);
+char		*get_var_value(const char *tf);
 
 /* Gestion d'erreurs */
 void		ft_arg_error(char c);

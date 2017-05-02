@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 13:46:18 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/27 20:02:45 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/02 16:09:54 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int				ft_launch_prog(char **av)
 		ret = spawn_bin(av);
 	else
 	{
-		diff_p = ft_strsplit(get_var_value(g_env, "PATH"), ':');
+		diff_p = ft_strsplit(get_var_value("PATH"), ':');
 		ret = spawn_path(av, diff_p);
 		ft_array_free(&diff_p);
 	}

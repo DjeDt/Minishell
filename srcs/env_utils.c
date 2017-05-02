@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 10:42:30 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/27 19:59:17 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/02 16:13:34 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ extern	char	**environ;
 
 char			**get_environ(void)
 {
-	char **tmp;
+	char	**tmp;
 
 	tmp = ft_array_cpy((const char **)environ);
 	return (tmp);
@@ -32,7 +32,7 @@ char			*get_var_name(char *str)
 	return (ret);
 }
 
-char			*get_var_value(char **ar_env, const char *tf)
+char			*get_var_value(const char *tf)
 {
 	size_t	count;
 	char	*tmp;
@@ -40,15 +40,15 @@ char			*get_var_value(char **ar_env, const char *tf)
 
 	count = 0;
 	tmp = NULL;
-	while (ar_env[count] != NULL)
+	while (g_env[count] != NULL)
 	{
-		if ((tmp = ft_strchr(ar_env[count], '=')))
+		if ((tmp = ft_strchr(g_env[count], '=')))
 		{
-			tc = *tmp;
-			*tmp = 0;
-			if (!ft_strcmp(tf, ar_env[count]))
+			tc = (*tmp);
+			(*tmp) = 0;
+			if (!ft_strcmp(tf, g_env[count]))
 			{
-				*tmp = tc;
+				(*tmp) = tc;
 				return (tmp + 1);
 			}
 			(*tmp) = tc;
