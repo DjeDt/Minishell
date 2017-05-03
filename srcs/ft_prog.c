@@ -16,6 +16,7 @@ static	int		not_found(char *name)
 {
 	ft_putstrlen_fd(name, 2);
 	ft_putendl_fd(": not found", 2);
+	exit (-1);
 	return (-1);
 }
 

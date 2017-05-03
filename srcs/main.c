@@ -26,14 +26,14 @@ static int	check_builtins(const char *input)
 	};
 
 	count = -1;
-	tmp = ft_split_whitespaces((char*)input);
-	if (tmp == NULL)
+	if ((tmp = ft_split_whitespaces((char*)input)) == NULL)
 		return (-1);
 	while ((tmp[0]) && (++count < 6))
 	{
 		if (ft_strcmp(builtin[count].ft, tmp[0]) == 0)
 		{
 			(*(builtin[count].func))((const char **)tmp);
+			ft_array_free(&tmp);
 			return (0);
 		}
 	}
