@@ -6,18 +6,16 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 13:46:18 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/02 16:09:54 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/04 17:30:02 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	int		not_found(char *name)
+static	void	not_found(char *name)
 {
 	ft_putstrlen_fd(name, 2);
 	ft_putendl_fd(": not found", 2);
-	exit (-1);
-	return (-1);
 }
 
 static int		spawn_bin(char **av)
@@ -41,8 +39,10 @@ static int		spawn_path(char **av, char **diff_p)
 	int		count;
 	char	*tmp;
 
-	child = fork();
+
 	ret = 0;
+	tmp = NULL;
+	child = fork();
 	if (child != 0)
 		wait(&child);
 	else
@@ -55,6 +55,7 @@ static int		spawn_path(char **av, char **diff_p)
 			ft_memdel((void*)&tmp);
 		}
 	}
+	tmp != NULL ? ft_memdel((void*)&tmp) : NULL;
 	return (ret);
 }
 
@@ -63,6 +64,7 @@ int				ft_launch_prog(char **av)
 	int		ret;
 	char	**diff_p;
 
+	ret = 0;
 	if (!av[0])
 		return (-1);
 	if (ft_strchr(av[0], '/') != NULL)
@@ -74,6 +76,9 @@ int				ft_launch_prog(char **av)
 		ft_array_free(&diff_p);
 	}
 	if (ret != 0)
-		return (not_found(av[0]));
+	{
+		not_found(av[0]);
+		exit (-1);
+	}
 	return (0);
 }

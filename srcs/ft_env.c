@@ -6,11 +6,20 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 14:37:39 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/02 18:56:02 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/04 14:22:01 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	arg_error(char c)
+{
+	ft_putstrlen_fd("env: option invalide -- ", 2);
+	ft_putchar_fd(c, 2);
+	ft_putchar_fd('\n', 2);
+	ft_putendl_fd(ENV_USAGE, 2);
+	return (-1);
+}
 
 static int	arg_check(const char **input)
 {
@@ -31,9 +40,8 @@ static int	arg_check(const char **input)
 				flags |= (1 << (ft_strchr(mask, input[count][count2]) - mask));
 			else
 			{
-				ft_arg_error(input[count][count2]);
 				ft_memdel((void*)&mask);
-				return (-1);
+				return (arg_error(input[count][count2]));
 			}
 			count2++;
 		}
@@ -59,10 +67,7 @@ int			ft_env(const char **input)
 	else if (flags & FLAG_1)
 		env_option_i(input);
 	else if (ft_array_len(input) > 1)
-	{
-		ft_putendl("env prog");
 		ft_launch_prog((char**)input + 1);
-	}
 	else
 		ft_array_print((const char **)g_env);
 	return (0);

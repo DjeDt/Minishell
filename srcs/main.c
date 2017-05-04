@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 12:39:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/04/27 20:04:44 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/04 15:00:03 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	core(void)
 	char	*line;
 	char	**cmd;
 
-	while (1)
+	while (13)
 	{
 		count = 0;
 		ft_putstrlen("$> ");
