@@ -6,16 +6,17 @@
 #    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/05 14:41:22 by ddinaut           #+#    #+#              #
-#    Updated: 2017/05/05 14:42:45 by ddinaut          ###   ########.fr        #
+#    Updated: 2017/05/05 17:01:22 by ddinaut          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #!bin/bash
 
 nbr=0
-while ((nbr!=53))
+while ((nbr != 1312))
 do
 	leaks minishell
 	read nbr
+	echo " ------------- \n"
 done
 exit 0
