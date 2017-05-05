@@ -42,3 +42,4 @@ minishell
 
 # inutile
 srcs/truc
+log_minishell.log

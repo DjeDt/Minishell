@@ -6,7 +6,7 @@
 #    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/17 14:14:43 by ddinaut           #+#    #+#              #
-#    Updated: 2017/04/20 17:57:47 by ddinaut          ###   ########.fr        #
+#    Updated: 2017/05/05 16:49:06 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -45,12 +45,12 @@ SRCS =	main.c \
 		env_utils.c \
 		ft_prog.c \
 		split_path.c \
-		ft_env.c \
-		ft_echo.c \
-		ft_setenv.c \
-		ft_unsetenv.c \
-		ft_exit.c \
-		ft_cd.c \
+		builtin_env.c \
+		builtin_echo.c \
+		builtin_setenv.c \
+		builtin_unsetenv.c \
+		builtin_exit.c \
+		builtin_cd.c \
 		error.c
 
 # Rules #

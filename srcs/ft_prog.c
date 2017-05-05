@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 13:46:18 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/04 17:30:02 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/05 16:41:21 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int		spawn_path(char **av, char **diff_p)
 	int		count;
 	char	*tmp;
 
-
+	fprintf(file, "\n/* Fonction spawn path */\n");
 	ret = 0;
 	tmp = NULL;
 	child = fork();
@@ -51,6 +51,7 @@ static int		spawn_path(char **av, char **diff_p)
 		while (diff_p[++count] != NULL)
 		{
 			tmp = ft_strjoin_fl(ft_strjoin(diff_p[count], "/"), av[0]);
+			fprintf(file, "char *tmp = %p\n", &tmp);
 			ret = execve(tmp, av, g_env);
 			ft_memdel((void*)&tmp);
 		}
@@ -64,6 +65,7 @@ int				ft_launch_prog(char **av)
 	int		ret;
 	char	**diff_p;
 
+	fprintf(file, "\n/* Fonction launch prog */\n");
 	ret = 0;
 	if (!av[0])
 		return (-1);
@@ -72,6 +74,7 @@ int				ft_launch_prog(char **av)
 	else
 	{
 		diff_p = ft_strsplit(get_var_value("PATH"), ':');
+		fprintf(file, "char **diff_p = %p\n", &diff_p);
 		ret = spawn_path(av, diff_p);
 		ft_array_free(&diff_p);
 	}

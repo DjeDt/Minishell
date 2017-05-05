@@ -25,6 +25,12 @@
 # define FLAG_4 (1 << 3)
 # define FLAG_5 (1 << 4)
 
+/* int global pour le log */
+# include <stdio.h>
+# include <unistd.h>
+# define LOG_PATH "/Users/ddinaut/Desktop/Minishell/log_minishell.log"
+FILE			*file;
+
 /* Globale env */
 char			**g_env;
 
