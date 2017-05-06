@@ -12,14 +12,11 @@
 
 #include "minishell.h"
 
-extern	char	**environ;
-
-char			**get_environ(void)
+void		get_environ(void)
 {
-	char	**tmp;
+	extern	char	**environ;
 
-	tmp = ft_array_cpy((const char **)environ);
-	return (tmp);
+	g_env = ft_array_cpy((const char **)environ);
 }
 
 char			*get_var_name(char *str)

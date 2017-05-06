@@ -29,6 +29,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # define LOG_PATH "/Users/ddinaut/Desktop/Minishell/log_minishell.log"
+# define LOG_P_DEB "/home/dje/code/Minishell/log_minishell.log"
 FILE			*file;
 
 /* Globale env */
@@ -42,7 +43,7 @@ typedef struct	s_builtin
 }s_builtin;
 
 /* Gestion d'environnement */
-char		**get_environ(void);
+void		get_environ(void);
 char		**split_path(char *str);
 char		*get_var_name(char *str);
 char		*get_var_value(const char *tf);

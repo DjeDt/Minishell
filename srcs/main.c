@@ -58,10 +58,9 @@ static void	core(void)
 	char	*line;
 	char	**cmd;
 
-	while (13)
+	while (1)
 	{
 		fprintf(file, "\n/* --- START --- */\n");
-
 		count = 0;
 		ft_putstrlen("$> ");
 		get_next_line(0, &line);
@@ -86,13 +85,10 @@ static void	core(void)
 
 int			main(void)
 {
-	file = fopen(LOG_PATH, "w+");
-	g_env = get_environ();
+	file = fopen(LOG_P_DEB, "w+");
+	get_environ();
 	core();
 	fclose(file);
 	ft_array_free(&g_env);
 	return (0);
 }
-
-
-
