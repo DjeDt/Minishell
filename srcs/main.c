@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 12:39:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/05 17:38:39 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/08 19:00:23 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	check_builtins(const char *input)
 		{"exit", &ft_exit}
 	};
 
-	fprintf(file, "\nFonction check builtin :\n");
+	fprintf(file, "\nFonction check_builtin :\n");
 
 	count = -1;
 
@@ -41,15 +41,13 @@ static int	check_builtins(const char *input)
 		if (ft_strcmp(builtin[count].ft, tmp[0]) == 0)
 		{
 			(*(builtin[count].func))((const char **)tmp);
-			/* LEAKS SUR TMP */
 			ft_array_free(&tmp);
 			return (0);
 		}
 	}
+	fprintf(file, "- tmp[0] = %p\n", tmp[0]);
 	if (tmp[0] != NULL)
 		ft_launch_prog(tmp);
-//	tmp[0] != NULL ? ft_launch_prog(tmp) : NULL;
-	/* LEAKS SUR TMP */
 	ft_array_free(&tmp);
 	return (0);
 }
@@ -71,10 +69,8 @@ static void	core(void)
 		fprintf(file, "Fonction core :\n");
 		fprintf(file, "- char *line = %p\n", line);
 
-		/* LEAKS SUR CMD */
 		cmd = ft_strsplit(line, ';');
 		ft_memdel((void*)&line);
-
 		fprintf(file, "- char **cmd = %p\n", cmd);
 
 		while (cmd[count] != NULL)
@@ -87,10 +83,10 @@ static void	core(void)
 
 int			main(void)
 {
-	file = fopen(LOG_P_DEB, "w+");
+	file = fopen(LOG_PATH, "w+");
 	get_environ();
 	core();
-	fclose(file);
 	ft_array_free(&g_env);
+	fclose(file);
 	return (0);
 }

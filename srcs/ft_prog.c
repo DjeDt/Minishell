@@ -6,13 +6,13 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 13:46:18 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/05 17:25:20 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/08 17:15:50 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	void	not_found(char *name)
+static	void	not_found(const char *name)
 {
 	ft_putstrlen_fd(name, 2);
 	ft_putendl_fd(": not found", 2);
@@ -23,6 +23,7 @@ static int		spawn_path(const char *path, char **av)
 	int		ret;
 	pid_t	child;
 
+	ret = 0;
 	if (access (path, F_OK) == 0)
 	{
 		child = fork();
@@ -53,7 +54,6 @@ int				ft_launch_prog(char **av)
 		fprintf(file, "- char **diff_p = %p\n", diff_p);
 		while ((diff_p != NULL) && (diff_p[count++] != NULL))
 		{
-//			path = ft_strjoin_fl(ft_strjoin(diff_p[count], "/"), av[0]);
 			path = ft_strjoin(diff_p[count], "/");
 			path = ft_strjoin_fl(path, av[0]);
 			ret = spawn_path(path, av);
