@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 12:39:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/08 19:00:23 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/08 23:26:43 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,25 @@ static int	check_builtins(const char *input)
 
 	count = -1;
 
-	fprintf(file, "- struct builtin  = %p\n", builtin);
-
+	fprintf(file, "split whitespaces\n");
 	if ((tmp = ft_split_whitespaces((char*)input)) == NULL)
 		return (-1);
-
-	fprintf(file, "- char **tmp = %p\n", tmp);
-
+	fprintf(file, "Debut boucle\n");
 	while ((tmp[0]) && (++count < 6))
 	{
 		if (ft_strcmp(builtin[count].ft, tmp[0]) == 0)
 		{
+			fprintf(file, "fonction builtin\n");
 			(*(builtin[count].func))((const char **)tmp);
+			fprintf(file, "free tmp\n");
 			ft_array_free(&tmp);
 			return (0);
 		}
 	}
-	fprintf(file, "- tmp[0] = %p\n", tmp[0]);
+	fprintf(file, "launch prog\n");
 	if (tmp[0] != NULL)
 		ft_launch_prog(tmp);
+	fprintf(file, "free tmp\n");
 	ft_array_free(&tmp);
 	return (0);
 }
@@ -63,20 +63,13 @@ static void	core(void)
 		fprintf(file, "\n/* --- START --- */\n");
 		count = 0;
 		ft_putstrlen("$> ");
-		get_next_line(0, &line);
-
-		fprintf(file, "input : %s\n\n", line);
-		fprintf(file, "Fonction core :\n");
-		fprintf(file, "- char *line = %p\n", line);
-
+		read_line(0, &line);
+		fprintf(file, "input = %s\n\n", line);
 		cmd = ft_strsplit(line, ';');
 		ft_memdel((void*)&line);
-		fprintf(file, "- char **cmd = %p\n", cmd);
-
 		while (cmd[count] != NULL)
 			check_builtins(cmd[count++]);
 		ft_array_free(&cmd);
-
 		fprintf(file, "/* --- END --- */\n");
 	}
 }

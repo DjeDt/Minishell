@@ -6,7 +6,7 @@
 #    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/17 14:14:43 by ddinaut           #+#    #+#              #
-#    Updated: 2017/05/05 16:49:06 by ddinaut          ###   ########.fr        #
+#    Updated: 2017/05/08 20:05:57 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -44,6 +44,7 @@ SRC = $(addprefix $(SRC_PATH)/,$(SRCS))
 SRCS =	main.c \
 		env_utils.c \
 		ft_prog.c \
+		read_line.c \
 		split_path.c \
 		builtin_env.c \
 		builtin_echo.c \

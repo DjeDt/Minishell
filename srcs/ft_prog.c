@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 13:46:18 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/08 17:15:50 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/08 19:24:33 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int				ft_launch_prog(char **av)
 	{
 		count = 0;
 		diff_p = ft_strsplit(get_var_value("PATH"), ':');
-		fprintf(file, "- char **diff_p = %p\n", diff_p);
 		while ((diff_p != NULL) && (diff_p[count++] != NULL))
 		{
 			path = ft_strjoin(diff_p[count], "/");

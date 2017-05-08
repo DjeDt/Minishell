@@ -60,6 +60,7 @@ int			ft_exit(const char **input);
 int			ft_cd(const char **input);
 
 /* Others */
+int			read_line(const int fd, char **line);
 int			ft_launch_prog(char **av);
 
 #endif
