@@ -25,29 +25,20 @@ static int	check_builtins(const char *input)
 		{"exit", &ft_exit}
 	};
 
-	fprintf(file, "\nFonction check_builtin :\n");
-
 	count = -1;
-
-	fprintf(file, "split whitespaces\n");
 	if ((tmp = ft_split_whitespaces((char*)input)) == NULL)
 		return (-1);
-	fprintf(file, "Debut boucle\n");
 	while ((tmp[0]) && (++count < 6))
 	{
 		if (ft_strcmp(builtin[count].ft, tmp[0]) == 0)
 		{
-			fprintf(file, "fonction builtin\n");
 			(*(builtin[count].func))((const char **)tmp);
-			fprintf(file, "free tmp\n");
 			ft_array_free(&tmp);
 			return (0);
 		}
 	}
-	fprintf(file, "launch prog\n");
 	if (tmp[0] != NULL)
 		ft_launch_prog(tmp);
-	fprintf(file, "free tmp\n");
 	ft_array_free(&tmp);
 	return (0);
 }
@@ -58,28 +49,25 @@ static void	core(void)
 	char	*line;
 	char	**cmd;
 
+	line = NULL;
+	cmd = NULL;
 	while (1)
 	{
-		fprintf(file, "\n/* --- START --- */\n");
 		count = 0;
 		ft_putstrlen("$> ");
 		read_line(0, &line);
-		fprintf(file, "input = %s\n\n", line);
 		cmd = ft_strsplit(line, ';');
 		ft_memdel((void*)&line);
 		while (cmd[count] != NULL)
 			check_builtins(cmd[count++]);
 		ft_array_free(&cmd);
-		fprintf(file, "/* --- END --- */\n");
 	}
 }
 
 int			main(void)
 {
-	file = fopen(LOG_PATH, "w+");
 	get_environ();
 	core();
 	ft_array_free(&g_env);
-	fclose(file);
 	return (0);
 }

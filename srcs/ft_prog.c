@@ -44,7 +44,6 @@ int				ft_launch_prog(char **av)
 	char	**diff_p;
 
 	ret = -1;
-	fprintf(file, "\nFonction launch prog :\n");
 	if (ft_strchr(av[0], '/') != NULL)
 		ret = spawn_path(av[0], av);
 	else
