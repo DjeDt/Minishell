@@ -46,7 +46,9 @@ static int	check_builtins(const char *input)
 			return (0);
 		}
 	}
-	ft_launch_prog(tmp);
+	if (tmp[0] != NULL)
+		ft_launch_prog(tmp);
+//	tmp[0] != NULL ? ft_launch_prog(tmp) : NULL;
 	/* LEAKS SUR TMP */
 	ft_array_free(&tmp);
 	return (0);
