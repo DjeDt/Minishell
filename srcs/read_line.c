@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 22:47:22 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/08 23:43:40 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/09 17:40:30 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		read_line(const int fd, char **line)
 	char	*tmp;
 	int		ret;
 
+	tmp = NULL;
 	if (fd < 0 || !line || BUFF_SIZE < 1)
 		return (-1);
 	if (!((*line) = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1))))
@@ -32,11 +33,19 @@ int		read_line(const int fd, char **line)
 		read_error(line);
 	while ((ret > 0) && ((*line)[ret - 1] != 10))
 	{
+		ft_putendl("test1");
 		(*line)[ret - 1] = '\0';
-		tmp = ft_strjoin(tmp, *line);
-		ft_memdel((void*)line);
+		ft_putendl("test2");
+		tmp = ft_strjoin_fr(tmp, *line);
+		ft_putendl("test3");
+//		ft_memdel((void*)line);
 		ret = read(fd, (*line), BUFF_SIZE);
+		if (ret < 0)
+			break ;
+		ft_putendl("test4");
 	}
 	(*line)[ret - 1] = '\0';
+	if (tmp != NULL)
+		ft_memdel((void*)&tmp);
 	return (ret);
 }

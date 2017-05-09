@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 13:21:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/08 19:27:26 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/09 17:25:55 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	check_input(const char **input)
 	}
 	while (input[1] && input[1][++count] != '\0')
 		input[1][count] == '=' ? n++ : 0;
-	if (n != 1)
+	if (n != 1 || count < 2)
 	{
 		ft_putendl_fd(SETENV_USAGE, 2);
 		return (-1);
