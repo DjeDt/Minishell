@@ -35,16 +35,11 @@ int		read_line(const int fd, char **line)
 	{
 		if (tmp != NULL)
 			ft_strdel(&tmp);
-		ft_putendl("test1");
 		(*line)[ret - 1] = '\0';
-		ft_putendl("test2");
 		tmp = ft_strjoin_fr(tmp, *line);
-		ft_putendl("test3");
-//		ft_memdel((void*)line);
 		ret = read(fd, (*line), BUFF_SIZE);
 		if (ret < 0)
 			break ;
-		ft_putendl("test4");
 	}
 	(*line)[ret - 1] = '\0';
 	if (tmp != NULL)
