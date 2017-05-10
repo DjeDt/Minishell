@@ -33,6 +33,8 @@ int		read_line(const int fd, char **line)
 		read_error(line);
 	while ((ret > 0) && ((*line)[ret - 1] != 10))
 	{
+		if (tmp != NULL)
+			ft_strdel(&tmp);
 		ft_putendl("test1");
 		(*line)[ret - 1] = '\0';
 		ft_putendl("test2");
