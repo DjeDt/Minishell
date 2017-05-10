@@ -63,4 +63,6 @@ int			ft_cd(const char **input);
 int			read_line(const int fd, char **line);
 int			ft_launch_prog(char **av);
 
+int			core_arrow(const char *input);
+
 #endif

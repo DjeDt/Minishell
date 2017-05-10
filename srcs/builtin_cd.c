@@ -34,12 +34,12 @@ int			ft_cd(const char **input)
 {
 	if (check_input(input) != 0)
 		return (-1);
-	if (ft_strncmp(input[1], "~", 1) == 0)
+	if (ft_strcmp(input[1], "~") == 0)
 		chdir(get_var_value("HOME"));
-	else if (ft_strncmp(input[1], "-", 1) == 0)
+	else if (ft_strcmp(input[1], "-") == 0)
 	{
-		ft_putendl(get_var_value("OLDPWD"));
 		chdir(get_var_value("OLDPWD"));
+		ft_putendl(get_var_value("OLDPWD"));
 	}
 	else
 		chdir(input[1]);
