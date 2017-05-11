@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 22:47:22 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/11 16:22:58 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/11 16:47:29 by tribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ int		read_line(const int fd, char **line)
 		save = ft_strjoin_fb(save, *line);
 		ret = read(fd, (*line), BUFF_SIZE);
 		(*line)[ret] = '\0';
-	}
 	(*line) = ft_strjoin_fb(save, (*line));
-	save != NULL ? ft_strdel(&save) : NULL;
+	}
 	return (ret);
 }
