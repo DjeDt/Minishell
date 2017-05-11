@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 13:21:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/09 17:25:55 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/11 15:31:17 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,27 @@
 
 static int	check_input(const char **input)
 {
-	int	n;
-	int count;
+	int		n;
+	int		count;
+	char	**tmp;
 
 	n = 0;
-	count = -1;
-	if (ft_array_len(input) != 2)
-	{
-		ft_putendl_fd(SETENV_USAGE, 2);
-		return (-1);
-	}
-	while (input[1] && input[1][++count] != '\0')
+	count = 0;
+	while ((input[1]) && (input[1][count++] != '\0'))
 		input[1][count] == '=' ? n++ : 0;
 	if (n != 1 || count < 2)
 	{
 		ft_putendl_fd(SETENV_USAGE, 2);
 		return (-1);
 	}
+	tmp = ft_strsplit(input[1], '=');
+	if (ft_array_len((const char **)tmp) != 2)
+	{
+		ft_putendl_fd(SETENV_USAGE, 2);
+		ft_array_free(&tmp);
+		return (-1);
+	}
+	ft_array_free(&tmp);
 	return (0);
 }
 
@@ -56,17 +60,15 @@ static void	array_add_one(const char **input)
 int			ft_setenv(const char **input)
 {
 	int		count;
-	int		len;
 
 	if ((input == NULL) || (check_input(input) != 0))
 		return (-1);
 	count = -1;
-	len = ft_strnlen(input[1], '=');
 	while (g_env[++count] != NULL)
 	{
-		if (ft_strncmp(input[1], g_env[count], len) == 0)
+		if (ft_strcmp(input[1], g_env[count]) == 0)
 		{
-			ft_memdel((void*)&g_env[count]);
+			ft_strdel(&g_env[count]);
 			g_env[count] = ft_strdup(input[1]);
 			return (0);
 		}

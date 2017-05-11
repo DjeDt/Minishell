@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 22:47:22 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/09 17:40:30 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/11 16:22:58 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,33 @@ static void	read_error(char **line)
 	exit (-1);
 }
 
+#include <stdio.h>
+#include <unistd.h>
+
 int		read_line(const int fd, char **line)
 {
-	char	*tmp;
+	char	*save;
 	int		ret;
 
-	tmp = NULL;
+	ret = 0;
+	save = NULL;
 	if (fd < 0 || !line || BUFF_SIZE < 1)
 		return (-1);
 	if (!((*line) = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1))))
 		return (-1);
 	if ((ret = read(fd, *line, BUFF_SIZE)) < 0)
 		read_error(line);
+	(*line)[ret] = '\0';
+	printf("line = %p\n", *line);
 	while ((ret > 0) && ((*line)[ret - 1] != 10))
 	{
-		if (tmp != NULL)
-			ft_strdel(&tmp);
-		(*line)[ret - 1] = '\0';
-		tmp = ft_strjoin_fr(tmp, *line);
+		printf("line = %p\n", *line);
+		printf("save = %p\n", save);
+		save = ft_strjoin_fb(save, *line);
 		ret = read(fd, (*line), BUFF_SIZE);
-		if (ret < 0)
-			break ;
+		(*line)[ret] = '\0';
 	}
-	(*line)[ret - 1] = '\0';
-	if (tmp != NULL)
-		ft_memdel((void*)&tmp);
+	(*line) = ft_strjoin_fb(save, (*line));
+	save != NULL ? ft_strdel(&save) : NULL;
 	return (ret);
 }

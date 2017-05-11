@@ -19,7 +19,7 @@ int		core_arrow(const char *input)
 	while (input[count] != '\0')
 	{
 		if (input[count])
-			ft_putendl("test");
+//			ft_putendl("test");
 		count++;
 	}
 	return (0);
