@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 12:39:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/11 16:00:24 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/11 19:27:26 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	check_builtins(const char *input)
 		}
 	}
 	if (tmp[0] != NULL)
-		ft_launch_prog(tmp);
+		ft_launch_prog((const char **)tmp);
 	ft_array_free(&tmp);
 	return (0);
 }
@@ -66,6 +66,7 @@ static void	core(void)
 
 int			main(void)
 {
+	g_env = NULL;
 	get_environ();
 	core();
 	ft_array_free(&g_env);

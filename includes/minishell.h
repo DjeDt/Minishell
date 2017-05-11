@@ -28,9 +28,6 @@
 /* int global pour le log */
 # include <stdio.h>
 # include <unistd.h>
-# define LOG_PATH "/Users/ddinaut/Desktop/Minishell/log_minishell.log"
-# define LOG_P_DEB "/home/dje/code/Minishell/log_minishell.log"
-FILE			*file;
 
 /* Globale env */
 char			**g_env;
@@ -61,7 +58,7 @@ int			ft_cd(const char **input);
 
 /* Others */
 int			read_line(const int fd, char **line);
-int			ft_launch_prog(char **av);
+int			ft_launch_prog(const char **av);
 
 int			core_arrow(const char *input);
 

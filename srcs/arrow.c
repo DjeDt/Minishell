@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   arrow.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/11 19:15:48 by ddinaut           #+#    #+#             */
+/*   Updated: 2017/05/11 19:15:57 by ddinaut          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 #include <sys/termios.h>
@@ -19,7 +31,7 @@ int		core_arrow(const char *input)
 	while (input[count] != '\0')
 	{
 		if (input[count])
-//			ft_putendl("test");
+			ft_putendl("test");
 		count++;
 	}
 	return (0);

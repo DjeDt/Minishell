@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 13:46:18 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/08 19:24:33 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/11 19:25:21 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static	void	not_found(const char *name)
 	ft_putendl_fd(": not found", 2);
 }
 
-static int		spawn_path(const char *path, char **av)
+static int		spawn_path(const char *path, const char **av)
 {
 	int		ret;
 	pid_t	child;
@@ -28,7 +28,7 @@ static int		spawn_path(const char *path, char **av)
 	{
 		child = fork();
 		if (child == 0)
-			ret = execve(path, av, g_env);
+			ret = execve(path, (char **)av, g_env);
 		wait(&child);
 	}
 	else
@@ -36,7 +36,7 @@ static int		spawn_path(const char *path, char **av)
 	return (ret);
 }
 
-int				ft_launch_prog(char **av)
+int				ft_launch_prog(const char **av)
 {
 	int		ret;
 	int		count;

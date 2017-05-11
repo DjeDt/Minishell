@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 22:47:22 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/11 16:47:29 by tribeiro         ###   ########.fr       */
+/*   Updated: 2017/05/11 19:11:31 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,29 @@ static void	read_error(char **line)
 	exit (-1);
 }
 
-#include <stdio.h>
-#include <unistd.h>
-
-int		read_line(const int fd, char **line)
+int		read_line(int fd, char **line)
 {
-	char	*save;
+	char	*buf;
+	char	*tmp;
 	int		ret;
 
-	ret = 0;
-	save = NULL;
-	if (fd < 0 || !line || BUFF_SIZE < 1)
-		return (-1);
-	if (!((*line) = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1))))
-		return (-1);
-	if ((ret = read(fd, *line, BUFF_SIZE)) < 0)
-		read_error(line);
-	(*line)[ret] = '\0';
-	printf("line = %p\n", *line);
-	while ((ret > 0) && ((*line)[ret - 1] != 10))
+	if (!(buf = (char*)malloc(sizeof(char) * (BUFF_SIZE) + 1)))
+		exit(1);
+	ret = read(fd, buf, BUFF_SIZE);
+	if (ret < 0)
+		read_error(&buf);
+	while (0 < ret && buf[ret - 1] != 10)
 	{
-		printf("line = %p\n", *line);
-		printf("save = %p\n", save);
-		save = ft_strjoin_fb(save, *line);
-		ret = read(fd, (*line), BUFF_SIZE);
-		(*line)[ret] = '\0';
-	(*line) = ft_strjoin_fb(save, (*line));
+		buf[ret] = '\0';
+		tmp = ft_strjoin((*line), buf);
+		ft_strdel(line);
+		(*line) = tmp;
+		ret = read(fd, buf, BUFF_SIZE);
 	}
+	buf[ret] = '\0';
+	tmp = ft_strjoin((*line), buf);
+	ft_strdel(line);
+	(*line) = tmp;
+	ft_strdel(&buf);
 	return (ret);
 }

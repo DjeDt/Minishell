@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 14:37:39 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/04 14:22:01 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/11 19:27:56 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int			ft_env(const char **input)
 	else if (flags & FLAG_1)
 		env_option_i(input);
 	else if (ft_array_len(input) > 1)
-		ft_launch_prog((char**)input + 1);
+		ft_launch_prog(input + 1);
 	else
 		ft_array_print((const char **)g_env);
 	return (0);
