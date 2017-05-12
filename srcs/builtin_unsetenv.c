@@ -14,7 +14,7 @@
 
 static	int		check_input(const char **input)
 {
-	if (ft_array_len(input) != 2)
+	if (ft_arrlen(input) != 2)
 	{
 		ft_putendl(UNSETENV_USAGE);
 		return (-1);
@@ -31,7 +31,7 @@ static	void	array_remove_one(const char *rm)
 
 	count = 0;
 	count2 = 0;
-	if (!(new = (char**)malloc(sizeof(char*) * ft_array_len((const char **)g_env))))
+	if (!(new = (char**)malloc(sizeof(char*) * ft_arrlen((const char **)g_env))))
 		ft_putendl_fd("Malloc error: abort prog", 2);
 	while (g_env[count] != NULL)
 	{
@@ -45,7 +45,7 @@ static	void	array_remove_one(const char *rm)
 		count++;
 	}
 	new[count2] = NULL;
-	ft_array_free(&g_env);
+	ft_arrfree(&g_env);
 	g_env = new;
 }
 
@@ -58,7 +58,7 @@ int				ft_unsetenv(const char **input)
 		return (-1);
 	while (g_env[count] != NULL)
 	{
-		if (ft_strcmp(g_env[count], input[1]) == 0)
+		if (ft_strncmp(g_env[count], input[1], ft_strlen(input[1])) == 0)
 		{
 			array_remove_one(input[1]);
 			return (0);

@@ -14,7 +14,7 @@
 
 static int	arg_error(char c)
 {
-	ft_putstrlen_fd("env: option invalide -- ", 2);
+	ft_putstr_fd("env: option invalide -- ", 2);
 	ft_putchar_fd(c, 2);
 	ft_putchar_fd('\n', 2);
 	ft_putendl_fd(ENV_USAGE, 2);
@@ -66,9 +66,9 @@ int			ft_env(const char **input)
 		return (-1);
 	else if (flags & FLAG_1)
 		env_option_i(input);
-	else if (ft_array_len(input) > 1)
+	else if (ft_arrlen(input) > 1)
 		ft_launch_prog(input + 1);
 	else
-		ft_array_print((const char **)g_env);
+		ft_arrprint((const char **)g_env);
 	return (0);
 }

@@ -14,7 +14,7 @@
 
 static	void	not_found(const char *name)
 {
-	ft_putstrlen_fd(name, 2);
+	ft_putstr_fd(name, 2);
 	ft_putendl_fd(": not found", 2);
 }
 
@@ -59,7 +59,7 @@ int				ft_launch_prog(const char **av)
 			if (ret == 0)
 				break ;
 		}
-		diff_p != NULL ? ft_array_free(&diff_p) : NULL;
+		diff_p != NULL ? ft_arrfree(&diff_p) : NULL;
 	}
 	ret < 0 ? not_found(av[0]) : 0;
 	return (ret);

@@ -33,13 +33,13 @@ static int	check_builtins(const char *input)
 		if (ft_strcmp(builtin[count].ft, tmp[0]) == 0)
 		{
 			(*(builtin[count].func))((const char **)tmp);
-			ft_array_free(&tmp);
+			ft_arrfree(&tmp);
 			return (0);
 		}
 	}
 	if (tmp[0] != NULL)
 		ft_launch_prog((const char **)tmp);
-	ft_array_free(&tmp);
+	ft_arrfree(&tmp);
 	return (0);
 }
 
@@ -54,13 +54,13 @@ static void	core(void)
 	while (1)
 	{
 		count = 0;
-		ft_putstrlen("$> ");
+		ft_putstr("$> ");
 		read_line(0, &line);
 		cmd = ft_strsplit(line, ';');
 		ft_memdel((void*)&line);
 		while (cmd[count] != NULL)
 			check_builtins(cmd[count++]);
-		ft_array_free(&cmd);
+		ft_arrfree(&cmd);
 	}
 }
 
@@ -69,6 +69,6 @@ int			main(void)
 	g_env = NULL;
 	get_environ();
 	core();
-	ft_array_free(&g_env);
+//	ft_array_free(&g_env);
 	return (0);
 }

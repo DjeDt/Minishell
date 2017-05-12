@@ -28,13 +28,13 @@ static int	check_input(const char **input)
 		return (-1);
 	}
 	tmp = ft_strsplit(input[1], '=');
-	if (ft_array_len((const char **)tmp) != 2)
+	if (ft_arrlen((const char **)tmp) != 2)
 	{
 		ft_putendl_fd(SETENV_USAGE, 2);
-		ft_array_free(&tmp);
+		ft_arrfree(&tmp);
 		return (-1);
 	}
-	ft_array_free(&tmp);
+	ft_arrfree(&tmp);
 	return (0);
 }
 
@@ -44,7 +44,7 @@ static void	array_add_one(const char **input)
 	char	**new;
 
 	count = 0;
-	if (!(new = (char**)malloc(sizeof(char*) * ft_array_len((const char **)g_env) + 2)))
+	if (!(new = (char**)malloc(sizeof(char*) * ft_arrlen((const char **)g_env) + 2)))
 		ft_putendl_fd("error: not enought memory to malloc", 2);
 	while (g_env[count] != NULL)
 	{
@@ -53,7 +53,7 @@ static void	array_add_one(const char **input)
 	}
 	new[count++] = ft_strdup(input[1]);
 	new[count] = NULL;
-	ft_array_free(&g_env);
+	ft_arrfree(&g_env);
 	g_env = new;
 }
 

@@ -14,8 +14,8 @@
 
 int		ft_exit(const char **input)
 {
-	ft_array_free((char ***)&input);
-	ft_array_free(&g_env);
+	ft_arrfree((char ***)&input);
+	ft_arrfree(&g_env);
 	exit(0);
 	return (0);
 }

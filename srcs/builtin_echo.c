@@ -21,7 +21,7 @@ int		ft_echo(const char **input)
 		return (-1);
 	while (input[++count] != NULL)
 	{
-		ft_putstrlen(input[count]);
+		ft_putstr(input[count]);
 		write(1, " ", 1);
 	}
 	write(1, "\n", 1);

@@ -16,7 +16,7 @@ void		get_environ(void)
 {
 	extern	char	**environ;
 
-	g_env = ft_array_cpy((const char **)environ);
+	g_env = ft_arrdup((const char **)environ);
 }
 
 char			*get_var_name(char *str)
