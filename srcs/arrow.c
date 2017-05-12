@@ -17,22 +17,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+
 int		core_arrow(const char *input)
 {
-	struct termios	test;
-	int count;
+	struct winsize test;
 
-	count = 0;
-	if (ioctl(0, TIOCGWINSZ, &test) < 0)
-		ft_putendl_fd("error", 2);
-	test.c_lflag &= ~(ICANON | ECHO);
-	if ((ioctl(0, TIOCGWINSZ, &test)) < 0)
-		ft_putendl_fd("error", 2);
-	while (input[count] != '\0')
-	{
-		if (input[count])
-			ft_putendl("test");
-		count++;
-	}
+	ioctl(0, TIOCGWINSZ, &test);
+
+	(void)input;
+	ft_putstr("colonne = ");
+	ft_putnbr(test.ws_col);
+	ft_putstr("\ncligne = ");
+	ft_putnbr(test.ws_row);
 	return (0);
 }

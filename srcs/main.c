@@ -56,6 +56,7 @@ static void	core(void)
 		count = 0;
 		ft_putstr("$> ");
 		read_line(0, &line);
+		core_arrow(line);
 		cmd = ft_strsplit(line, ';');
 		ft_memdel((void*)&line);
 		while (cmd[count] != NULL)
@@ -69,6 +70,5 @@ int			main(void)
 	g_env = NULL;
 	get_environ();
 	core();
-//	ft_array_free(&g_env);
 	return (0);
 }
