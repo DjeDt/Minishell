@@ -56,7 +56,7 @@ static void	core(void)
 		count = 0;
 		ft_putstr("$> ");
 		read_line(0, &line);
-		core_arrow(line);
+//		core_arrow(line);
 		cmd = ft_strsplit(line, ';');
 		ft_memdel((void*)&line);
 		while (cmd[count] != NULL)

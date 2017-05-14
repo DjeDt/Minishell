@@ -46,7 +46,7 @@ char		*get_var_name(char *str);
 char		*get_var_value(const char *tf);
 
 /* Gestion d'erreurs */
-void		ft_malloc_error(void);
+void		ft_malloc_error(char *str);
 
 /* Builtins */
 int			ft_echo(const char **input);
@@ -60,6 +60,7 @@ int			ft_cd(const char **input);
 int			read_line(const int fd, char **line);
 int			ft_launch_prog(const char **av);
 
-int			core_arrow(const char *input);
+/* Edition de ligne */
+int			core_arrow(void);
 
 #endif

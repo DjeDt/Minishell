@@ -17,18 +17,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <termios.h>
+#include <unistd.h>
 
-
-int		core_arrow(const char *input)
+int		core_arrow(void)
 {
 	struct winsize test;
+	struct termios term;
 
-	ioctl(0, TIOCGWINSZ, &test);
+	ioctl(STDIN_FILENO, TIOCGWINSZ, &test);
+	tcgetattr(STDIN_FILENO, &term);
 
-	(void)input;
-	ft_putstr("colonne = ");
-	ft_putnbr(test.ws_col);
-	ft_putstr("\ncligne = ");
-	ft_putnbr(test.ws_row);
+	term.c_iflag &= ~(IXON); // Inhibe le controle de flux
+	term.c_lflag &= ~(ICANON); // Pas de mode canonique
+	term.c_lflag &= ~(ECHO);	// Pas d'echo
+	term.c_lflag &= ~(ISIG); // Pour virer les signaux comme ctrl+c
+
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
 	return (0);
 }

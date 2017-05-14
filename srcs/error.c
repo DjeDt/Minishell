@@ -12,8 +12,9 @@
 
 #include "minishell.h"
 
-void	ft_malloc_error(void)
+void	ft_malloc_error(char *str)
 {
-	ft_putendl_fd("Error malloc, abort prog", 2);
+	ft_putstr_fd(str, 2);
+	ft_putendl_fd(": Error malloc, abort prog", 2);
 	exit(-1);
 }
