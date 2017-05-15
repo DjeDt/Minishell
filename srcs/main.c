@@ -51,12 +51,12 @@ static void	core(void)
 
 	line = NULL;
 	cmd = NULL;
+	print_launch();
 	while (1)
 	{
 		count = 0;
-		ft_putstr("$> ");
+		print_prompt();
 		read_line(0, &line);
-//		core_arrow(line);
 		cmd = ft_strsplit(line, ';');
 		ft_memdel((void*)&line);
 		while (cmd[count] != NULL)

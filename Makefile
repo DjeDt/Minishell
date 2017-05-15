@@ -42,6 +42,7 @@ SRC = $(addprefix $(SRC_PATH)/,$(SRCS))
 
 # Sources #
 SRCS =	main.c \
+		print_swag.c \
 		env_utils.c \
 		ft_prog.c \
 		read_line.c \

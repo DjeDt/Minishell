@@ -14,7 +14,7 @@
 
 static	int		check_input(const char **input)
 {
-	if (ft_arrlen(input) != 2)
+	if (ft_arrlen(input) != 2 || (ft_count_char(input[1], '=') != 0))
 	{
 		ft_putendl(UNSETENV_USAGE);
 		return (-1);
@@ -22,45 +22,31 @@ static	int		check_input(const char **input)
 	return (0);
 }
 
-static	void	array_remove_one(const char *rm)
+static void		ft_new(char **rm)
 {
-	int		count;
-	int		count2;
-	char	**new;
-	char	*name;
+	size_t	len;
 
-	count = 0;
-	count2 = 0;
-	if (!(new = (char**)malloc(sizeof(char*) * ft_arrlen((const char **)g_env))))
-		ft_putendl_fd("Malloc error: abort prog", 2);
-	while (g_env[count] != NULL)
-	{
-		name = get_var_name(g_env[count]);
-		if (ft_strcmp(name, rm) != 0)
-		{
-			new[count2] = ft_strdup(g_env[count]);
-			count2++;
-		}
-		ft_memdel((void*)&name);
-		count++;
-	}
-	new[count2] = NULL;
-	ft_arrfree(&g_env);
-	g_env = new;
+	len = 0;
+	while (rm[len] != NULL)
+		++len;
+	free(*rm);
+	ft_memcpy(rm, rm + 1, len * sizeof(*rm));
 }
 
 int				ft_unsetenv(const char **input)
 {
 	int		count;
+	int		len;
 
-	count = 0;
 	if (check_input(input) != 0)
 		return (-1);
+	count = 0;
+	len = ft_strlen(input[1]);
 	while (g_env[count] != NULL)
 	{
-		if (ft_strncmp(g_env[count], input[1], ft_strlen(input[1])) == 0)
+		if (ft_strncmp(g_env[count], input[1], len) == 0)
 		{
-			array_remove_one(input[1]);
+			ft_new(g_env + count);
 			return (0);
 		}
 		count++;

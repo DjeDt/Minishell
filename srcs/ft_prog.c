@@ -24,7 +24,7 @@ static int		spawn_path(const char *path, const char **av)
 	pid_t	child;
 
 	ret = 0;
-	if (access (path, F_OK) == 0)
+	if (access(path, F_OK) == 0)
 	{
 		child = fork();
 		if (child == 0)
@@ -50,7 +50,7 @@ int				ft_launch_prog(const char **av)
 	{
 		count = 0;
 		diff_p = ft_strsplit(get_var_value("PATH"), ':');
-		while ((diff_p != NULL) && (diff_p[count++] != NULL))
+		while ((diff_p != NULL) && (diff_p[count] != NULL))
 		{
 			path = ft_strjoin(diff_p[count], "/");
 			path = ft_strjoin_fl(path, av[0]);
@@ -58,6 +58,7 @@ int				ft_launch_prog(const char **av)
 			ft_memdel((void*)&path);
 			if (ret == 0)
 				break ;
+			count++;
 		}
 		diff_p != NULL ? ft_arrfree(&diff_p) : NULL;
 	}

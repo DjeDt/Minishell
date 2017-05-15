@@ -63,4 +63,8 @@ int			ft_launch_prog(const char **av);
 /* Edition de ligne */
 int			mode_raw(void);
 
+/* print func */
+void		print_prompt(void);
+void		print_launch(void);
+
 #endif
