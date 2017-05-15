@@ -20,7 +20,7 @@
 #include <termios.h>
 #include <unistd.h>
 
-int		core_arrow(void)
+int		mode_raw(void)
 {
 	struct winsize test;
 	struct termios term;
@@ -28,11 +28,16 @@ int		core_arrow(void)
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &test);
 	tcgetattr(STDIN_FILENO, &term);
 
+//	ft_putnbr(term.c_iflag);
+//	ft_print_binary(term.c_iflag);
+//	ft_putchar('\n');
 	term.c_iflag &= ~(IXON); // Inhibe le controle de flux
+//	ft_print_binary(term.c_iflag);
+//	ft_putnbr(term.c_iflag);
 	term.c_lflag &= ~(ICANON); // Pas de mode canonique
 	term.c_lflag &= ~(ECHO);	// Pas d'echo
 	term.c_lflag &= ~(ISIG); // Pour virer les signaux comme ctrl+c
 
-	tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &term); // pour tout cacher
 	return (0);
 }

@@ -61,6 +61,6 @@ int			read_line(const int fd, char **line);
 int			ft_launch_prog(const char **av);
 
 /* Edition de ligne */
-int			core_arrow(void);
+int			mode_raw(void);
 
 #endif
