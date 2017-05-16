@@ -12,11 +12,9 @@
 
 #!bin/bash
 
-nbr=0
-while ((nbr != 1))
+while [ 1 ]
 do
 	leaks minishell
-	read nbr
-	echo " ------------- \n"
+	sleep 1
+	clear
 done
-exit 0
