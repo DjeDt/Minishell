@@ -14,7 +14,7 @@
 
 static int	check_input(const char **input)
 {
-	if (ft_arrlen(input) != 2)
+	if (ft_arrlen(input) > 2)
 	{
 		ft_putendl_fd(CD_USAGE, 2);
 		return (-1);
@@ -25,7 +25,7 @@ static int	check_input(const char **input)
 static int			move_dir(const char *path)
 {
 	if (access(path, F_OK) == 0)
-		chdir(path);
+	    chdir(path);
 	else
 	{
 		ft_putstr_fd("cd: cannot acccess to : ", 2);
@@ -40,7 +40,9 @@ int			ft_cd(const char **input)
 {
 	if (check_input(input) != 0)
 		return (-1);
-	if (ft_strcmp(input[1], "~") == 0)
+	if (ft_arrlen(input) == 1)
+	  move_dir(get_var_value("HOME"));
+	else if (ft_strcmp(input[1], "~") == 0)
 		move_dir(get_var_value("HOME"));
 	else if (ft_strcmp(input[1], "-") == 0)
 	{

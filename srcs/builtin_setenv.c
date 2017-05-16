@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -38,7 +39,8 @@ static void array_add_one(const char **input)
 	char **new;
 
 	count = 0;
-	new = (char**)malloc(sizeof(char*) * ft_arrlen((const char **)g_env) + 2);
+	if (!(new = (char**)malloc(sizeof(char*) * ft_arrlen((const char **)g_env) + 2)))
+	  exit (-1);
 	while (g_env[count] != NULL)
 	{
 		new[count] = g_env[count];
