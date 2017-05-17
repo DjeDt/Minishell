@@ -46,7 +46,7 @@ static	int	prog_check(const char *path, char **tmp_arg, char **tmp_env)
 	int		ret;
 	pid_t	child;
 
-	ret = 0;
+	ret = -1;
 	if (access(path, F_OK) == 0)
 	{
 		child = fork();
@@ -57,7 +57,7 @@ static	int	prog_check(const char *path, char **tmp_arg, char **tmp_env)
 	return (ret);
 }
 
-static int	prog_env(const char *prog, char **tmp_arg, char **tmp_env, char **path)
+static int	prog_env(const char *prog, char **arg, char **env, char **path)
 {
 	int		ret;
 	int		count;
@@ -67,11 +67,17 @@ static int	prog_env(const char *prog, char **tmp_arg, char **tmp_env, char **pat
 	count = 0;
 	while (path[count] != NULL)
 	{
+		if (ft_strchr(prog, '/') != NULL)
+		{
+			ret = prog_check(prog, arg, env);
+			return (ret);
+		}
 		tmp = ft_strjoin(path[count], "/");
 		tmp = ft_strjoin_fl(tmp, prog);
-		ft_putendl(tmp);
-		ret = prog_check(tmp, tmp_arg, tmp_env);
+		ret = prog_check(tmp, arg, env);
 		ft_strdel(&tmp);
+		if (ret != -1)
+			break ;
 		count++;
 	}
 	return (ret);
@@ -85,6 +91,8 @@ static int	env_option_i(const char **input, char **path)
 	char	**tmp_arg;
 
 	count = 0;
+	tmp_env = NULL;
+	tmp_arg = NULL;
 	while (input[count] != NULL && (ft_strchr(input[count], '=') != NULL))
 		count++;
 	tmp_env = ft_arrldup(input, count);
