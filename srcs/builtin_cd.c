@@ -22,10 +22,28 @@ static int	check_input(const char **input)
 	return (0);
 }
 
+static void			new_oldpwd(void)
+{
+	char	**tmp;
+	char	*value_add;
+
+	value_add = ft_strjoin("PWD=", get_var_value("PWD"));
+	if (!(tmp = (char**)malloc(sizeof(char*) * 3)))
+		ft_malloc_error("builtin_cd->new_oldpwd: malloc_error", -1);
+	tmp[0] = ft_strdup("setenv");
+	tmp[1] = value_add;
+	tmp[2] = NULL;
+	ft_setenv((const char **)tmp);
+	ft_arrfree(&tmp);
+}
+
 static int			move_dir(const char *path)
 {
 	if (access(path, F_OK) == 0)
+	{
+		new_oldpwd();
 	    chdir(path);
+	}
 	else
 	{
 		ft_putstr_fd("cd: cannot acccess to : ", 2);

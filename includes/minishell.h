@@ -46,8 +46,8 @@ char		*get_var_name(char *str);
 char		*get_var_value(const char *tf);
 
 /* Gestion d'erreurs */
-void		ft_malloc_error(char *str);
-
+void		ft_malloc_error(char *str, int ret);
+int			arg_error(char *str, char *usage, char c);
 /* Builtins */
 int			ft_echo(const char **input);
 int			ft_env(const char **input);

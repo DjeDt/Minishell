@@ -12,9 +12,19 @@
 
 #include "minishell.h"
 
-void	ft_malloc_error(char *str)
+void	ft_malloc_error(char *str, int ret)
 {
 	ft_putstr_fd(str, 2);
 	ft_putendl_fd(": Error malloc, abort prog", 2);
-	exit(-1);
+	exit(ret);
+}
+
+int		arg_error(char *str, char *usage, char c)
+{
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": option invalide -- ", 2);
+	ft_putchar_fd(c, 2);
+	ft_putchar_fd('\n', 2);
+	ft_putendl_fd(usage, 2);
+	return (-1);
 }
