@@ -93,6 +93,8 @@ static int	env_option_i(const char **input, char **path)
 		count2++;
 	tmp_arg = ft_arrldup(input + count + 1, count2);
 	prog_env(input[count], tmp_arg, tmp_env, path);
+	ft_arrfree(&tmp_env);
+	ft_arrfree(&tmp_arg);
 	return (0);
 }
 
