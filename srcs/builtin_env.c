@@ -72,10 +72,13 @@ static int	prog_env(const char *prog, char **arg, char **env, char **path)
 			ret = prog_check(prog, arg, env);
 			return (ret);
 		}
-		tmp = ft_strjoin(path[count], "/");
-		tmp = ft_strjoin_fl(tmp, prog);
-		ret = prog_check(tmp, arg, env);
-		ft_strdel(&tmp);
+		else
+		{
+			tmp = ft_strjoin(path[count], "/");
+			tmp = ft_strjoin_fl(tmp, prog);
+			ret = prog_check(tmp, arg, env);
+			ft_strdel(&tmp);
+		}
 		if (ret != -1)
 			break ;
 		count++;
@@ -96,10 +99,10 @@ static int	env_option_i(const char **input, char **path)
 	while (input[count] != NULL && (ft_strchr(input[count], '=') != NULL))
 		count++;
 	tmp_env = ft_arrldup(input, count);
-	count2 = count;
+	count2 = count + 1;
 	while (input[count2] != NULL && input[count2][0] && input[count2][0] == '-')
 		count2++;
-	tmp_arg = ft_arrldup(input + count + 1, count2);
+	tmp_arg = ft_arrldup(input + count, count2);
 	prog_env(input[count], tmp_arg, tmp_env, path);
 	ft_arrfree(&tmp_env);
 	ft_arrfree(&tmp_arg);
