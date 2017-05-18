@@ -46,9 +46,6 @@ static void	new_oldpwd(void)
 
 static int	move_dir(const char *path)
 {
-	struct stat st;
-
-	lstat(path, &st);
 	if (access(path, F_OK) == 0)
 	{
 		if (access(path, R_OK) == 0)

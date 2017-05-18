@@ -16,6 +16,7 @@ static int	check_input(const char **input)
 {
 	char	**tmp;
 
+	tmp = NULL;
 	if ((ft_count_char(input[1], '=') != 1))
 	{
 		ft_putendl_fd(SETENV_USAGE, 2);
@@ -38,17 +39,21 @@ static void	array_add_one(const char **input)
 	char	**new;
 
 	count = 0;
+	new = NULL;
+	fprintf(fd, "Fonction array_add_one :\n");
 	if (!(new = (char**)malloc(sizeof(char*) * ft_arrlen((const char **)g_env) + 2)))
-		exit(-1);
+		ft_malloc_error("builtin_setenv->array_add_one : error malloc", -1);
+	fprintf(fd, "new = %p\ng_env = %p\n&new = %p\n&env = %p\n", new, g_env, &new, &g_env);
 	while (g_env[count] != NULL)
 	{
 		new[count] = g_env[count];
 		count++;
 	}
-	new[count] = ft_strdup(input[1]);
-	new[++count] = NULL;
+	new[count++] = ft_strdup(input[1]);
+	new[count] = NULL;
 	free(g_env);
 	g_env = new;
+	fprintf(fd, "\nnew = %p\ng_env = %p\n&new = %p\n&env = %p\n", new, g_env, &new, &g_env);
 }
 
 int			ft_setenv(const char **input)
@@ -56,11 +61,12 @@ int			ft_setenv(const char **input)
 	int		count;
 	int		len;
 
+	fprintf(fd, "\nFonction ft_setenv :\n");
 	if ((input == NULL) || (check_input(input) != 0))
 		return (-1);
-	count = -1;
+	count = 0;
 	len = ft_strnlen(input[1], '=');
-	while (g_env[++count] != NULL)
+	while (g_env[count] != NULL)
 	{
 		if (ft_strncmp(input[1], g_env[count], len) == 0)
 		{
@@ -68,6 +74,7 @@ int			ft_setenv(const char **input)
 			g_env[count] = ft_strdup(input[1]);
 			return (0);
 		}
+		count++;
 	}
 	array_add_one(input);
 	return (0);

@@ -34,10 +34,11 @@ static int	check_builtins(const char *input)
 	char		**tmp;
 	s_builtin	builtin[6];
 
-	count = -1;
+	count = 0;
 	init_builtin_struct(builtin);
 	tmp = ft_split_whitespaces((char*)input);
-	while ((tmp && tmp[0]) && builtin[count].ft)
+	fprintf(fd, "Fonction check_builtins :\ntmp = %p\n&tmp = %p\n\n", tmp, &tmp);
+	while ((tmp && tmp[0]) && count < 6)
 	{
 		if (ft_strcmp(builtin[count].ft, tmp[0]) == 0)
 		{
@@ -58,6 +59,7 @@ static void	core(void)
 	char	*line;
 	char	**cmd;
 
+	fprintf(fd, "Fonction core :\n");
 	line = NULL;
 	cmd = NULL;
 	print_launch();
@@ -67,9 +69,11 @@ static void	core(void)
 		count = 0;
 		print_prompt();
 		read_line(0, &line);
+		fprintf(fd, "line = %p\n&line = %p\n", line, &line);
 		cmd = ft_strsplit(line, ';');
+		fprintf(fd, "cmd = %p\n&cmd = %p\n\n", cmd, &cmd);
 		ft_strdel(&line);
-		while (cmd && cmd[count] != NULL)
+		while (cmd != NULL && cmd[count] != NULL)
 			check_builtins(cmd[count++]);
 		cmd != NULL ? ft_arrfree(&cmd) : NULL;
 	}
@@ -77,8 +81,11 @@ static void	core(void)
 
 int			main(void)
 {
+	fd = fopen("/home/dje/code/Minishell/log_minishell.log", "w+");
 	g_env = NULL;
 	get_environ();
+	fprintf(fd, "Fonction main :\ng_env = %p\n&g_env = %p\n", g_env, &g_env);
 	core();
+	fclose(fd);
 	return (0);
 }

@@ -15,6 +15,12 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
+/* Pour le fichiers de log */
+# include <stdio.h>
+# include <fcntl.h>
+# include <stdio.h>
+FILE			*fd;
+
 /* Env error */
 # define ENV_USAGE "usage: env [-i] [name=value]... [utility [argument...]]"
 /* Setenv error*/
@@ -30,10 +36,6 @@
 # define FLAG_3 (1 << 2)
 # define FLAG_4 (1 << 3)
 # define FLAG_5 (1 << 4)
-
-/* int global pour le log */
-# include <stdio.h>
-# include <unistd.h>
 
 /* Globale env */
 char			**g_env;

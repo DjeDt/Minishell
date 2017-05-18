@@ -16,7 +16,7 @@ NAME =	minishell
 # Compilation #
 CC			= gcc
 FLAGS		= -Wall -Wextra -Werror
-ADDFLAGS	=
+ADDFLAGS	= -g
 
 # Directories #
 OBJ_PATH = obj
