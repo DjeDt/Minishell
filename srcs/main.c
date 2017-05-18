@@ -56,6 +56,7 @@ static void	core(void)
 	{
 		count = 0;
 		print_prompt();
+		mode_raw();
 		read_line(0, &line);
 		cmd = ft_strsplit(line, ';');
 		ft_memdel((void*)&line);

@@ -63,25 +63,22 @@ static int	prog_env(const char *prog, char **arg, char **env, char **path)
 	int		count;
 	char	*tmp;
 
-	ret = 0;
+	ret = -1;
 	count = 0;
-	while (path[count] != NULL)
+	if (prog == NULL)
+		return (ret);
+	if (ft_strchr(prog, '/') != NULL)
+		ret = prog_check(prog, arg, env);
+	else
 	{
-		if (ft_strchr(prog, '/') != NULL)
-		{
-			ret = prog_check(prog, arg, env);
-			return (ret);
-		}
-		else
+		while (path[count] != NULL && ret != 0)
 		{
 			tmp = ft_strjoin(path[count], "/");
 			tmp = ft_strjoin_fl(tmp, prog);
 			ret = prog_check(tmp, arg, env);
 			ft_strdel(&tmp);
+			count++;
 		}
-		if (ret != -1)
-			break ;
-		count++;
 	}
 	return (ret);
 }
@@ -96,8 +93,6 @@ static int	env_option_i(const char **input, char **path)
 	count = 0;
 	tmp_env = NULL;
 	tmp_arg = NULL;
-	if (input == NULL)
-		return (-1);
 	while (input[count] != NULL && (ft_strchr(input[count], '=') != NULL))
 		count++;
 	tmp_env = ft_arrldup(input, count);
@@ -105,7 +100,10 @@ static int	env_option_i(const char **input, char **path)
 	while (input[count2] != NULL && input[count2][0] && input[count2][0] == '-')
 		count2++;
 	tmp_arg = ft_arrldup(input + count, count2);
-	prog_env(input[count], tmp_arg, tmp_env, path);
+	if (tmp_arg == NULL || ft_arrlen((const char **)tmp_arg) < 1)
+		ft_arrprint((const char **)tmp_env);
+	else
+		prog_env(input[count], tmp_arg, tmp_env, path);
 	ft_arrfree(&tmp_env);
 	ft_arrfree(&tmp_arg);
 	return (0);

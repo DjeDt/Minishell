@@ -46,7 +46,6 @@ SRCS =	main.c \
 		env_utils.c \
 		ft_prog.c \
 		read_line.c \
-		split_path.c \
 		builtin_env.c \
 		builtin_echo.c \
 		builtin_setenv.c \

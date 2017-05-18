@@ -61,7 +61,7 @@ int			read_line(const int fd, char **line);
 int			ft_launch_prog(const char **av);
 
 /* Edition de ligne */
-int			mode_raw(void);
+void		mode_raw(void);
 
 /* print func */
 void		print_prompt(void);
