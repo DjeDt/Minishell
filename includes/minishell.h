@@ -8,6 +8,9 @@
 /* Pour le mode raw*/
 # include <sys/termios.h>
 
+/* Pour gerer les signaux claviers */
+# include <signal.h>
+
 /* Sous debian */
 # include <sys/types.h>
 # include <sys/wait.h>
@@ -67,6 +70,7 @@ int			ft_launch_prog(const char **av);
 
 /* Edition de ligne */
 void		mode_raw(void);
+void		get_signal(int signal);
 
 /* print func */
 void		print_prompt(void);
