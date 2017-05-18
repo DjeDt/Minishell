@@ -123,10 +123,7 @@ int			ft_env(const char **input)
 	else if (flags & FLAG_1)
 	{
 		if (ft_arrlen(input) < 3)
-		{
-			ft_putendl_fd(ENV_USAGE, 2);
 			return (-1);
-		}
 		path = ft_strsplit(get_var_value("PATH"), ':');
 		env_option_i(input + 2, path);
 		path != NULL ? ft_arrfree(&path) : NULL;
