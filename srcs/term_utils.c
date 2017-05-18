@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arrow.c                                            :+:      :+:    :+:   */
+/*   term_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,12 +12,19 @@
 
 #include "minishell.h"
 
+void	get_signal(int sig)
+{
+	(void)sig;
+	ft_putchar('\n');
+	print_prompt();
+}
+
 void	mode_raw(void)
 {
 	struct termios term;
 
-	tcgetattr(STDIN_FILENO, &term);
 	term.c_iflag &= ~(IXON);
 	term.c_lflag &= ~(ISIG);
-	tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
+	term.c_lflag &= ~(ICANON);
+	tcgetattr(STDIN_FILENO, &term);
 }

@@ -34,12 +34,11 @@ static int	check_input(const char **input)
 
 static void	array_add_one(const char **input)
 {
-	int		count;
+	size_t	count;
 	char	**new;
 
 	count = 0;
-	if (!(new = (char**)malloc(sizeof(char*) * \
-							ft_arrlen((const char **)g_env) + 2)))
+	if (!(new = (char**)malloc(sizeof(char*) * ft_arrlen((const char **)g_env) + 2)))
 		exit(-1);
 	while (g_env[count] != NULL)
 	{

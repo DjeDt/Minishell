@@ -52,7 +52,7 @@ SRCS =	main.c \
 		builtin_unsetenv.c \
 		builtin_exit.c \
 		builtin_cd.c \
-		arrow.c \
+		term_utils.c \
 		error.c
 
 # Rules #

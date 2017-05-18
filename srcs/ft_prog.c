@@ -55,7 +55,7 @@ int				ft_launch_prog(const char **av)
 			path = ft_strjoin(diff_p[count], "/");
 			path = ft_strjoin_fl(path, av[0]);
 			ret = spawn_path(path, av);
-			ft_memdel((void*)&path);
+			ft_strdel(&path);
 			if (ret == 0)
 				break ;
 		}

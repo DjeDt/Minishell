@@ -22,6 +22,13 @@ static int	check_input(const char **input)
 	return (0);
 }
 
+static int	dir_error(const char *error, const char *file)
+{
+	ft_putstr_fd(error, 2);
+	ft_putendl_fd(file, 2);
+	return (-1);
+}
+
 static void	new_oldpwd(void)
 {
 	char	**tmp;
@@ -39,35 +46,41 @@ static void	new_oldpwd(void)
 
 static int	move_dir(const char *path)
 {
+	struct stat st;
+
+	lstat(path, &st);
 	if (access(path, F_OK) == 0)
 	{
-		new_oldpwd();
-		chdir(path);
+		if (access(path, R_OK) == 0)
+		{
+			new_oldpwd();
+			chdir(path);
+		}
+		else
+			return (dir_error("cd: permission denied: ", path));
 	}
 	else
-	{
-		ft_putstr_fd("cd: cannot acccess to : ", 2);
-		ft_putstr_fd(path, 2);
-		ft_putchar_fd('\n', 2);
-		return (-1);
-	}
+		return (dir_error("cd: no such file or directory: ", path));
 	return (0);
 }
 
 int			ft_cd(const char **input)
 {
+	int ret;
+
+	ret = 0;
 	if (check_input(input) != 0)
 		return (-1);
 	if (ft_arrlen(input) == 1)
-		move_dir(get_var_value("HOME"));
+		ret = move_dir(get_var_value("HOME"));
 	else if (ft_strcmp(input[1], "~") == 0)
-		move_dir(get_var_value("HOME"));
+		ret = move_dir(get_var_value("HOME"));
 	else if (ft_strcmp(input[1], "-") == 0)
 	{
-		move_dir(get_var_value("OLDPWD"));
+		ret = move_dir(get_var_value("OLDPWD"));
 		ft_putendl(get_var_value("OLDPWD"));
 	}
 	else
-		move_dir(input[1]);
-	return (0);
+		ret = move_dir(input[1]);
+	return (ret);
 }

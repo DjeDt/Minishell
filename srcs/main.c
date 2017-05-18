@@ -12,22 +12,32 @@
 
 #include "minishell.h"
 
+static void	init_builtin_struct(s_builtin *builtin)
+{
+	builtin[0].ft = "env";
+	builtin[0].func = &ft_env;
+	builtin[1].ft = "setenv";
+	builtin[1].func = &ft_setenv;
+	builtin[2].ft = "unsetenv";
+	builtin[2].func = &ft_unsetenv;
+	builtin[3].ft = "echo";
+	builtin[3].func = &ft_echo;
+	builtin[4].ft = "cd";
+	builtin[4].func = &ft_cd;
+	builtin[5].ft = "exit";
+	builtin[5].func = &ft_exit;
+}
+
 static int	check_builtins(const char *input)
 {
 	int			count;
 	char		**tmp;
-	s_builtin	builtin[6] = {
-		{"env", &ft_env},
-		{"setenv", &ft_setenv},
-		{"unsetenv", &ft_unsetenv},
-		{"echo", &ft_echo},
-		{"cd", &ft_cd},
-		{"exit", &ft_exit}
-	};
+	s_builtin	builtin[6];
 
 	count = -1;
+	init_builtin_struct(builtin);
 	tmp = ft_split_whitespaces((char*)input);
-	while ((tmp[0]) && (++count < 6))
+	while ((tmp && tmp[0]) && builtin[count].ft)
 	{
 		if (ft_strcmp(builtin[count].ft, tmp[0]) == 0)
 		{
@@ -35,6 +45,7 @@ static int	check_builtins(const char *input)
 			ft_arrfree(&tmp);
 			return (0);
 		}
+		count++;
 	}
 	tmp[0] != NULL ? ft_launch_prog((const char **)tmp) : 0;
 	tmp != NULL ? ft_arrfree(&tmp) : NULL;
@@ -50,16 +61,17 @@ static void	core(void)
 	line = NULL;
 	cmd = NULL;
 	print_launch();
+	signal(SIGINT, get_signal);
 	while (1)
 	{
 		count = 0;
 		print_prompt();
 		read_line(0, &line);
 		cmd = ft_strsplit(line, ';');
-		ft_memdel((void*)&line);
-		while (cmd[count] != NULL)
+		ft_strdel(&line);
+		while (cmd && cmd[count] != NULL)
 			check_builtins(cmd[count++]);
-		ft_arrfree(&cmd);
+		cmd != NULL ? ft_arrfree(&cmd) : NULL;
 	}
 }
 
@@ -67,7 +79,6 @@ int			main(void)
 {
 	g_env = NULL;
 	get_environ();
-	mode_raw();
 	core();
 	return (0);
 }
