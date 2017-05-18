@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 13:46:18 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/11 19:25:21 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/18 12:25:14 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static	void	not_found(const char *name)
 	ft_putendl_fd(": not found", 2);
 }
 
-static int		spawn_path(const char *path, const char **av)
+static	int		spawn_path(const char *path, const char **av)
 {
 	int		ret;
 	pid_t	child;
@@ -48,9 +48,9 @@ int				ft_launch_prog(const char **av)
 		ret = spawn_path(av[0], av);
 	else
 	{
-		count = 0;
+		count = -1;
 		diff_p = ft_strsplit(get_var_value("PATH"), ':');
-		while ((diff_p != NULL) && (diff_p[count] != NULL))
+		while ((diff_p != NULL) && (diff_p[++count] != NULL))
 		{
 			path = ft_strjoin(diff_p[count], "/");
 			path = ft_strjoin_fl(path, av[0]);
@@ -58,7 +58,6 @@ int				ft_launch_prog(const char **av)
 			ft_memdel((void*)&path);
 			if (ret == 0)
 				break ;
-			count++;
 		}
 		diff_p != NULL ? ft_arrfree(&diff_p) : NULL;
 	}

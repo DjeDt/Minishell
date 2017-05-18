@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 12:39:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/11 19:27:26 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/18 12:25:23 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ static int	check_builtins(const char *input)
 	};
 
 	count = -1;
-	if ((tmp = ft_split_whitespaces((char*)input)) == NULL)
-		return (-1);
+	tmp = ft_split_whitespaces((char*)input);
 	while ((tmp[0]) && (++count < 6))
 	{
 		if (ft_strcmp(builtin[count].ft, tmp[0]) == 0)
@@ -37,9 +36,8 @@ static int	check_builtins(const char *input)
 			return (0);
 		}
 	}
-	if (tmp[0] != NULL)
-		ft_launch_prog((const char **)tmp);
-	ft_arrfree(&tmp);
+	tmp[0] != NULL ? ft_launch_prog((const char **)tmp) : 0;
+	tmp != NULL ? ft_arrfree(&tmp) : NULL;
 	return (0);
 }
 
@@ -56,7 +54,6 @@ static void	core(void)
 	{
 		count = 0;
 		print_prompt();
-		mode_raw();
 		read_line(0, &line);
 		cmd = ft_strsplit(line, ';');
 		ft_memdel((void*)&line);
@@ -70,6 +67,7 @@ int			main(void)
 {
 	g_env = NULL;
 	get_environ();
+	mode_raw();
 	core();
 	return (0);
 }

@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 13:21:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/11 15:31:17 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/18 12:24:41 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +32,15 @@ static int	check_input(const char **input)
 	return (0);
 }
 
-static void array_add_one(const char **input)
+static void	array_add_one(const char **input)
 {
-	int count;
-	char **new;
+	int		count;
+	char	**new;
 
 	count = 0;
-	if (!(new = (char**)malloc(sizeof(char*) * ft_arrlen((const char **)g_env) + 2)))
-	  exit (-1);
+	if (!(new = (char**)malloc(sizeof(char*) * \
+							ft_arrlen((const char **)g_env) + 2)))
+		exit(-1);
 	while (g_env[count] != NULL)
 	{
 		new[count] = g_env[count];

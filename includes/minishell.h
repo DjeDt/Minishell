@@ -5,6 +5,9 @@
 # include <sys/stat.h>
 # include <unistd.h>
 
+/* Pour le mode raw*/
+# include <sys/termios.h>
+
 /* Sous debian */
 # include <sys/types.h>
 # include <sys/wait.h>
@@ -48,6 +51,8 @@ char		*get_var_value(const char *tf);
 /* Gestion d'erreurs */
 void		ft_malloc_error(char *str, int ret);
 int			arg_error(char *str, char *usage, char c);
+void		error_bin(const char *str);
+
 /* Builtins */
 int			ft_echo(const char **input);
 int			ft_env(const char **input);

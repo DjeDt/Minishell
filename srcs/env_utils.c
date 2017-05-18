@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 10:42:30 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/08 16:33:42 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/18 12:24:59 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		get_environ(void)
 	g_env = ft_arrdup((const char **)environ);
 }
 
-char			*get_var_name(char *str)
+char		*get_var_name(char *str)
 {
 	char	*ret;
 
@@ -29,7 +29,7 @@ char			*get_var_name(char *str)
 	return (ret);
 }
 
-char			*get_var_value(const char *tf)
+char		*get_var_value(const char *tf)
 {
 	size_t	count;
 	char	*tmp;

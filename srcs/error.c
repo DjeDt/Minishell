@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 14:45:48 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/04 14:30:56 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/18 12:25:06 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,10 @@ int		arg_error(char *str, char *usage, char c)
 	ft_putchar_fd('\n', 2);
 	ft_putendl_fd(usage, 2);
 	return (-1);
+}
+
+void	error_bin(const char *str)
+{
+	ft_putstr_fd(str, 2);
+	ft_putendl_fd(": no such file or directory", 2);
 }

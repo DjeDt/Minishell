@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 14:37:39 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/11 19:27:56 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/18 12:24:28 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ static int	prog_env(const char *prog, char **arg, char **env, char **path)
 			count++;
 		}
 	}
+	ret == -1 ? error_bin(prog) : 0;
 	return (ret);
 }
 
 static int	env_option_i(const char **input, char **path)
 {
 	int		count;
-	int		count2;
 	char	**tmp_env;
 	char	**tmp_arg;
 
@@ -96,10 +96,7 @@ static int	env_option_i(const char **input, char **path)
 	while (input[count] != NULL && (ft_strchr(input[count], '=') != NULL))
 		count++;
 	tmp_env = ft_arrldup(input, count);
-	count2 = count + 1;
-	while (input[count2] != NULL && input[count2][0] && input[count2][0] == '-')
-		count2++;
-	tmp_arg = ft_arrldup(input + count, count2);
+	tmp_arg = ft_arrdup(input + count);
 	if (tmp_arg == NULL || ft_arrlen((const char **)tmp_arg) < 1)
 		ft_arrprint((const char **)tmp_env);
 	else
