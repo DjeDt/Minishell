@@ -96,6 +96,8 @@ static int	env_option_i(const char **input, char **path)
 	count = 0;
 	tmp_env = NULL;
 	tmp_arg = NULL;
+	if (input == NULL)
+		return (-1);
 	while (input[count] != NULL && (ft_strchr(input[count], '=') != NULL))
 		count++;
 	tmp_env = ft_arrldup(input, count);
@@ -120,6 +122,11 @@ int			ft_env(const char **input)
 		return (-1);
 	else if (flags & FLAG_1)
 	{
+		if (ft_arrlen(input) < 3)
+		{
+			ft_putendl_fd(ENV_USAGE, 2);
+			return (-1);
+		}
 		path = ft_strsplit(get_var_value("PATH"), ':');
 		env_option_i(input + 2, path);
 		path != NULL ? ft_arrfree(&path) : NULL;
