@@ -41,16 +41,19 @@ static void	array_add_one(const char **input)
 	count = 0;
 	new = NULL;
 	fprintf(fd, "Fonction array_add_one :\n");
-	if (!(new = (char**)malloc(sizeof(char*) * ft_arrlen((const char **)g_env) + 2)))
+	fprintf(fd, "input = %s, %s\n", input[0], input[1]);
+	if (!(new = (char**)malloc(sizeof(char*) * ft_arrlen((const char **)g_env) + 9))) // Si en dessous de 9 -> corrupted double linked list
 		ft_malloc_error("builtin_setenv->array_add_one : error malloc", -1);
 	fprintf(fd, "new = %p\ng_env = %p\n&new = %p\n&env = %p\n", new, g_env, &new, &g_env);
 	while (g_env[count] != NULL)
 	{
+		fprintf(fd, "new[count] = %p\n&new[count] = %p\ng_env[count] = %p\n&g_env[count] = %p\n", new[count], &new[count], g_env, &g_env);
 		new[count] = g_env[count];
+		fprintf(fd, "new[count] = %p\n&new[count] = %p\ng_env[count] = %p\n&g_env[count] = %p\n", new[count], &new[count], g_env, &g_env);
 		count++;
 	}
-	new[count++] = ft_strdup(input[1]);
-	new[count] = NULL;
+	new[count] = ft_strdup(input[1]);
+	new[++count] = NULL;
 	free(g_env);
 	g_env = new;
 	fprintf(fd, "\nnew = %p\ng_env = %p\n&new = %p\n&env = %p\n", new, g_env, &new, &g_env);
