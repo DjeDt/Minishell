@@ -27,5 +27,7 @@ void	print_launch(void)
 
 void	print_prompt(void)
 {
+	ft_putstr("\033[32;m");
 	ft_putstr("$> ");
+	ft_putstr("\033[0;m");
 }
