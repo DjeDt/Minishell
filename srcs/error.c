@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	ft_malloc_error(char *str, int ret)
+void	malloc_error(char *str, int ret)
 {
 	ft_putstr_fd(str, 2);
 	ft_putendl_fd(": Error malloc, abort prog", 2);
@@ -29,7 +29,7 @@ int		arg_error(char *str, char *usage, char c)
 	return (-1);
 }
 
-void	error_bin(const char *str)
+void	bin_error(const char *str)
 {
 	ft_putstr_fd(str, 2);
 	ft_putendl_fd(": no such file or directory", 2);

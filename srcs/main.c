@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static void	init_builtin_struct(s_builtin *builtin)
+static void	init_builtin_struct(t_builtin *builtin)
 {
 	builtin[0].ft = "env";
 	builtin[0].func = &ft_env;
@@ -32,7 +32,7 @@ static int	check_builtins(const char *input)
 {
 	int			count;
 	char		**tmp;
-	s_builtin	builtin[6];
+	t_builtin	builtin[6];
 
 	count = 0;
 	init_builtin_struct(builtin);

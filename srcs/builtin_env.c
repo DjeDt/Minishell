@@ -80,7 +80,7 @@ static int	prog_env(const char *prog, char **arg, char **env, char **path)
 			count++;
 		}
 	}
-	ret == -1 ? error_bin(prog) : 0;
+	ret == -1 ? bin_error(prog) : 0;
 	return (ret);
 }
 

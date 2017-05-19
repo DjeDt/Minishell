@@ -42,7 +42,7 @@ static void	array_add_one(const char **input)
 	new = NULL;
 	if (!(new = (char**)malloc(sizeof(char*) \
 							* (ft_arrlen((const char **)g_env) + 2))))
-		ft_malloc_error("builtin_setenv->array_add_one : error malloc", -1);
+		malloc_error("builtin_setenv->array_add_one : error malloc", -1);
 	while (g_env[count] != NULL)
 	{
 		new[count] = g_env[count];

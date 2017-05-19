@@ -36,7 +36,7 @@ static void	new_oldpwd(void)
 
 	value_add = ft_strjoin("PWD=", get_var_value("PWD"));
 	if (!(tmp = (char**)malloc(sizeof(char*) * 3)))
-		ft_malloc_error("builtin_cd->new_oldpwd: malloc_error", -1);
+		malloc_error("builtin_cd->new_oldpwd: malloc_error", -1);
 	tmp[0] = ft_strdup("setenv");
 	tmp[1] = value_add;
 	tmp[2] = NULL;

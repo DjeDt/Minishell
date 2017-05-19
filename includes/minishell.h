@@ -1,81 +1,59 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/19 15:02:42 by ddinaut           #+#    #+#             */
+/*   Updated: 2017/05/19 15:02:45 by ddinaut          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include "libft.h"
 # include <sys/stat.h>
-# include <unistd.h>
-
-/* Pour le mode raw*/
-# include <sys/termios.h>
-
-/* Pour gerer les signaux claviers */
 # include <signal.h>
 
-/* Sous debian */
-# include <sys/types.h>
-# include <sys/wait.h>
-
-/* Pour le fichiers de log */
-# include <stdio.h>
-# include <fcntl.h>
-# include <stdio.h>
-FILE			*fd;
-
-/* Env error */
 # define ENV_USAGE "usage: env [-i] [name=value]... [utility [argument...]]"
-/* Setenv error*/
 # define SETENV_USAGE "usage: setenv [NAME=value]"
-/* Unsetenv error */
 # define UNSETENV_USAGE "usage: unsetenv [NAME]"
-/* Cd error */
 # define CD_USAGE "usage: cd [path]"
 
 # define FLAG_0 (0)
 # define FLAG_1 (1 << 0)
 # define FLAG_2 (1 << 1)
-# define FLAG_3 (1 << 2)
-# define FLAG_4 (1 << 3)
-# define FLAG_5 (1 << 4)
 
-/* Globale env */
-char			**g_env;
-
-/* Pointeurs sur fonctions */
 typedef struct	s_builtin
 {
 	const char	*ft;
 	int			(*func)(const char **);
-}s_builtin;
+}				t_builtin;
 
-/* Gestion d'environnement */
-void		get_environ(void);
-char		**split_path(char *str);
-char		*get_var_name(char *str);
-char		*get_var_value(const char *tf);
+char			**g_env;
 
-/* Gestion d'erreurs */
-void		ft_malloc_error(char *str, int ret);
-int			arg_error(char *str, char *usage, char c);
-void		error_bin(const char *str);
+void			get_environ(void);
+char			*get_var_name(char *str);
+char			*get_var_value(const char *tf);
 
-/* Builtins */
-int			ft_echo(const char **input);
-int			ft_env(const char **input);
-int			ft_setenv(const char **input);
-int			ft_unsetenv(const char **input);
-int			ft_exit(const char **input);
-int			ft_cd(const char **input);
+void			bin_error(const char *str);
+void			malloc_error(char *str, int ret);
+int				arg_error(char *str, char *usage, char c);
 
-/* Others */
-int			read_line(const int fd, char **line);
-int			ft_launch_prog(const char **av);
+int				ft_echo(const char **input);
+int				ft_env(const char **input);
+int				ft_setenv(const char **input);
+int				ft_unsetenv(const char **input);
+int				ft_exit(const char **input);
+int				ft_cd(const char **input);
 
-/* Edition de ligne */
-void		mode_raw(void);
-void		get_signal(int signal);
+int				read_line(const int fd, char **line);
+int				ft_launch_prog(const char **av);
 
-/* print func */
-void		print_prompt(void);
-void		print_launch(void);
+void			get_signal(int signal);
+void			print_prompt(void);
+void			print_launch(void);
 
 #endif
