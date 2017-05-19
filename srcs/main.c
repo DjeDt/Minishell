@@ -33,22 +33,12 @@ static int	check_builtins(const char *input)
 	int			count;
 	char		**tmp;
 	s_builtin	builtin[6];
-/*
-	s_builtin builtin[6] = {
-		{"env", &ft_env},
-		{"setenv", &ft_setenv},
-		{"unsetenv", &ft_unsetenv},
-		{"echo", &ft_echo},
-		{"cd", &ft_cd},
-		{"exit", &ft_exit}};
-*/
+
 	count = 0;
 	init_builtin_struct(builtin);
 	tmp = ft_split_whitespaces((char*)input);
-	fprintf(fd, "Fonction check_builtins :\ntmp = %p\n&tmp = %p\n\n", tmp, &tmp);
 	while ((tmp && tmp[0]) && count < 6)
 	{
-//		if (ft_strcmp(builtin[count].ft, tmp[0]) == 0)
 		if (ft_strncmp(tmp[0], builtin[count].ft, ft_strlen(tmp[0])) == 0)
 		{
 			(*(builtin[count].func))((const char **)tmp);
@@ -68,7 +58,6 @@ static void	core(void)
 	char	*line;
 	char	**cmd;
 
-	fprintf(fd, "Fonction core :\n");
 	line = NULL;
 	cmd = NULL;
 	print_launch();
@@ -78,9 +67,7 @@ static void	core(void)
 		count = 0;
 		print_prompt();
 		read_line(0, &line);
-		fprintf(fd, "line = %p\n&line = %p\n", line, &line);
 		cmd = ft_strsplit(line, ';');
-		fprintf(fd, "cmd = %p\n&cmd = %p\n\n", cmd, &cmd);
 		ft_strdel(&line);
 		while (cmd != NULL && cmd[count] != NULL)
 			check_builtins(cmd[count++]);
@@ -90,11 +77,8 @@ static void	core(void)
 
 int			main(void)
 {
-	fd = fopen("/home/dje/code/Minishell/log_minishell.log", "w+");
 	g_env = NULL;
 	get_environ();
-	fprintf(fd, "Fonction main :\ng_env = %p\n&g_env = %p\n\n", g_env, &g_env);
 	core();
-	fclose(fd);
 	return (0);
 }

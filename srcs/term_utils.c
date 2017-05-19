@@ -18,13 +18,3 @@ void	get_signal(int sig)
 	ft_putchar('\n');
 	print_prompt();
 }
-
-void	mode_raw(void)
-{
-	struct termios term;
-
-	term.c_iflag &= ~(IXON);
-	term.c_lflag &= ~(ISIG);
-	term.c_lflag &= ~(ICANON);
-	tcgetattr(STDIN_FILENO, &term);
-}

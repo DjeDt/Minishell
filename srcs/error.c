@@ -34,12 +34,3 @@ void	error_bin(const char *str)
 	ft_putstr_fd(str, 2);
 	ft_putendl_fd(": no such file or directory", 2);
 }
-
-/*
-  A SUPPRIMER
-
-void	print_error(const char *str)
-{
-
-}
-*/

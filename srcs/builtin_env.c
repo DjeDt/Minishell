@@ -97,7 +97,6 @@ static int	env_option_i(const char **input, char **path)
 		count++;
 	tmp_env = ft_arrldup(input, count);
 	tmp_arg = ft_arrdup(input + count);
-	fprintf(fd, "Fonction env -i :\ntmp_env = %p\n&tmp_env = %p\ntmp_arg = %p\n&tmp_arg = %p", tmp_env, &tmp_env, tmp_arg, &tmp_arg);
 	if (tmp_arg == NULL || ft_arrlen((const char **)tmp_arg) < 1)
 		ft_arrprint((const char **)tmp_env);
 	else
@@ -113,7 +112,6 @@ int			ft_env(const char **input)
 	char	**path;
 
 	path = NULL;
-	fprintf(fd, "fonction env :\n");
 	flags = arg_check(input);
 	if (flags == -1)
 		return (-1);
@@ -122,7 +120,6 @@ int			ft_env(const char **input)
 		if (ft_arrlen(input) < 3)
 			return (-1);
 		path = ft_strsplit(get_var_value("PATH"), ':');
-		fprintf(fd, "path = %p\n&path = %p\n\n", path, &path);
 		env_option_i(input + 2, path);
 		path != NULL ? ft_arrfree(&path) : NULL;
 	}
