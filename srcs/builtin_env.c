@@ -46,7 +46,7 @@ static	int	prog_check(const char *path, char **tmp_arg, char **tmp_env)
 	int		ret;
 	pid_t	child;
 
-	ret = -1;
+	ret = 0;
 	if (access(path, F_OK) == 0)
 	{
 		child = fork();
@@ -54,6 +54,8 @@ static	int	prog_check(const char *path, char **tmp_arg, char **tmp_env)
 			ret = execve(path, tmp_arg, tmp_env);
 		wait(&child);
 	}
+	else
+		return (-1);
 	return (ret);
 }
 
@@ -64,23 +66,24 @@ static int	prog_env(const char *prog, char **arg, char **env, char **path)
 	char	*tmp;
 
 	ret = -1;
-	count = 0;
 	if (prog == NULL)
 		return (ret);
 	if (ft_strchr(prog, '/') != NULL)
 		ret = prog_check(prog, arg, env);
 	else
 	{
-		while (path[count] != NULL && ret != 0)
+		count = -1;
+		while (path != NULL && path[++count] != NULL)
 		{
 			tmp = ft_strjoin(path[count], "/");
 			tmp = ft_strjoin_fl(tmp, prog);
 			ret = prog_check(tmp, arg, env);
 			ft_strdel(&tmp);
-			count++;
+			if (ret == 0)
+				break ;
 		}
 	}
-	ret == -1 ? bin_error(prog) : 0;
+	ret < 0 ? bin_error(prog) : 0;
 	return (ret);
 }
 

@@ -39,7 +39,7 @@ static int	check_builtins(const char *input)
 	tmp = ft_split_whitespaces((char*)input);
 	while ((tmp && tmp[0]) && count < 6)
 	{
-		if (ft_strncmp(tmp[0], builtin[count].ft, ft_strlen(tmp[0])) == 0)
+		if (ft_strcmp(tmp[0], builtin[count].ft) == 0)
 		{
 			(*(builtin[count].func))((const char **)tmp);
 			ft_arrfree(&tmp);
