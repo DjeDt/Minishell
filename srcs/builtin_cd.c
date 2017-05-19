@@ -25,7 +25,8 @@ static int	check_input(const char **input)
 static int	dir_error(const char *error, const char *file)
 {
 	ft_putstr_fd(error, 2);
-	ft_putendl_fd(file, 2);
+	ft_putstr_fd(file, 2);
+	ft_putchar('\n');
 	return (-1);
 }
 
@@ -34,7 +35,7 @@ static void	new_oldpwd(void)
 	char	**tmp;
 	char	*value_add;
 
-	value_add = ft_strjoin("PWD=", get_var_value("PWD"));
+	value_add = ft_strjoin("OLDPWD=", get_var_value("PWD"));
 	if (!(tmp = (char**)malloc(sizeof(char*) * 3)))
 		malloc_error("builtin_cd->new_oldpwd: malloc_error", -1);
 	tmp[0] = ft_strdup("setenv");
