@@ -22,14 +22,6 @@ static int	check_input(const char **input)
 	return (0);
 }
 
-static int	dir_error(const char *error, const char *file)
-{
-	ft_putstr_fd(error, 2);
-	ft_putstr_fd(file, 2);
-	ft_putchar('\n');
-	return (-1);
-}
-
 static void	new_oldpwd(void)
 {
 	char	**tmp;

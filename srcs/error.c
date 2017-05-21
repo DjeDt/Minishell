@@ -29,6 +29,14 @@ int		arg_error(char *str, char *usage, char c)
 	return (-1);
 }
 
+int		dir_error(const char *error, const char *file)
+{
+	ft_putstr_fd(error, 2);
+	ft_putstr_fd(file, 2);
+	ft_putchar('\n');
+	return (-1);
+}
+
 void	bin_error(const char *str)
 {
 	ft_putstr_fd(str, 2);

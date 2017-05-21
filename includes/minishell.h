@@ -41,6 +41,7 @@ char			*get_var_value(const char *tf);
 void			bin_error(const char *str);
 void			malloc_error(char *str, int ret);
 int				arg_error(char *str, char *usage, char c);
+int				dir_error(const char *error, const char *file);
 
 int				ft_echo(const char **input);
 int				ft_env(const char **input);
