@@ -33,7 +33,7 @@ int		dir_error(const char *error, const char *file)
 {
 	ft_putstr_fd(error, 2);
 	ft_putstr_fd(file, 2);
-	ft_putchar('\n');
+	ft_putchar_fd('\n', 2);
 	return (-1);
 }
 

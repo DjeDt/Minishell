@@ -12,29 +12,34 @@
 
 #include "minishell.h"
 
-static int	check_input(const char **input)
-{
-	if (ft_arrlen(input) > 2)
-	{
-		ft_putendl_fd(CD_USAGE, 2);
-		return (-1);
-	}
-	return (0);
-}
-
 static void	new_oldpwd(void)
 {
-	char	**tmp;
+	char	*tmp[3];
+	char	act_p[256];
 	char	*value_add;
 
-	value_add = ft_strjoin("OLDPWD=", get_var_value("PWD"));
-	if (!(tmp = (char**)malloc(sizeof(char*) * 3)))
-		malloc_error("builtin_cd->new_oldpwd: malloc_error", -1);
-	tmp[0] = ft_strdup("setenv");
+	getcwd(act_p, sizeof(act_p));
+	value_add = ft_strjoin("OLDPWD=", act_p);
+	tmp[0] = "setenv";
 	tmp[1] = value_add;
 	tmp[2] = NULL;
 	ft_setenv((const char **)tmp);
-	ft_arrfree(&tmp);
+	ft_strdel(&value_add);
+}
+
+static void	new_pwd(void)
+{
+	char	*tmp[3];
+	char	act_p[256];
+	char	*value_add;
+
+	getcwd(act_p, sizeof(act_p));
+	value_add = ft_strjoin("PWD=", act_p);
+	tmp[0] = "setenv";
+	tmp[1] = value_add;
+	tmp[2] = NULL;
+	ft_setenv((const char **)tmp);
+	ft_strdel(&value_add);
 }
 
 static int	move_dir(const char *path)
@@ -45,6 +50,7 @@ static int	move_dir(const char *path)
 		{
 			new_oldpwd();
 			chdir(path);
+			new_pwd();
 		}
 		else
 			return (dir_error("cd: permission denied: ", path));
@@ -59,16 +65,19 @@ int			ft_cd(const char **input)
 	int ret;
 
 	ret = 0;
-	if (check_input(input) != 0)
+	if (ft_arrlen(input) > 2)
+	{
+		ft_putendl_fd(CD_USAGE, 2);
 		return (-1);
+	}
 	if (ft_arrlen(input) == 1)
 		ret = move_dir(get_var_value("HOME"));
 	else if (ft_strcmp(input[1], "~") == 0)
 		ret = move_dir(get_var_value("HOME"));
 	else if (ft_strcmp(input[1], "-") == 0)
 	{
-		ret = move_dir(get_var_value("OLDPWD"));
 		ft_putendl(get_var_value("OLDPWD"));
+		ret = move_dir(get_var_value("OLDPWD"));
 	}
 	else
 		ret = move_dir(input[1]);
