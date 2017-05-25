@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 16:12:56 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/18 12:24:35 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/25 15:01:24 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ static int	check_input(const char *input)
 	count = -1;
 	while (input[++count] != '\0')
 	{
-		if (ft_isdigit(input[count]) != 1)
+		if (input[0] && input[0] == '-')
+			continue ;
+		else if (ft_isdigit(input[count]) != 1)
 		{
 			ft_putchar_fd('\'', 2);
 			ft_putchar_fd(input[count], 2);
@@ -40,8 +42,14 @@ int			ft_exit(const char **input)
 {
 	int ret;
 
-	if (ft_arrlen(input) != 2)
+	if (ft_arrlen(input) > 2)
 		return (exit_error(EXIT_USAGE));
+	if (ft_arrlen(input) == 1)
+	{
+		ft_arrfree((char ***)&input);
+		ft_arrfree(&g_env);
+		exit(0);
+	}
 	if (check_input(input[1]) != 0)
 		return (-1);
 	ret = ft_atoi(input[1]);

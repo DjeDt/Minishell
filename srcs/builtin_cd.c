@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 16:46:48 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/18 12:24:14 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/05/25 14:57:07 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static int	move_dir(const char *path)
 		if (access(path, R_OK) == 0)
 		{
 			new_oldpwd();
-			chdir(path);
+			if (chdir(path) == -1)
+				return (dir_error("cd: is not a directory: ", path));
 			new_pwd();
 		}
 		else
