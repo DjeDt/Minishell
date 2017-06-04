@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 22:47:22 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/04 16:17:49 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/04 20:22:57 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	init_struct(t_info *info, int fd)
 	info->nbr_mlc = 2;
 	info->cur_pos = 0;
 	info->buf_max_size = w.ws_col;
+	info->max_nbr_line = w.ws_row;
 	info->current_line = 0;
 	info->max_line = w.ws_col;
 	if (!(info->buf = (char*)malloc(sizeof(char) * (info->max_line - 3))))
@@ -56,6 +57,15 @@ static void	new_size(t_info *info)
 	info->nbr_mlc += 1;
 }
 
+static void	new_term_size(t_info *info, int fd)
+{
+	struct winsize w;
+
+	ioctl(fd, TIOCGWINSZ, &w);
+	info->max_line = w.ws_col;
+	info->max_nbr_line = w.ws_row;
+}
+
 int			read_line(int fd, char **line)
 {
 	int		ret;
@@ -65,6 +75,7 @@ int			read_line(int fd, char **line)
 	while (1)
 	{
 		info.cur_pos == info.buf_max_size ? new_size(&info) : 0;
+		new_term_size(&info, fd);
 		ret = read(fd, &info.c, 1);
 		if (ft_isprint(info.c))
 			add_char(&info);

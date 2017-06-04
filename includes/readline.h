@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 15:02:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/04 15:05:05 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/04 19:39:39 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct	s_info
 	int			nbr_mlc;
 	int			cur_pos;
 	int			buf_max_size;
-	int			begin_line;
+	int			max_nbr_line;
 	int			current_line;
 	int			min_line;
 	int			max_line;
