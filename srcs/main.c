@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 12:39:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/18 12:25:23 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/04 14:04:27 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static void	core(void)
 	while (1)
 	{
 		count = 0;
+		change_term_mode();
 		print_prompt();
 		read_line(0, &line);
 		cmd = ft_strsplit(line, ';');

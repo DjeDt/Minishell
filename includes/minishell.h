@@ -6,16 +6,17 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 15:02:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/19 15:02:45 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/04 12:55:40 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft.h"
 # include <sys/stat.h>
 # include <signal.h>
+# include "libft.h"
+# include "readline.h"
 
 # define ENV_USAGE "usage: env [-i] [name=value]... [utility [argument...]]"
 # define SETENV_USAGE "usage: setenv [NAME=value]"

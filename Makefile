@@ -6,7 +6,7 @@
 #    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/17 14:14:43 by ddinaut           #+#    #+#              #
-#    Updated: 2017/05/18 12:04:02 by ddinaut          ###   ########.fr        #
+#    Updated: 2017/06/04 16:42:09 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,13 +16,17 @@ NAME =	minishell
 # Compilation #
 CC			= gcc
 FLAGS		= -Wall -Wextra -Werror
-ADDFLAGS	= -g
+ADDFLAGS	=
 
 # Directories #
 OBJ_PATH = obj
 SRC_PATH = srcs
 LIB_PATH = libft
 INC_PATH = includes/
+
+# Sub_dirs #
+BUILTIN = builtin/
+READLINE = readline/
 
 # Colors #
 BLACK  = \033[1;30m
@@ -32,6 +36,7 @@ YELLOW = \033[1;33m
 BLUE   = \033[1;34m
 PURPLE = \033[1;35m
 WHITE  = \033[1;37m
+END_COL= \033[0m
 
 LIBFT		= -L $(LIB_PATH)
 LIBS		= $(LIBFT) -lft
@@ -45,15 +50,22 @@ SRCS =	main.c \
 		print_swag.c \
 		env_utils.c \
 		ft_prog.c \
-		read_line.c \
-		builtin_env.c \
-		builtin_echo.c \
-		builtin_setenv.c \
-		builtin_unsetenv.c \
-		builtin_exit.c \
-		builtin_cd.c \
+		error.c \
 		term_utils.c \
-		error.c
+\
+		$(BUILTIN)builtin_env.c \
+		$(BUILTIN)builtin_echo.c \
+		$(BUILTIN)builtin_setenv.c \
+		$(BUILTIN)builtin_unsetenv.c \
+		$(BUILTIN)builtin_exit.c \
+		$(BUILTIN)builtin_cd.c \
+\
+		$(READLINE)change_term_mode.c \
+		$(READLINE)read_line.c \
+		$(READLINE)match_key.c \
+		$(READLINE)add_char.c \
+		$(READLINE)cursor_move.c \
+		$(READLINE)key_delete.c
 
 # Rules #
 .PHONY: all norme clean fclean re
@@ -61,13 +73,13 @@ SRCS =	main.c \
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@make -C $(LIB_PATH)/
+	@make -C $(LIB_PATH)
 	@$(CC) -o $@ $(FLAGS) $(ADDFLAGS) $(OBJ) $(LIBS)
 
 $(OBJ): $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
 	@mkdir -p $(dir $@)
 	@$(CC) -o $@ $(FLAGS) $(ADD_FLAGS) $(INCLUDES) -c $<
-	@printf "$(GREEN)%s -> %s                                \r" $@ $<
+	@printf "$(GREEN)%s -> %s                                \r$(END_COL)" $@ $<
 
 clean:
 	@/bin/rm -rf $(OBJ_PATH)
