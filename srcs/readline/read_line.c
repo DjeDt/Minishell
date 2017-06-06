@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 22:47:22 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/04 20:22:57 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/06 21:41:08 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ static void	init_struct(t_info *info, int fd)
 	info->max_nbr_line = w.ws_row;
 	info->current_line = 0;
 	info->max_line = w.ws_col;
+	info->cur_hist = 0;
+	info->hist = NULL;
+	info->fd = open(".history", O_CREAT | O_RDWR | O_APPEND, S_IRUSR | S_IWUSR | S_IROTH | S_IWOTH);
 	if (!(info->buf = (char*)malloc(sizeof(char) * (info->max_line - 3))))
 		ft_error("malloc error: ", "func init_struct: ", info);
 	ft_bzero(info->buf, info->max_line - 3);
@@ -72,6 +75,8 @@ int			read_line(int fd, char **line)
 	t_info	info;
 
 	init_struct(&info, fd);
+	init_hist(&info);
+	info.cur_hist = count_hist(&info.hist);
 	while (1)
 	{
 		info.cur_pos == info.buf_max_size ? new_size(&info) : 0;
@@ -79,13 +84,12 @@ int			read_line(int fd, char **line)
 		ret = read(fd, &info.c, 1);
 		if (ft_isprint(info.c))
 			add_char(&info);
-		if (info.c == 10)
+		if (which_key(fd, &info) == -1)
 			break ;
-		if (info.c == 127)
-			key_delete(&info);
-		if (info.c == 27)
-			which_key(fd, &info);
 	}
+	info.buf[0] != '\0' ? add_hist(info.buf, info.cur_hist, &info.hist) : NULL;
+	info.buf[0] != '\0' ? ft_putendl_fd(info.buf, info.fd) : NULL;
+	close(info.fd);
 	ft_putchar('\n');
 	*line = info.buf;
 	return (ret);

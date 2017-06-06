@@ -6,7 +6,7 @@
 #    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/17 14:14:43 by ddinaut           #+#    #+#              #
-#    Updated: 2017/06/04 16:42:09 by ddinaut          ###   ########.fr        #
+#    Updated: 2017/06/06 16:58:47 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -65,7 +65,9 @@ SRCS =	main.c \
 		$(READLINE)match_key.c \
 		$(READLINE)add_char.c \
 		$(READLINE)cursor_move.c \
-		$(READLINE)key_delete.c
+		$(READLINE)key_delete.c \
+		$(READLINE)autocompletion.c \
+		$(READLINE)history.c
 
 # Rules #
 .PHONY: all norme clean fclean re
@@ -75,6 +77,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@make -C $(LIB_PATH)
 	@$(CC) -o $@ $(FLAGS) $(ADDFLAGS) $(OBJ) $(LIBS)
+	@printf "$(PURPLE)- Minishell completed -\n$(END_COL)"
 
 $(OBJ): $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
 	@mkdir -p $(dir $@)

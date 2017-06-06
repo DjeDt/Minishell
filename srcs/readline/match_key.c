@@ -6,13 +6,13 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/04 15:06:36 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/04 15:07:03 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/06 21:12:32 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
 
-void		which_key(int fd, t_info *info)
+static void		which_key_2(int fd, t_info *info)
 {
 	read(fd, &info->c, 1);
 	if (info->c == '[')
@@ -22,6 +22,10 @@ void		which_key(int fd, t_info *info)
 			arrow_right(info);
 		else if (info->c == 'D')
 			arrow_left(info);
+		else if (info->c == 'A')
+			history_up(info, &info->hist);
+		else if (info->c == 'B')
+			history_down(info, &info->hist);
 		else if (info->c == 'H')
 			go_to_begin(info);
 		else if (info->c == 'F')
@@ -33,4 +37,17 @@ void		which_key(int fd, t_info *info)
 				key_delete_rev(info);
 		}
 	}
+}
+
+int			which_key(int fd, t_info *info)
+{
+	if (info->c == 10)
+		return (-1);
+	else if (info->c == 9)
+		core_autocomp(info);
+	else if (info->c == 127)
+		key_delete(info);
+	else if (info->c == 27)
+		which_key_2(fd, info);
+	return (0);
 }
