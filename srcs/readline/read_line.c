@@ -47,10 +47,8 @@ static void	init_struct(t_info *info, int fd)
 static void	new_size(t_info *info)
 {
 	char	*new;
-	int		count;
 
 	new = NULL;
-	count = 0;
 	info->buf_max_size = info->max_line * info->nbr_mlc;
 	if (!(new = malloc(sizeof(char) * info->buf_max_size)))
 		ft_error("malloc error: ", "func new_size: ", info);

@@ -20,6 +20,8 @@
 
 # include "minishell.h"
 
+#define SIZE_BUFF 256
+
 typedef struct		s_hist
 {
 	int				cur;

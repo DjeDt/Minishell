@@ -58,6 +58,7 @@ void		init_hist(t_info *info)
 
 	cur = 0;
 	tmp = NULL;
+//	while (read_hist(info->hist_fd, &tmp) > 0);
 	while (get_next_line(info->hist_fd, &tmp))
 	{
 		if (tmp == NULL)

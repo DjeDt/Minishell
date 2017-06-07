@@ -19,6 +19,8 @@
 # include "libft.h"
 # include "readline.h"
 
+# include <sys/wait.h>
+
 # define ENV_USAGE "usage: env [-i] [name=value]... [utility [argument...]]"
 # define SETENV_USAGE "usage: setenv [NAME=value]"
 # define UNSETENV_USAGE "usage: unsetenv [NAME]"
@@ -28,6 +30,7 @@
 # define FLAG_0 (0)
 # define FLAG_1 (1 << 0)
 # define FLAG_2 (1 << 1)
+
 
 typedef struct	s_builtin
 {
