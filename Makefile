@@ -67,8 +67,7 @@ SRCS =	main.c \
 		$(READLINE)cursor_move.c \
 		$(READLINE)key_delete.c \
 		$(READLINE)history.c \
-		$(READLINE)hist_utils.c \
-		$(READLINE)read_hist.c
+		$(READLINE)hist_utils.c
 
 # Rules #
 .PHONY: all norme clean fclean re

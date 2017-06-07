@@ -51,6 +51,7 @@ int			history_up(t_info *info, t_hist **hist)
 			break ;
 		tmp = tmp->next;
 	}
+
 	put_in_buf(tmp->value, info);
 	return (0);
 }
