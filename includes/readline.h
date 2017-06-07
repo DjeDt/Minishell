@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 15:02:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/06 21:30:08 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/07 12:55:59 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ typedef struct	s_info
 	int			min_line;
 	int			max_line;
 	int			cur_hist;
-	int			fd;
+	int			max_hist;
+	int			hist_fd;
 	t_hist		*hist;
 }				t_info;
 
@@ -61,14 +62,13 @@ void			key_delete(t_info *info);
 void			key_delete_rev(t_info *info);
 void			add_char(t_info *info);
 
-/* Autocompletion */
 int				core_autocomp(t_info *info);
 
-/* History */
 t_hist			*create_hist(const char *str, int cur);
 void			init_hist(t_info *info);
 void			add_hist(const char *str, int cur, t_hist **hist);
 int				count_hist(t_hist **hist);
+void			maj_hist(t_info *info);
 int				history_up(t_info *info, t_hist **hist);
 int				history_down(t_info *info, t_hist **hist);
 

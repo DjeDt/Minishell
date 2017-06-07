@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 22:47:22 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/06 21:41:08 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/07 14:14:35 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ static void	init_struct(t_info *info, int fd)
 	info->current_line = 0;
 	info->max_line = w.ws_col;
 	info->cur_hist = 0;
+	info->max_hist = 0;
 	info->hist = NULL;
-	info->fd = open(".history", O_CREAT | O_RDWR | O_APPEND, S_IRUSR | S_IWUSR | S_IROTH | S_IWOTH);
+	info->hist_fd = open(".history", O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
 	if (!(info->buf = (char*)malloc(sizeof(char) * (info->max_line - 3))))
 		ft_error("malloc error: ", "func init_struct: ", info);
 	ft_bzero(info->buf, info->max_line - 3);
@@ -87,9 +88,7 @@ int			read_line(int fd, char **line)
 		if (which_key(fd, &info) == -1)
 			break ;
 	}
-	info.buf[0] != '\0' ? add_hist(info.buf, info.cur_hist, &info.hist) : NULL;
-	info.buf[0] != '\0' ? ft_putendl_fd(info.buf, info.fd) : NULL;
-	close(info.fd);
+	maj_hist(&info);
 	ft_putchar('\n');
 	*line = info.buf;
 	return (ret);
