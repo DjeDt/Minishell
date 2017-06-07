@@ -6,16 +6,19 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 11:50:17 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/07 14:19:14 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/07 20:12:18 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
 
+#include <stdio.h>
+
 t_hist		*create_hist(const char *str, int cur)
 {
 	t_hist	*ret;
 
+	ret = NULL;
 	if (!(ret = (t_hist*)malloc(sizeof(t_hist))))
 		return (NULL);
 	if (str != NULL)
@@ -25,8 +28,8 @@ t_hist		*create_hist(const char *str, int cur)
 	}
 	else
 	{
-		ret->value = NULL;
 		ret->cur = 0;
+		ret->value = NULL;
 	}
 	ret->next = NULL;
 	return (ret);
@@ -60,8 +63,8 @@ void		init_hist(t_info *info)
 		if (tmp == NULL)
 			return ;
 		add_hist(tmp, cur, &info->hist);
-		info->max_hist += 1;
 		ft_strdel(&tmp);
+		info->max_hist += 1;
 		cur++;
 	}
 }
@@ -83,14 +86,17 @@ int			count_hist(t_hist **hist)
 	return (count);
 }
 
-void		maj_hist(t_info *info)
+void		free_hist(t_hist **hist)
 {
-	if (info->buf[0] != '\0')
+	t_hist	*tmp;
+
+	tmp = *hist;
+	while (tmp->next != NULL)
 	{
-		add_hist(info->buf, info->cur_hist, &info->hist);
-		ft_putendl_fd(info->buf, info->hist_fd);
-		info->max_hist += 1;
-		info->cur_hist += 1;
+		ft_strdel(&tmp->value);
+		free(tmp);
+		tmp = tmp->next;
 	}
-	close(info->hist_fd);
+	ft_strdel(&tmp->value);
+	free(tmp);
 }

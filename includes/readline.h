@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 15:02:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/07 12:55:59 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/07 19:16:05 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
 
 # include "minishell.h"
 
-typedef struct	s_hist
+typedef struct		s_hist
 {
 	int				cur;
 	char			*value;
 	struct s_hist	*next;
-}				t_hist;
+}					t_hist;
 
 typedef struct	s_info
 {
@@ -62,9 +62,9 @@ void			key_delete(t_info *info);
 void			key_delete_rev(t_info *info);
 void			add_char(t_info *info);
 
-int				core_autocomp(t_info *info);
-
 t_hist			*create_hist(const char *str, int cur);
+int				read_hist(const int fd, char **buf);
+void			free_hist(t_hist **hist);
 void			init_hist(t_info *info);
 void			add_hist(const char *str, int cur, t_hist **hist);
 int				count_hist(t_hist **hist);

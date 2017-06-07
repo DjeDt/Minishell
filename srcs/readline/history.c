@@ -6,11 +6,20 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 16:44:33 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/07 14:18:43 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/07 17:40:55 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
+
+void		maj_hist(t_info *info)
+{
+	if (info->buf[0] != '\0')
+		ft_putendl_fd(info->buf, info->hist_fd);
+	if (info->hist != NULL)
+		free_hist(&info->hist);
+	close(info->hist_fd);
+}
 
 static void	put_in_buf(const char *str, t_info *info)
 {

@@ -6,7 +6,7 @@
 #    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/17 14:14:43 by ddinaut           #+#    #+#              #
-#    Updated: 2017/06/07 11:51:09 by ddinaut          ###   ########.fr        #
+#    Updated: 2017/06/07 19:08:45 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -67,7 +67,8 @@ SRCS =	main.c \
 		$(READLINE)cursor_move.c \
 		$(READLINE)key_delete.c \
 		$(READLINE)history.c \
-		$(READLINE)hist_utils.c
+		$(READLINE)hist_utils.c \
+		$(READLINE)read_hist.c
 
 # Rules #
 .PHONY: all norme clean fclean re
