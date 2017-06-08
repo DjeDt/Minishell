@@ -6,11 +6,17 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 16:44:33 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/07 17:40:55 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/08 22:39:27 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
+
+void		save_current_buf(t_info *info)
+{
+	info->save_buf != NULL ? ft_strdel(&info->save_buf) : NULL;
+	info->save_buf = ft_strdup(info->buf);
+}
 
 void		maj_hist(t_info *info)
 {
@@ -65,7 +71,7 @@ int			history_down(t_info *info, t_hist **hist)
 	tmp = *hist;
 	info->cur_hist < info->max_hist ? info->cur_hist += 1 : 0;
 	if (info->cur_hist == info->max_hist)
-		put_in_buf(NULL, info);
+		put_in_buf(info->save_buf, info);
 	else
 	{
 		while (tmp->next != NULL)

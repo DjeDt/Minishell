@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 15:02:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/06 14:44:52 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/08 21:25:34 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int				dir_error(const char *str, const char *file);
 
 int				ft_echo(const char **input);
 int				ft_env(const char **input);
+int				env_no_arg(const char **input, char **path);
 int				ft_setenv(const char **input);
 int				ft_unsetenv(const char **input);
 int				ft_exit(const char **input);

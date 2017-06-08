@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 14:37:39 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/25 14:24:47 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/08 21:23:52 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,19 +114,20 @@ int			ft_env(const char **input)
 	int		flags;
 	char	**path;
 
-	path = NULL;
-	flags = arg_check(input);
-	if (flags == -1)
-		return (-1);
-	else if (flags & FLAG_1)
+	if (ft_arrlen(input) == 1)
+		ft_arrprint((const char **)g_env);
+	else
 	{
-		if (ft_arrlen(input) < 3)
+		if ((flags = arg_check(input)) == -1)
 			return (-1);
 		path = ft_strsplit(get_var_value("PATH"), ':');
-		env_option_i(input + 2, path);
+		if (flags & FLAG_1)
+			env_option_i(input + 2, path);
+		else if (ft_strchr(input[1], '=') != NULL)
+			env_no_arg(input + 1, path);
+		else
+			ft_launch_prog(input + 1);
 		path != NULL ? ft_arrfree(&path) : NULL;
 	}
-	else if (ft_arrlen(input) == 1)
-		ft_arrprint((const char **)g_env);
 	return (0);
 }

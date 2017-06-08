@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 15:02:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/07 19:16:05 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/08 22:32:31 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct	s_info
 	int			cur_hist;
 	int			max_hist;
 	int			hist_fd;
+	char		*save_buf;
 	t_hist		*hist;
 }				t_info;
 
@@ -71,6 +72,7 @@ void			init_hist(t_info *info);
 void			add_hist(const char *str, int cur, t_hist **hist);
 int				count_hist(t_hist **hist);
 void			maj_hist(t_info *info);
+void			save_current_buf(t_info *info);
 int				history_up(t_info *info, t_hist **hist);
 int				history_down(t_info *info, t_hist **hist);
 

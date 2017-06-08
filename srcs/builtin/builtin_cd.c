@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 16:46:48 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/05/25 14:57:07 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/08 18:43:04 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int			ft_cd(const char **input)
 	}
 	if (ft_arrlen(input) == 1)
 		ret = move_dir(get_var_value("HOME"));
-	else if (ft_strcmp(input[1], "~") == 0)
+	else if (ft_strcmp(input[1], "~") == 0 || ft_strcmp(input[1], "--") == 0)
 		ret = move_dir(get_var_value("HOME"));
 	else if (ft_strcmp(input[1], "-") == 0)
 	{

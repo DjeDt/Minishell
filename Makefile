@@ -6,7 +6,7 @@
 #    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/17 14:14:43 by ddinaut           #+#    #+#              #
-#    Updated: 2017/06/07 19:08:45 by ddinaut          ###   ########.fr        #
+#    Updated: 2017/06/08 19:51:28 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -54,6 +54,7 @@ SRCS =	main.c \
 		term_utils.c \
 \
 		$(BUILTIN)builtin_env.c \
+		$(BUILTIN)builtin_env2.c \
 		$(BUILTIN)builtin_echo.c \
 		$(BUILTIN)builtin_setenv.c \
 		$(BUILTIN)builtin_unsetenv.c \

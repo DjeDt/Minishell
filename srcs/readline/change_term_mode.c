@@ -6,17 +6,17 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/04 13:40:26 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/04 14:48:07 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/08 18:38:16 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
 
-static int	error_mode(const char *func, const char *prog)
+static int	error_mode(const char *func, const char *sub_func)
 {
 	ft_putstr_fd("error in func: ", 2);
 	ft_putstr_fd(func, 2);
-	ft_putstr_fd(prog, 2);
+	ft_putstr_fd(sub_func, 2);
 	ft_putendl_fd("setting on basic edit_line.", 2);
 	return (-1);
 }
@@ -47,6 +47,9 @@ int			change_term_mode(void)
 	struct termios prev;
 
 	if (raw_mode(&prev) != 0)
+	{
 		normal_mode(&prev);
+		return (-1);
+	}
 	return (0);
 }

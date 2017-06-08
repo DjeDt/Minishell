@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 22:47:22 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/07 17:40:29 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/08 22:36:54 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	init_struct(t_info *info, int fd)
 	info->cur_hist = 0;
 	info->max_hist = 0;
 	info->hist = NULL;
+	info->save_buf = NULL;
 	info->hist_fd = open(".history", O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
 	if (!(info->buf = (char*)malloc(sizeof(char) * (info->max_line - 3))))
 		ft_error("malloc error: ", "func init_struct: ", info);
@@ -73,6 +74,7 @@ int			read_line(int fd, char **line)
 	int		ret;
 	t_info	info;
 
+	change_term_mode();
 	init_struct(&info, fd);
 	init_hist(&info);
 	info.cur_hist = count_hist(&info.hist);
@@ -80,6 +82,7 @@ int			read_line(int fd, char **line)
 	{
 		info.cur_pos == info.buf_max_size ? new_size(&info) : 0;
 		new_term_size(&info, fd);
+		save_current_buf(&info);
 		ret = read(fd, &info.c, 1);
 		if (ft_isprint(info.c))
 			add_char(&info);
