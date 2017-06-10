@@ -18,6 +18,7 @@ static int	ft_error(const char *error, const char *func, t_info *info)
 	ft_putstr_fd(func, 2);
 	ft_putstr_fd("abort prog\n", 2);
 	info->buf != NULL ? free(info->buf) : NULL;
+	info->save_buf != NULL ? free(info->save_buf) : NULL;
 	exit(-1);
 }
 
@@ -82,12 +83,12 @@ int			read_line(int fd, char **line)
 	{
 		info.cur_pos == info.buf_max_size ? new_size(&info) : 0;
 		new_term_size(&info, fd);
-		save_current_buf(&info);
 		ret = read(fd, &info.c, 1);
 		if (ft_isprint(info.c))
 			add_char(&info);
 		if (which_key(fd, &info) == -1)
 			break ;
+		save_current_buf(&info);
 	}
 	maj_hist(&info);
 	ft_putchar('\n');

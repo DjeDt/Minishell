@@ -69,11 +69,10 @@ int			history_down(t_info *info, t_hist **hist)
 	if (*hist == NULL)
 		return (-1);
 	tmp = *hist;
-	info->cur_hist < info->max_hist ? info->cur_hist += 1 : 0;
-	if (info->cur_hist == info->max_hist)
+	if (info->cur_hist + 1 == info->max_hist)
 		put_in_buf(info->save_buf, info);
 	else
-	{
+		info->cur_hist < info->max_hist ? info->cur_hist += 1 : 0;
 		while (tmp->next != NULL)
 		{
 			if (info->cur_hist == tmp->cur)
