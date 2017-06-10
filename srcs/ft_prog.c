@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 13:46:18 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/06 17:26:16 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/10 16:04:49 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ static	int		spawn_path(const char *path, const char **av)
 	{
 		child = fork();
 		if (child == 0)
+		{
 			ret = execve(path, (char **)av, g_env);
+			exit(1);
+		}
 		wait(&child);
 	}
 	else

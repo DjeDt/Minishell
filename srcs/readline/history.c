@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 16:44:33 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/08 22:39:27 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/10 16:39:46 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void		maj_hist(t_info *info)
 		ft_putendl_fd(info->buf, info->hist_fd);
 	if (info->hist != NULL)
 		free_hist(&info->hist);
+	if (info->save_buf != NULL)
+		ft_strdel(&info->save_buf);
 	close(info->hist_fd);
 }
 
@@ -57,7 +59,6 @@ int			history_up(t_info *info, t_hist **hist)
 			break ;
 		tmp = tmp->next;
 	}
-
 	put_in_buf(tmp->value, info);
 	return (0);
 }
@@ -69,10 +70,14 @@ int			history_down(t_info *info, t_hist **hist)
 	if (*hist == NULL)
 		return (-1);
 	tmp = *hist;
-	if (info->cur_hist + 1 == info->max_hist)
+	info->cur_hist += 1;
+	if (info->cur_hist >= info->max_hist)
+	{
 		put_in_buf(info->save_buf, info);
+		info->cur_hist = info->max_hist;
+	}
 	else
-		info->cur_hist < info->max_hist ? info->cur_hist += 1 : 0;
+	{
 		while (tmp->next != NULL)
 		{
 			if (info->cur_hist == tmp->cur)

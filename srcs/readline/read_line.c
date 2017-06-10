@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 22:47:22 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/08 22:36:54 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/10 16:00:55 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ int			read_line(int fd, char **line)
 	int		ret;
 	t_info	info;
 
-	change_term_mode();
+	if ((change_term_mode()) != 0)
+		return (-1);
 	init_struct(&info, fd);
 	init_hist(&info);
 	info.cur_hist = count_hist(&info.hist);
@@ -88,7 +89,6 @@ int			read_line(int fd, char **line)
 			add_char(&info);
 		if (which_key(fd, &info) == -1)
 			break ;
-		save_current_buf(&info);
 	}
 	maj_hist(&info);
 	ft_putchar('\n');

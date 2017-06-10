@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 18:55:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/08 22:17:48 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/10 16:08:00 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ static	int	prog_check(const char *path, char **tmp_arg, char **tmp_env)
 	{
 		child = fork();
 		if (child == 0)
+		{
 			ret = execve(path, tmp_arg, tmp_env);
+			exit(1);
+		}
 		wait(&child);
 	}
 	else
@@ -58,7 +61,7 @@ static int	prog_env(const char *prog, char **arg, char **env, char **path)
 	return (ret);
 }
 
-int		env_no_arg(const char **input, char **path)
+int			env_no_arg(const char **input, char **path)
 {
 	int		count;
 	char	**tmp_env;

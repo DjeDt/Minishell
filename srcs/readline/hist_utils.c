@@ -6,13 +6,11 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 11:50:17 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/08 14:57:48 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/10 16:11:13 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
-
-#include <stdio.h>
 
 t_hist		*create_hist(const char *str, int cur)
 {

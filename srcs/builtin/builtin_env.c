@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 14:37:39 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/08 21:23:52 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/10 16:07:30 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ static	int	prog_check(const char *path, char **tmp_arg, char **tmp_env)
 	{
 		child = fork();
 		if (child == 0)
+		{
 			ret = execve(path, tmp_arg, tmp_env);
+			exit(1);
+		}
 		wait(&child);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 15:02:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/08 21:25:34 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/10 15:18:52 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 # define FLAG_0 (0)
 # define FLAG_1 (1 << 0)
 # define FLAG_2 (1 << 1)
-
 
 typedef struct	s_builtin
 {

@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 12:39:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/08 17:46:19 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/10 16:10:12 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static void	core(void)
 	char	*line;
 	char	**cmd;
 
-
 	line = NULL;
 	cmd = NULL;
 	print_launch();
@@ -67,7 +66,8 @@ static void	core(void)
 	{
 		count = 0;
 		print_prompt();
-		read_line(0, &line);
+		if (read_line(0, &line) == -1)
+			get_next_line(0, &line);
 		cmd = ft_strsplit(line, ';');
 		ft_strdel(&line);
 		while (cmd != NULL && cmd[count] != NULL)

@@ -6,7 +6,7 @@
 /*   By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/04 15:43:30 by ddinaut           #+#    #+#             */
-/*   Updated: 2017/06/04 19:44:28 by ddinaut          ###   ########.fr       */
+/*   Updated: 2017/06/10 15:12:56 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void		add_char(t_info *info)
 		}
 		info->buf[info->cur_pos] = info->c;
 	}
+	save_current_buf(info);
 	info->buf_size += 1;
 	info->cur_pos += 1;
 	check_cur_pos(info);
